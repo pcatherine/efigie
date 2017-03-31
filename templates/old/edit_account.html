@@ -1,0 +1,46 @@
+{% extends 'base_admin.html' %}  
+{% load acc_tags %}
+{% load static %}
+
+{% block header %}
+<div class="block-header">
+    <h2>Dados Pessoais</h2><small>Altere aqui as suas informações</small>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+      <h2></h2>
+  </div>
+
+  <div class="card-body card-padding">
+      <form method="post" role="form" action="{% url 'accounts:edit_account' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+            
+            {% if success %}
+            <p>A sua senha foi alterada com sucesso</p>
+            {% endif %}
+            
+                {{ form.non_field_errors }}
+                {% for field in form %}
+               <div class="form-group fg-line">
+                    <label for="{{field.name}}">{{ field.label_tag }}</label>
+                    {% if field.field|get_type == "django.forms.fields.ImageField" and field.value %}
+                     <img height="100px" src="{{field.value.url}}"/><br/>
+                     {{field}}
+                     {% else %}
+                         {{field|addcssclass:"form-control"}}
+                     {% endif %}
+                     {{ field.errors }}
+                </div>
+                {% endfor %}
+               <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Salvar Modificações</button>
+              </div>
+      </form>
+  </div>
+</div>
+
+{% endblock %}
