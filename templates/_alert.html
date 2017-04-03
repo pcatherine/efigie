@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+{% if description != '' %}
+  <div class="alert alert-{{ alert }}  alert-dismissable">
+
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>
+    {% if alert == 'info' %}
+      <i class="icon fa fa-info"></i>{% trans "Informação" %}
+    {% elif alert == 'success' %}
+      <i class="icon fa fa-check"></i>{% trans "Sucesso" %}
+    {% elif alert == 'warning' %}
+      <i class="icon fa fa-warning"></i>{% trans "Alerta" %}
+    {% elif alert == 'danger' %}
+      <i class="icon fa fa-ban"></i>{% trans "Erro" %}
+    {% endif %}
+
+    </h4>
+    {{ description }}
+  </div>
+{% endif %}

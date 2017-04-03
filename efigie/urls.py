@@ -20,6 +20,9 @@ import efigie.views
 
 urlpatterns = [
   url(r'^$', efigie.views.index, name='index'),
+  url(r'^login/$', efigie.views.userLogin, name='userLogin'),
+
+
   # url(r'^criar-conta/$', efigie.views.register, name='register'),
   # url(r'^nova-senha/$', efigie.views.password_reset, name='password_reset'),
 

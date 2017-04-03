@@ -8,4 +8,5 @@ __version__ = "1.0.0"
 __email__ = "paollacath@gmail.com"
 __status__ = "Production"
 
-from efigie.forms.RegisterForm import *
+# from efigie.forms.RegisterForm import *
+from efigie.forms.UserLoginForm import *

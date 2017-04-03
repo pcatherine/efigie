@@ -1,0 +1,72 @@
+{% load static %}
+{% load efigieFilterTags %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Efigie</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+  <!-- iCheck -->
+</head>
+
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <b>Efigie</b>
+  </div>
+  <!-- /.login-logo -->
+
+  <div class="login-box-body">
+  {% include "_alert.html" with description=description alert=alert %}
+    <form action="#" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="
+          {% if field.errors %}
+            form-group has-error
+          {% else %}
+            form-group has-feedback
+          {% endif %}
+        ">
+        
+        {% for error in field.errors %}
+          <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
+        {% endfor %}
+
+        {{ field|addcssclass:"form-control input-lg" }}
+        </div>
+      {% endfor %}
+
+      <div class="form-group has-feedback">
+        <button type="submit" class="btn btn-warning btn-block btn-lg">{% trans "Login" %}</button>
+      </div>
+    </form> 
+
+    <a href="#">{% trans "Esqueci minha senha" %}</a><br>
+    <a href="#">{% trans "Registrar-se" %}</a>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"'></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- iCheck -->
+<script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>
+</body>
+</html>

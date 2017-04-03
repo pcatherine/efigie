@@ -9,3 +9,4 @@ __email__ = "paollacath@gmail.com"
 __status__ = "Production"
 
 from efigie.views.index import *
+from efigie.views.userLogin import *
