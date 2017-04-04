@@ -35,7 +35,10 @@ def userLogin(request, alert='', description=''):
         alert = 'danger'
         description = 'Username ou senha inválido.'
 
-  return render(request, 'user_login.html', 
-    {'form': form, 
+  return render(request, '_template_login.html', 
+    {'form': form,
+     'button': 'Cadastrar-se',
+     'links': {'<a href="#">Esqueci minha senha</a><br>', 
+               '<a href="/user/new/">Cadastrar-se</a>'},
      'alert': alert,
      'description': description})

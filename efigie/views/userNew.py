@@ -22,7 +22,8 @@ def userNew(request, alert='', description=''):
     login(request, user)
     return redirect(index)
 
-  return render(request, 'user_new.html', 
+  return render(request, '_template_login.html', 
     {'form': form, 
+     'button': 'Cadastrar-se',
      'alert': alert,
      'description': description})

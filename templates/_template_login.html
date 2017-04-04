@@ -50,9 +50,16 @@
       {% endfor %}
 
       <div class="form-group has-feedback">
-        <button type="submit" class="btn btn-warning btn-block btn-lg">{% trans "Cadastrar" %}</button>
+        <button type="submit" class="btn btn-warning btn-block btn-lg">{{ button }}</button>
       </div>
     </form> 
+
+    {% for a in links %}
+      {{ a|safe }}
+    {% endfor %}
+<!--     <a href="#">{% trans "Esqueci minha senha" %}</a><br>
+    <a href="#">{% trans "Cadastrar-se" %}</a> -->
+
   </div>
   <!-- /.login-box-body -->
 </div>
