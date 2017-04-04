@@ -155,7 +155,7 @@ MEDIA_URL = '/media/'
 #Site Configs
 # SITE_NAME = "efigie"
 
-# LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = 'login'
-# LOGOUT_URL = 'logout'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = '/login/'
 # AUTH_USER_MODEL = 'efigie.User'

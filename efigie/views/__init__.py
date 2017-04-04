@@ -12,4 +12,6 @@ from efigie.views.index import *
 from efigie.views.about import *
 
 from efigie.views.userLogin import *
+from efigie.views.userLogout import *
+
 from efigie.views.userNew import *
