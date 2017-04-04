@@ -10,3 +10,5 @@ __status__ = "Production"
 
 # from efigie.forms.RegisterForm import *
 from efigie.forms.UserLoginForm import *
+from efigie.forms.UserNewForm import *
+

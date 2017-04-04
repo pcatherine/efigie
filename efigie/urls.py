@@ -20,14 +20,14 @@ import efigie.views
 
 urlpatterns = [
   url(r'^$', efigie.views.index, name='index'),
+  url(r'^about/', efigie.views.about, name='about'),
   url(r'^login/$', efigie.views.userLogin, name='userLogin'),
+  url(r'^user/new/$', efigie.views.userNew, name='userNew'),
+
 
 
   # url(r'^criar-conta/$', efigie.views.register, name='register'),
   # url(r'^nova-senha/$', efigie.views.password_reset, name='password_reset'),
-
   # url(r'^$', efigie.views.index, name='index'),
-
-
   # url(r'^admin/', admin.site.urls),
 ]
