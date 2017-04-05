@@ -28,17 +28,18 @@ def userLogin(request, alert='', description=''):
         description = 'Username ou senha inválido.'
     else:
       user = authenticate(username=username, password=password)
-      if user is not None:
-        login(request, user)
-        return redirect(index)
-      else: 
-        alert = 'danger'
-        description = 'Username ou senha inválido.'
+    
+    if user is not None:
+      login(request, user)
+      return redirect(index)
+    else: 
+      alert = 'danger'
+      description = 'Username ou senha inválido.'
 
   return render(request, '_template_login.html', 
     {'form': form,
-     'button': 'Cadastrar-se',
-     'links': {'<a href="#">Esqueci minha senha</a><br>', 
+     'button': 'Login',
+     'links': {'<a href="/user/password/forget/">Esqueci minha senha</a>', 
                '<a href="/user/new/">Cadastrar-se</a>'},
      'alert': alert,
      'description': description})

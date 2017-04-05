@@ -7,6 +7,6 @@ def randomKey(size=5):
   return ''.join(random.choice(chars) for x in range(size))
 
 def generateHashKey(salt, random_str_size=5):
-  random_str = random_key(random_str_size)
+  random_str = randomKey(random_str_size)
   text = random_str + salt
   return hashlib.sha224(text.encode('utf-8')).hexdigest()

@@ -222,18 +222,24 @@ desired effect
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  
+  <aside class="main-sidebar"> <!-- Left side column. contains the logo and sidebar -->
+    <section class="sidebar"> <!-- sidebar: style can be found in sidebar.less -->
+      <ul class="sidebar-menu"> <!-- Sidebar Menu -->
+        {% with request.resolver_match.url_name as url_name %}
+          <li class="{% if url_name == 'index' %} active {% endif %}">
+            <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
+          </li>
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <!-- <li class="header">HEADER</li> -->
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+          <li class="{% if url_name == 'about' %} active {% endif %}">
+            <a href="{% url 'about' %}"><i class="fa fa-info-circle text-yellow"></i> <span>{% trans 'Sobre' %}</span></a>
+          </li>
+          
+          <li class="{% if url_name == 'userLogout' %} active {% endif %}">
+            <a href="{% url 'userLogout' %}"><i class="fa fa-sign-out text-yellow"></i> <span>Logout</span></a>
+          </li>
+        {% endwith %}
+        <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
@@ -244,11 +250,9 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
             <li><a href="#">Link in level 2</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
-      <!-- /.sidebar-menu -->
     </section>
-    <!-- /.sidebar -->
   </aside>
 
   <!-- Content Wrapper. Contains page content -->

@@ -7,3 +7,6 @@ DATABASES_LOCALHOST_NAME = 'efigie'
 DATABASES_LOCALHOST_USER = 'paolla'               
 DATABASES_LOCALHOST_PASSWORD = 'paolla'   
 DATABASES_LOCALHOST_HOST = 'localhost'     
+
+EMAIL_HOST_USER = 'paollacath@gmail.com'
+EMAIL_HOST_PASSWORD = 'Paolla22'

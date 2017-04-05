@@ -26,6 +26,9 @@ urlpatterns = [
   url(r'^logout/$', efigie.views.userLogout, name='userLogout'),
 
   url(r'^user/new/$', efigie.views.userNew, name='userNew'),
+  url(r'^user/password/forget/$', efigie.views.userPasswordReset, name='userPasswordReset'),
+  url(r'^user/password/forget/(?P<key>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm'),
+
 
 
 
