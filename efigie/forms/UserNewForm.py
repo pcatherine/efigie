@@ -30,15 +30,15 @@ class UserNewForm(UserCreationForm):
       user.save()
     return user
 
-  def clean_password1(self):
+  def clean_password2(self):
     password_length = settings.MIN_PASSWORD_LENGTH
     password1 = self.cleaned_data.get("password1")
     if len(password1) < password_length:
       raise forms.ValidationError("Password must be longer than " "{} characters".format(password_length))
-    password1 = self.cleaned_data.get("password2")
+    password2 = self.cleaned_data.get("password2")
     if password1 and password2 and password1 != password2:
         raise forms.ValidationError("The passwords are not equal.")
-    return password1
+    return password2
 
 
   class Meta:

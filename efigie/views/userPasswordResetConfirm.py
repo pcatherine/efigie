@@ -16,33 +16,9 @@ def userPasswordResetConfirm(request, key, alert='', description=''):
   if form.is_valid():
     form.save()
     return redirect(userLogin)
-    # context['success'] = True
-  # context['form'] = form
-  # return render(request, template_name, context)
+
   return render(request, '_template_login.html', 
     {'form': form, 
      'button': 'Alterar Senha',
      'alert': alert,
      'description': description})
-
-
-
-# @never_cache
-# @csrf_protect
-# def userNew(request, alert='', description=''):
-#   if request.user.is_authenticated():
-#     return redirect(index)
-
-#   form = UserNewForm(request.POST or None)
-  
-#   if form.is_valid():
-#     user = form.save()
-#     user = authenticate(username=user.username, password=form.cleaned_data['password1'])
-#     login(request, user)
-#     return redirect(index)
-
-#   return render(request, '_template_login.html', 
-#     {'form': form, 
-#      'button': 'Cadastrar-se',
-#      'alert': alert,
-#      'description': description})
