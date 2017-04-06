@@ -30,6 +30,21 @@ class UserNewForm(UserCreationForm):
       user.save()
     return user
 
+  def clean_username(self):
+      username = self.cleaned_data['username']
+      if User.objects.filter(username=username).exists():
+        return username
+      else:
+        raise forms.ValidationError('Usuário já cadastrado com este username')
+
+  def clean_email(self):
+    email = self.cleaned_data['email']
+    if User.objects.filter(email=email).exists():
+      return email
+    else:
+      raise forms.ValidationError('Usuário já cadastrado com este e-mail')
+
+
   def clean_password2(self):
     password_length = settings.MIN_PASSWORD_LENGTH
     password1 = self.cleaned_data.get("password1")
@@ -37,7 +52,7 @@ class UserNewForm(UserCreationForm):
       raise forms.ValidationError("Password must be longer than " "{} characters".format(password_length))
     password2 = self.cleaned_data.get("password2")
     if password1 and password2 and password1 != password2:
-        raise forms.ValidationError("The passwords are not equal.")
+      raise forms.ValidationError("The passwords are not equal.")
     return password2
 
 

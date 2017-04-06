@@ -2,10 +2,10 @@
 #-*- coding: utf-8 -*-
 
 from django import forms
-from efigie.models import UserPasswordReset
 from efigie.controllers import utils
 from efigie.controllers import mail
 from efigie.forms import *
+from efigie.models import UserPasswordReset
 
 class UserPasswordResetForm(forms.Form):
   email = forms.EmailField(
