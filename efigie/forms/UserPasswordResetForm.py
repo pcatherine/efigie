@@ -16,7 +16,7 @@ class UserPasswordResetForm(forms.Form):
     if User.objects.filter(email=email).exists():
       return email
     else:
-      raise forms.ValidationErros('Nenhum usuário encontrado com este e-mail')
+      raise forms.ValidationError('Nenhum usuário encontrado com este e-mail')
 
   def save(self, url):
     user = User.objects.get(email=self.cleaned_data['email'])
