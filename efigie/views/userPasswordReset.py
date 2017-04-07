@@ -8,11 +8,12 @@ from efigie.controllers import *
 from efigie.views import *
 from efigie.forms import *
 
+CATEGORY = 1 #1 para quando o email foi esquecido
 def userPasswordReset(request, alert='', description=''):
   form = UserPasswordResetForm(request.POST or None)
 
   if form.is_valid(): 
-    form.save(request.build_absolute_uri(None))
+    form.save(request.build_absolute_uri(None), CATEGORY)
     return redirect(userLogin) 
 
   return render(request, '_template_login.html', 

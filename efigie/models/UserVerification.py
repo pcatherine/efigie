@@ -1,4 +1,8 @@
+import re
+
 from django.db import models
+from django.core import validators
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.conf import settings
 
 class UserVerification(models.Model):

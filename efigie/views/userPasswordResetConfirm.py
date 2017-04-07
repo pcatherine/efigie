@@ -6,16 +6,17 @@ from django.views.decorators.csrf import csrf_protect
 
 from efigie.controllers import *
 from efigie.forms import *
-from efigie.models import UserPasswordReset
+from efigie.models import UserVerification
 from efigie.views import *
 
 def userPasswordResetConfirm(request, key, alert='', description=''):
-  if UserPasswordReset.objects.filter(key=key).exists():
-    reset = get_object_or_404(UserPasswordReset, key=key)
+  if UserVerification.objects.filter(key=key, confirmed=False).exists():
+    reset = get_object_or_404(UserVerification, key=key)
     form = UserSetPasswordForm(user=reset.user, data=request.POST or None)
     if form.is_valid():
       form.save()
-      reset.delete()
+      reset.confirmed = True
+      reset.save()
       return redirect(userLogin)
   else:
     return redirect(userNew)
