@@ -6,7 +6,7 @@ from efigie.controllers import *
 from efigie.views import *
 from efigie.forms import *
 
-#pela pagina
+#AGARD
 
 @login_required
 def userPasswordEdit(request):

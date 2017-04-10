@@ -5,6 +5,8 @@ from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.conf import settings
 
+from enum import IntEnum
+
 class UserVerification(models.Model):
   user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário', related_name='resets')
   key = models.CharField('Chave', max_length=100, unique=True)
@@ -19,3 +21,8 @@ class UserVerification(models.Model):
     verbose_name = 'Nova Senha'
     verbose_name_plural = 'Novas Senhas'
     ordering = ['-created_at']
+
+
+class Category(IntEnum):
+  VERIFICATION = 1
+  PASSWORD = 2
