@@ -27,6 +27,7 @@ class UserNewForm(UserCreationForm):
   password2 = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder':'Re-Password'}))
 
+
   def save(self, url, category, commit=True):
     user = super(UserNewForm, self).save(commit=False)
     user.set_password(self.cleaned_data['password1'])
@@ -36,14 +37,21 @@ class UserNewForm(UserCreationForm):
       key = utils.generateHashKey(user.username)
       reset = UserVerification(key=key, user=user, category=category)
       reset.save()
-      template_name = 'user_password_reset_mail.html'
-      subject = '[Efigie] E-mail Verification'
-      context = {'confirmation_url': url+reset.key, 'email':user.email}
-      mail.sendMailTemplate(subject, template_name, context, [user.email])
+      
+      subject = '[Efigie] E-mail Confirmation'
+      
+      message = '''Olá %s, <br/>
+      Você está quase lá, apenas um último passo para certificar-se de que temos todas 
+      as suas informações. Você entrou como %s, o endereço de e-mail para a sua 
+      conta Efigie, durante o processo de inscrição. Se este é você, basta clicar no botão 
+      abaixo e sua conta Efigie está pronta para ir.
+      ''' % (user.first_name, user.email)
 
+      button = 'Confirmar E-mail'
+
+      context = {'confirmation_url': url+reset.key, 'email':user.email, 'message': message, 'button': button}
+      mail.sendMailTemplate(subject, context, [user.email])
     return user
-
-
 
 
   def clean_username(self):

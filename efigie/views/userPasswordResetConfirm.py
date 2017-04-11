@@ -20,7 +20,7 @@ def userPasswordResetConfirm(request, key, alert='', description=''):
       reset.save()
       return redirect(userLogin)
   else:
-    return redirect(userNew)
+    raise Http404("Chave não encontrada ou já utilizada")
 
   return render(request, '_template_login.html', 
     {'form': form, 

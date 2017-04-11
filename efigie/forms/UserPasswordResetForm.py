@@ -11,19 +11,31 @@ class UserPasswordResetForm(forms.Form):
   email = forms.EmailField(
     widget=forms.TextInput(attrs={'placeholder':'E-mail'}))
 
+
   def clean_email(self):
     email = self.cleaned_data['email']
     if User.objects.filter(email=email).exists():
-      return email
-    else:
       raise forms.ValidationError('Nenhum usuário encontrado com este e-mail')
+    else:
+      return email
+
 
   def save(self, url, category):
     user = User.objects.get(email=self.cleaned_data['email'])
     key = utils.generateHashKey(user.username)
     reset = UserVerification(key=key, user=user, category=category)
     reset.save()
-    template_name = 'user_password_reset_mail.html'
+    
     subject = '[Efigie] New Password'
-    context = {'confirmation_url': url+reset.key, 'email':user.email}
-    mail.sendMailTemplate(subject, template_name, context, [user.email])
+    
+    message = '''Olá %s, <br/>
+      Você solicitou uma nova senha de acesso para sua conta Efigie. Se você 
+      realmente fez essa solicitação clique no botão abaixo e vocé poderá 
+      cadastrar uma nova senha para sua conta Efigie.
+      ''' % (user.first_name)
+
+    button = 'Cadastrar Nova Senha'
+
+
+    context = {'confirmation_url': url+reset.key, 'email':user.email, 'message': message, 'button': button}
+    mail.sendMailTemplate(subject, context, [user.email])

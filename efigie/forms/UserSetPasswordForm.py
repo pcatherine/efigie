@@ -11,9 +11,11 @@ class UserSetPasswordForm(SetPasswordForm):
   new_password2 = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder': 'Password again'}))
 
+
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
     super(SetPasswordForm, self).__init__(*args, **kwargs)
+
 
   def clean_new_password2(self):
     password_length = settings.MIN_PASSWORD_LENGTH
@@ -24,6 +26,7 @@ class UserSetPasswordForm(SetPasswordForm):
     if new_password1 and new_password2 and new_password1 != new_password2:
       raise forms.ValidationError("The passwords are not equal.")
     return new_password2
+
 
   class Meta:
     fields = ("new_password1","new_password2")
