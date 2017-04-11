@@ -19,3 +19,5 @@ from efigie.views.userNewConfirm import *
 from efigie.views.userPasswordEdit import *
 from efigie.views.userPasswordReset import *
 from efigie.views.userPasswordResetConfirm import *
+
+from efigie.views.errorViews import *

@@ -14,6 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from django.conf.urls import (
+  handler400, handler403, handler404, handler500
+)
 from django.contrib import admin
 import efigie.views 
 
@@ -39,3 +42,8 @@ urlpatterns = [
   # url(r'^$', efigie.views.index, name='index'),
   # url(r'^admin/', admin.site.urls),
 ]
+
+handler400 = efigie.views.errorViews.bad_request
+handler403 = efigie.views.errorViews.permission_denied
+handler404 = efigie.views.errorViews.page_not_found
+handler500 = efigie.views.errorViews.server_error
