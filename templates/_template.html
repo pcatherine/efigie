@@ -1,5 +1,7 @@
 {% load static %}
 {% load efigieSimpleTags %}
+{% load efigieFilterTags %}
+
 {% load i18n %}
 
 <!DOCTYPE html>
@@ -258,6 +260,14 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      {% if user.is_authenticated %}
+        {% if emailConfirmation  %}
+          <div class="callout callout-danger">
+            <h4> Alerta</h4>
+            <p><i class="icon fa fa-ban"></i> Confirmação de e-mail ainda não realizada</p>
+          </div>
+        {% endif %}
+      {% endif %}
       <h1>
         {% block header %} 
 

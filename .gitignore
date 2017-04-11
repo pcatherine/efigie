@@ -3,4 +3,4 @@ venv
 staticfiles
 .env
 __pycache__
-efigie/config.py
+efigie/config.py  
