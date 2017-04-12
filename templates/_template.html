@@ -1,4 +1,5 @@
 {% load static %}
+{% load efigieAssignmentTags %}
 {% load efigieSimpleTags %}
 {% load efigieFilterTags %}
 
@@ -260,13 +261,12 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      {% if user.is_authenticated %}
-        {% if emailConfirmation  %}
-          <div class="callout callout-danger">
-            <h4> Alerta</h4>
-            <p><i class="icon fa fa-ban"></i> Confirmação de e-mail ainda não realizada</p>
-          </div>
-        {% endif %}
+      {% emailConfirmation user as confimation  %}
+      {% if confimation %}
+        <div class="callout callout-danger">
+          <h4> Alerta</h4>
+          <p><i class="icon fa fa-ban"></i> Confirmação de e-mail ainda não realizada</p>
+        </div>
       {% endif %}
       <h1>
         {% block header %} 
