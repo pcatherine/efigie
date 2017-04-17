@@ -1,0 +1,41 @@
+{% load static %}
+{% load efigieFilterTags %}
+{% load i18n %}
+
+<div class="modal fade modal-danger" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="confirmationModalLabel">{{ confirmation.title }}</h4>
+      </div>
+      <div class="modal-body">
+        {{ confirmation.description|safe }} 
+        <form action="#" method="post">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="
+              {% if field.errors %}
+                form-group has-error
+              {% else %}
+                form-group has-feedback
+              {% endif %}
+            ">
+            
+            {% for error in field.errors %}
+              <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
+            {% endfor %}
+
+            {{ field|addcssclass:"form-control" }}
+            </div>
+          {% endfor %}
+
+        </div> 
+        <div class="modal-footer">
+          <button type="submit"  class="btn btn-danger btn-outline" ><span><i class="fa fa-times"></i> {{ confirmation.button }}</span></button>
+        </div>
+      </form> 
+
+    </div>
+  </div>
+</div>

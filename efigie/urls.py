@@ -35,6 +35,8 @@ urlpatterns = [
   url(r'^user/password/forget/(?P<key>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm'),
   
   url(r'^user/settings/$', efigie.views.userSettings, name='userSettings'),
+  url(r'^user/delete/$', efigie.views.userDelete, name='userDelete'),
+
 
 
   # url(r'^criar-conta/$', efigie.views.register, name='register'),

@@ -1,94 +1,42 @@
 {% extends "_template.html" %}
 {% load static %}
+{% load efigieSimpleTags %}
+
 {% load i18n %}
 
 {% block header %} {% trans "Configuracoes" %} {% endblock %}
 
 {% block content %}
-<!--   <div class="row">
-    <div class="col-md-6"> -->
-      <div class="box box-warning ">
-        <div class="box-header with-border" >
-          <h1 class="box-title">{% trans "Perfil" %}</h1>
-        </div>
+  
+  {% userDeleteTag user form as confirmation  %}
+  {% include "_confirmation.html" with confirmation=confirmation %}
+  {% include "_alert.html" with description=description alert=alert %}
 
-        <div class="box-body ">
-          <dl class="dl-horizontal">
-            <dt class="with-border" >{% trans "Nome Completo" %}</dt>
-            <dd >{{ request.user.first_name }} {{ request.user.last_name }}</dd>
-            <dd ><a>alterar</a></dd>
-            <!-- <hr /> -->
-            <dt class="with-border">Username</dt>
-            <dd >{{ request.user.username }}</dd>
-            <!-- <hr /> -->
-            <dt >E-mail</dt>
-            <dd >{{ request.user.email }}</dd>
-            <!-- <hr /> -->
-            <dt >Senha</dt>
-            <dd >Ultima alteração em {{ request.user.date_joined }}</dd>
-            <!-- <hr/> -->
-            <dt >Membro desde</dt>
-            <dd >{{ request.user.date_joined }}</dd>
-        </div>
-
-<!--          <div class="box-footer">
-          <a type="button" class="btn btn-warning" href="#"><i class="fa fa-pencil"></i> <span>{% trans "Editar" %} {% trans "Dados" %}</span></a>
-          <a type="button" class="btn btn-info" href="#"> 
-            <span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
-          <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</span></a> 
-         </div> -->
-      </div>
-<!--     </div>
-  </div> -->
-<!--
-  </div>
-
-  <div class="row">
-
-    <div class="col-md-6">
-      <div class="box box-warning">
-        <div class="box-header ui-sortable-handle" style="cursor: move;">
-          <h3 class="box-title">Pinterest</h3>
-
-        </div>
-
-        <div class="box-body">
-          <dl class="dl-horizontal">
-            <dt >Status</dt>
-            <dd >{{ pinterest }} </dd>
-          </dl>
-        </div>
-
-        <div class="box-footer">
-          <a type="submit" class="btn btn-info" href="#"><span>{{ authenticator }}</span></a>
-        </div>
-      </div>
+  <div class="box box-warning ">
+    <div class="box-header with-border" >
+      <h1 class="box-title">{% trans "Perfil" %}</h1>
     </div>
 
-    <div class="col-md-6">
-      <div class="box box-warning">
-        <div class="box-header ui-sortable-handle" style="cursor: move;">
-          <h3 class="box-title">Google Authenticator</h3>
-          
-          <div class="pull-right box-tools">
-            <button type="button" class="btn btn-warning btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="{% trans "A verificacao em 2 etapas adiciona uma camada extra de protecao para sua conta. Depois que voce a ligar, vamos pedir que voce digite um codigo de seguranca adicional quando voce entrar. Vamos fornecer o codigo de seguranca somente a voce." %}">
-              <i class="fa fa-question"></i>
-            </button>
-          </div>
-        </div>
+    <div class="box-body ">
+      <dl class="dl-horizontal">
+        <dt class="with-border" >{% trans "Nome Completo" %}</dt>
+        <dd >{{ request.user.first_name }} {{ request.user.last_name }}</dd>
 
-        <div class="box-body">
-          <dl class="dl-horizontal">
-            <dt >Status</dt>
-            <dd >{{ authenticator }}</dd>
-          </dl>
-        </div>
+        <dt class="with-border">Username</dt>
+        <dd >{{ request.user.username }}</dd>
 
-        <div class="box-footer">
-          <a type="submit" class="btn btn-info" data-toggle="modal" href="{{ linkAuthenticator }}"><span>{{ titleAuthenticator }}</span></a>
-        </div>
+        <dt >E-mail</dt>
+        <dd >{{ request.user.email }}</dd>
 
-      </div>
-    </div> 
-  </div> -->
+        <dt >Membro desde</dt>
+        <dd >{{ request.user.date_joined }}</dd>
+      </dl>  
+    </div>
+
+    <div class="box-footer">
+      <a type="submit" class="btn btn-info" href="#"><span>{% trans "Editar" %} {% trans "Dados" %}</span></a>
+      <a type="submit" class="btn btn-info" href="#"><span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
+      <a type="button" class="btn btn-danger pull-rigth" data-toggle="modal" data-target="#confirmationModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
+    </div>
+  </div>
 {% endblock %}

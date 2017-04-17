@@ -20,6 +20,6 @@ from efigie.views.userPasswordEdit import *
 from efigie.views.userPasswordReset import *
 from efigie.views.userPasswordResetConfirm import *
 from efigie.views.userSettings import *
-
+from efigie.views.userDelete import *
 
 from efigie.views.errorViews import *
