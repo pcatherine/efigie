@@ -50,7 +50,10 @@ class UserNewForm(UserCreationForm):
       button = 'Confirmar E-mail'
 
       context = {'confirmation_url': url+reset.key, 'email':user.email, 'message': message, 'button': button}
-      mail.sendMailTemplate(subject, context, [user.email])
+      
+      # Para evitar que de erro no servidor de teste remoto
+      if not 'heroku' in url:
+        mail.sendMailTemplate(subject, context, [user.email])
     return user
 
 

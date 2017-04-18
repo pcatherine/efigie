@@ -8,8 +8,8 @@
 
 {% block content %}
   
-  {% userDeleteTag user form as confirmation  %}
-  {% include "_confirmation.html" with confirmation=confirmation %}
+  {% include "user_delete.html" with form=form %}
+  {% include "_alert.html" with messages=messages %}
   {% include "_alert.html" with description=description alert=alert %}
 
   <div class="box box-warning ">
@@ -29,14 +29,14 @@
         <dd >{{ request.user.email }}</dd>
 
         <dt >Membro desde</dt>
-        <dd >{{ request.user.date_joined }}</dd>
+        <dd >{{ request.user.date_joined|date:"SHORT_DATE_FORMAT" }}</dd>
       </dl>  
     </div>
 
     <div class="box-footer">
-      <a type="submit" class="btn btn-info" href="#"><span>{% trans "Editar" %} {% trans "Dados" %}</span></a>
-      <a type="submit" class="btn btn-info" href="#"><span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
-      <a type="button" class="btn btn-danger pull-rigth" data-toggle="modal" data-target="#confirmationModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
+      <a type="button" class="btn btn-info" href="#"><span>{% trans "Alterar" %} {% trans "Dados" %}</span></a>
+      <a type="button" class="btn btn-info" data-toggle="modal" data-target="#passwordChangeModal"><span>{% trans "Alterar" %} {% trans "Senha" %}</span></a>
+      <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
     </div>
   </div>
 {% endblock %}

@@ -12,7 +12,7 @@ from efigie.views import *
 
 @never_cache
 @csrf_protect
-def userNew(request, alert='', description=''):
+def userNew(request):
   if request.user.is_authenticated():
     return redirect(index)
 
@@ -26,6 +26,4 @@ def userNew(request, alert='', description=''):
 
   return render(request, '_template_login.html', 
     {'form': form, 
-     'button': 'Cadastrar-se',
-     'alert': alert,
-     'description': description})
+     'button': 'Cadastrar-se'})

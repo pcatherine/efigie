@@ -10,7 +10,7 @@ from efigie.models import Category
 from efigie.views import *
 
 
-def userPasswordReset(request, alert='', description=''):
+def userPasswordReset(request):
   form = UserPasswordResetForm(request.POST or None)
 
   if form.is_valid(): 
@@ -19,6 +19,4 @@ def userPasswordReset(request, alert='', description=''):
 
   return render(request, '_template_login.html', 
     {'form': form,
-     'button': 'Restar Senha',
-     'alert': alert,
-     'description': description})
+     'button': 'Restar Senha'})

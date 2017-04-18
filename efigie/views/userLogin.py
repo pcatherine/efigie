@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
@@ -10,7 +11,7 @@ from efigie.forms import *
 
 @never_cache
 @csrf_protect
-def userLogin(request, alert='', description=''):
+def userLogin(request):
   if request.user.is_authenticated():
     return redirect(index)
 
@@ -24,8 +25,7 @@ def userLogin(request, alert='', description=''):
         user = User.objects.get(email=username)
         user = authenticate(username=user.username, password=password)
       except Exception as e:
-        alert = 'danger'
-        description = 'Username ou senha inválido.'
+        messages.error(request, 'Username ou senha inválido.')
     else:
       user = authenticate(username=username, password=password)
     
@@ -33,13 +33,10 @@ def userLogin(request, alert='', description=''):
       login(request, user)
       return redirect(index)
     else: 
-      alert = 'danger'
-      description = 'Username ou senha inválido.'
+      messages.error(request, 'Username ou senha inválido.')
 
   return render(request, '_template_login.html', 
     {'form': form,
      'button': 'Login',
      'links': {'<a href="/user/password/forget/">Esqueci minha senha</a>', 
-               '<a href="/user/new/">Cadastrar-se</a>'},
-     'alert': alert,
-     'description': description})
+               '<a href="/user/new/">Cadastrar-se</a>'}})

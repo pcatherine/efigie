@@ -2,23 +2,23 @@
 {% load efigieFilterTags %}
 {% load i18n %}
 
-<div class="modal fade modal-danger" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
+  <div class="modal fade modal-danger" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="confirmationModalLabel">{{ confirmation.title }}</h4>
+        <h4 class="modal-title" id="deleteModalLabel">Você tem certeza que deseja fazer isso?</h4>
       </div>
       <div class="modal-body">
-        {{ confirmation.description|safe }} 
+      {% trans '<p>Excluiremos <b>imediatamente</b> todas as chaves relacionados somente a voce, juntamente com todos os seus contatos.</p>' %}
         <form action="#" method="post">
           {% csrf_token %}
           {% for field in form %}
             <div class="
               {% if field.errors %}
-                form-group has-error
-              {% else %}
                 form-group has-feedback
+              {% else %}
+                form-group has-error
               {% endif %}
             ">
             
@@ -32,7 +32,7 @@
 
         </div> 
         <div class="modal-footer">
-          <button type="submit"  class="btn btn-danger btn-outline" ><span><i class="fa fa-times"></i> {{ confirmation.button }}</span></button>
+            <button type="submit" class="btn btn-danger btn-outline" ><i class="fa fa-times"></i> <span>{% trans 'Deletar' %}</span></button>
         </div>
       </form> 
 

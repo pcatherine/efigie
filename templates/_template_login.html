@@ -29,7 +29,12 @@
   <!-- /.login-logo -->
 
   <div class="login-box-body">
-  {% include "_alert.html" with description=description alert=alert %}
+
+
+  {% include "_alert.html" with messages=messages %}
+  
+
+
     <form action="#" method="post">
       {% csrf_token %}
       {% for field in form %}

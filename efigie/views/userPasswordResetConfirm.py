@@ -10,7 +10,7 @@ from efigie.models import Category, UserVerification
 from efigie.views import *
 
 @never_cache
-def userPasswordResetConfirm(request, key, alert='', description=''):
+def userPasswordResetConfirm(request, key):
   if UserVerification.objects.filter(key=key, category=Category.PASSWORD, confirmed=False).exists():
     reset = get_object_or_404(UserVerification, key=key)
     form = UserSetPasswordForm(user=reset.user, data=request.POST or None)
@@ -24,6 +24,4 @@ def userPasswordResetConfirm(request, key, alert='', description=''):
 
   return render(request, '_template_login.html', 
     {'form': form, 
-     'button': 'Alterar Senha',
-     'alert': alert,
-     'description': description})
+     'button': 'Alterar Senha'})

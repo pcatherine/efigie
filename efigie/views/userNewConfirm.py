@@ -12,7 +12,7 @@ from efigie.models import UserVerification, Category
 from efigie.views import *
 
 @never_cache
-def userNewConfirm(request, key, alert='', description=''):
+def userNewConfirm(request, key):
   if UserVerification.objects.filter(key=key, category=Category.VERIFICATION, confirmed=False).exists():
     reset = get_object_or_404(UserVerification, key=key)
     reset.confirmed = True
