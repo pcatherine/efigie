@@ -10,7 +10,6 @@
   
   {% include "user_delete.html" with form=form %}
   {% include "_alert.html" with messages=messages %}
-  {% include "_alert.html" with description=description alert=alert %}
 
   <div class="box box-warning ">
     <div class="box-header with-border" >
@@ -20,7 +19,7 @@
     <div class="box-body ">
       <dl class="dl-horizontal">
         <dt class="with-border" >{% trans "Nome Completo" %}</dt>
-        <dd >{{ request.user.first_name }} {{ request.user.last_name }}</dd>
+        <dd >{{ request.user.get_full_name }}</dd>
 
         <dt class="with-border">Username</dt>
         <dd >{{ request.user.username }}</dd>
@@ -35,7 +34,7 @@
 
     <div class="box-footer">
       <a type="button" class="btn btn-info" href="#"><span>{% trans "Alterar" %} {% trans "Dados" %}</span></a>
-      <a type="button" class="btn btn-info" data-toggle="modal" data-target="#passwordChangeModal"><span>{% trans "Alterar" %} {% trans "Senha" %}</span></a>
+      <a type="button" class="btn btn-info" ><span>{% trans "Alterar" %} {% trans "Senha" %}</span></a>
       <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
     </div>
   </div>

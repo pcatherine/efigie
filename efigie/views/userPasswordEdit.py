@@ -7,7 +7,7 @@ from efigie.views import *
 from efigie.forms import *
 
 @login_required
-def userPasswordChange(request, form=None):
+def userPasswordEdit(request, form=None):
 
   if form == None:
     return redirect('userSettings')

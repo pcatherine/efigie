@@ -36,7 +36,9 @@ urlpatterns = [
   
   url(r'^user/settings/$', efigie.views.userSettings, name='userSettings'),
   url(r'^user/delete/$', efigie.views.userDelete, name='userDelete'),
-  url(r'^user/change/password/$',  efigie.views.userPasswordChange, name='userPasswordChange'),
+  url(r'^user/password/edit/$',  efigie.views.userPasswordEdit, name='userPasswordEdit'),
+  url(r'^user/profile/edit/$',  efigie.views.userEdit, name='userEdit'),
+
 
 
 

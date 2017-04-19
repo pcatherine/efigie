@@ -1,0 +1,29 @@
+{% extends "_template.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block header %} 
+  <h1>{% trans "Editar" %} {% trans "Dados" %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% include "_alert.html" with messages=messages %}
+  <div class="box box-warning">
+    <form method="POST" action="{% url 'userEdit' %}" role="form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-body">
+        <input type="text" class="form-control input-lg" id="firstName" name="firstName" placeholder="{% trans "Nome" %}" value="{{ user.first_name }}">
+        <br/>
+        <input type="text" class="form-control input-lg" id="lastName" name="lastName" placeholder="{% trans "Sobrenome (opcional)" %}" value="{{ user.last_name }}">
+        <br/>
+        <input type="text" class="form-control input-lg" id="username" name="username" placeholder="Username" value="{{ user.username }}">
+        <br/>
+        <input type="email" class="form-control input-lg" id="email" name="email" placeholder="E-mail" value="{{ user.email }}">
+      </div>
+        
+      <div class="box-footer">
+        <button type="submit" class="btn btn-info"><i class="fa fa-pencil"></i> <span>{% trans "Editar" %}</span></button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

@@ -12,4 +12,7 @@ def sendMailTemplate(subject, context, recipient_list,from_email=settings.DEFAUL
     to=recipient_list
     )
   email.attach_alternative(message_html, "text/html")
-  email.send(fail_silently=fail_silently)
+  
+  # Para evitar que de erro no servidor de teste remoto
+  if not 'heroku' in context.confirmation_url:
+    email.send(fail_silently=fail_silently)

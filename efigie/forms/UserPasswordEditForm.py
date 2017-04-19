@@ -5,14 +5,13 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 from efigie import settings
 
-class UserPasswordChangeForm(PasswordChangeForm):
+class UserPasswordEditForm(PasswordChangeForm):
   old_password = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder': 'Current password'}))
   new_password1 = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder': 'New password'}))
   new_password2 = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder': 'Password again'}))
-
 
   # def __init__(self, *args, **kwargs):
   #   self.instance = kwargs.pop('instance', None)
@@ -32,10 +31,6 @@ class UserPasswordChangeForm(PasswordChangeForm):
     if new_password1 and new_password2 and new_password1 != new_password2:
       raise forms.ValidationError("The passwords are not equal.")
     return new_password2
-
-
-
-
 
   class Meta:
     fields = ("old_password","new_password1","new_password2")

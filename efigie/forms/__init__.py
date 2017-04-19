@@ -11,6 +11,6 @@ __status__ = "Production"
 
 from efigie.forms.UserLoginForm import *
 from efigie.forms.UserNewForm import *
-from efigie.forms.UserPasswordChangeForm import *
+from efigie.forms.UserPasswordEditForm import *
 from efigie.forms.UserPasswordResetForm import *
 from efigie.forms.UserSetPasswordForm import *

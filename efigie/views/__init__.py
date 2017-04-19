@@ -16,10 +16,12 @@ from efigie.views.userLogout import *
 
 from efigie.views.userNew import *
 from efigie.views.userNewConfirm import *
+from efigie.views.userDelete import *
+from efigie.views.userEdit import *
+
 from efigie.views.userPasswordReset import *
 from efigie.views.userPasswordResetConfirm import *
-from efigie.views.userDelete import *
-from efigie.views.userPasswordChange import *
+from efigie.views.userPasswordEdit import *
 
 from efigie.views.userSettings import *
 
