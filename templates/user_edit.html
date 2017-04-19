@@ -9,7 +9,10 @@
 
 {% block content %}
   {% include "_alert.html" with messages=messages %}
+
   <div class="box box-warning">
+  <section class="content">
     {% include "_form.html" with form=form button=button %}
+    </section>
   </div>
 {% endblock %}
