@@ -234,7 +234,7 @@ desired effect
             <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
           </li>
 
-          <li class="{% if url_name == 'userSettings' %} active {% endif %}">
+          <li class="{% if url_name == 'userSettings' or 'userEdit' %} active {% endif %}">
             <a href="{% url 'userSettings' %}"> <i class="fa fa-cog text-yellow"></i> <span>{% trans 'Configurações' %}</span></a>
           </li>
 
