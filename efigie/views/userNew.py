@@ -19,7 +19,7 @@ def userNew(request):
   form = UserNewForm(request.POST or None)
   
   if form.is_valid():
-    user = form.save(request.build_absolute_uri(None), Category.VERIFICATION)
+    user = form.save(request.build_absolute_uri(None))
     user = authenticate(username=user.username, password=form.cleaned_data['password1'])
     login(request, user)
     return redirect(index)

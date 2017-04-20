@@ -14,7 +14,7 @@ def userPasswordReset(request):
   form = UserPasswordResetForm(request.POST or None)
 
   if form.is_valid(): 
-    form.save(request.build_absolute_uri(None), Category.PASSWORD)
+    form.save(request.build_absolute_uri(None))
     return redirect(userLogin) 
 
   return render(request, '_template_login.html', 

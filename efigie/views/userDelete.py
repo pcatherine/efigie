@@ -5,4 +5,4 @@ from efigie.views import *
 
 @login_required
 def userDelete(request):
-  return redirect('userSettings')
+  return redirect(userSettings)
