@@ -21,6 +21,7 @@ from efigie.views.userNew import *
 from efigie.views.userNewConfirm import *
 from efigie.views.userDelete import *
 from efigie.views.userEdit import *
+from efigie.views.userEditConfirm import *
 
 from efigie.views.userPasswordReset import *
 from efigie.views.userPasswordResetConfirm import *

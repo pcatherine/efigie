@@ -1,11 +1,11 @@
 from django import template
 
-from efigie.models import UserVerification, Category
+from efigie.models import UserConfirmation, Category
 
 register = template.Library()
 
 @register.assignment_tag
 def emailConfirmation(user):
-  if UserVerification.objects.filter(user=user, category=Category.VERIFICATION, confirmed=False).exists():
+  if UserConfirmation.objects.filter(user=user, category=Category.VERIFICATION, confirmed=False).exists():
     return True
   return False

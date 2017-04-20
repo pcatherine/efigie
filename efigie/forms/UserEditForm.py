@@ -5,7 +5,7 @@ from efigie import settings
 from efigie.controllers import utils
 from efigie.controllers import mail
 from efigie.forms import *
-from efigie.models import UserVerification, Category
+from efigie.models import UserConfirmation, Category
 
 class UserEditForm(forms.Form):
   first_name = forms.CharField( 
@@ -42,7 +42,7 @@ class UserEditForm(forms.Form):
       self.user.save()
       if old_email != self.cleaned_data['email']:
         key = utils.generateHashKey(self.user.username)
-        reset = UserVerification(key=key, user=self.user, category=Category.VERIFICATION)
+        reset = UserConfirmation(key=key, user=self.user, category=Category.VERIFICATION)
         reset.save()
         
         subject = '[Efigie] E-mail Confirmation'

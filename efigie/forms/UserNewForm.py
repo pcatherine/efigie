@@ -6,7 +6,7 @@ from efigie import settings
 from efigie.controllers import utils
 from efigie.controllers import mail
 from efigie.forms import *
-from efigie.models import UserVerification, Category
+from efigie.models import UserConfirmation, Category
 
 class UserNewForm(UserCreationForm):
   first_name = forms.CharField(
@@ -35,7 +35,7 @@ class UserNewForm(UserCreationForm):
     if commit:
       user.save()
       key = utils.generateHashKey(user.username)
-      reset = UserVerification(key=key, user=user, category=Category.VERIFICATION)
+      reset = UserConfirmation(key=key, user=user, category=Category.VERIFICATION)
       reset.save()
       
       subject = '[Efigie] E-mail Confirmation'

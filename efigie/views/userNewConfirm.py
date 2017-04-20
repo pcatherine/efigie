@@ -8,13 +8,13 @@ from django.views.decorators.csrf import csrf_protect
 from efigie import *
 from efigie.controllers import *
 from efigie.forms import *
-from efigie.models import UserVerification, Category
+from efigie.models import UserConfirmation, Category
 from efigie.views import *
 
 @never_cache
 def userNewConfirm(request, key):
-  if UserVerification.objects.filter(key=key, category=Category.VERIFICATION, confirmed=False).exists():
-    reset = get_object_or_404(UserVerification, key=key)
+  if UserConfirmation.objects.filter(key=key, category=Category.VERIFICATION, confirmed=False).exists():
+    reset = get_object_or_404(UserConfirmation, key=key)
     reset.confirmed = True
     reset.save()
     login(request, reset.user)

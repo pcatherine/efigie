@@ -6,6 +6,8 @@ from efigie.controllers import *
 from efigie.views import *
 from efigie.forms import *
 
+#AGARD
+
 @login_required
 def userPasswordEdit(request, form=None):
 

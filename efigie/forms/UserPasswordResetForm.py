@@ -5,7 +5,7 @@ from django import forms
 from efigie.controllers import utils
 from efigie.controllers import mail
 from efigie.forms import *
-from efigie.models import UserVerification, Category
+from efigie.models import UserConfirmation, Category
 
 class UserPasswordResetForm(forms.Form):
   email = forms.EmailField(
@@ -23,7 +23,7 @@ class UserPasswordResetForm(forms.Form):
   def save(self, url):
     user = User.objects.get(email=self.cleaned_data['email'])
     key = utils.generateHashKey(user.username)
-    reset = UserVerification(key=key, user=user, category=Category.PASSWORD)
+    reset = UserConfirmation(key=key, user=user, category=Category.PASSWORD)
     reset.save()
     
     subject = '[Efigie] New Password'
