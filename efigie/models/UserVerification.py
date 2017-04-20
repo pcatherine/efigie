@@ -17,6 +17,10 @@ class UserVerification(models.Model):
   def __str__(self):
     return '{0} em {1}'.format(self.user, self.created_at)
 
+  def save(self, *args, **kwargs):
+    UserVerification.objects.filter(user=self.user,category=self.category, confirmed=False).update(confirmed=True)
+    super(UserVerification,self).save(*args, **kwargs)
+
   class Meta:
     verbose_name = 'Nova Senha'
     verbose_name_plural = 'Novas Senhas'
