@@ -4,4 +4,4 @@ register = template.Library()
 
 @register.simple_tag
 def version():
-  return "0.3.1030" 
+  return "0.3.1044" 
