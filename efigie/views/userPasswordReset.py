@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_protect
 
 from efigie.controllers import *
 from efigie.forms import *
-from efigie.models import Category
 from efigie.views import *
 
 

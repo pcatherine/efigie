@@ -1,5 +1,3 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import SetPasswordForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -10,6 +8,7 @@ from efigie.models import UserConfirmation, Category
 from efigie.views import *
 
 @never_cache
+@csrf_protect
 def userPasswordResetConfirm(request, key):
   if UserConfirmation.objects.filter(key=key, category=Category.PASSWORD, confirmed=False).exists():
     reset = get_object_or_404(UserConfirmation, key=key)
