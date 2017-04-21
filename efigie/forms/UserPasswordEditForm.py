@@ -13,15 +13,6 @@ class UserPasswordEditForm(PasswordChangeForm):
   new_password2 = forms.CharField(
     widget=forms.PasswordInput(attrs={'placeholder': 'Password again'}))
 
-  # def __init__(self, *args, **kwargs):
-  #   self.instance = kwargs.pop('instance', None)
-  #   assert self.instance is not None
-  #   super(PasswordChangeForm, self).__init__(*args, **kwargs)
-    
-  #   # self.user = kwargs.pop('user')
-  #   # super(PasswordChangeForm, self).__init__(*args, **kwargs)
-
-
   def clean_new_password2(self):
     password_length = settings.MIN_PASSWORD_LENGTH
     new_password1 = self.cleaned_data.get("new_password1")

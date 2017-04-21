@@ -34,7 +34,7 @@
 
     <div class="box-footer">
       <a type="button" class="btn btn-info" href="{% url 'userEdit' %}"><span>{% trans "Editar" %} {% trans "Dados" %}</span></a>
-      <a type="button" class="btn btn-info" ><span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
+      <a type="button" class="btn btn-info" href="{% url 'userPasswordEdit' %}" ><span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
       <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
     </div>
   </div>
