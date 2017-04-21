@@ -9,3 +9,5 @@ __email__ = "paollacath@gmail.com"
 __status__ = "Production"
 
 from efigie.models.UserConfirmation import *
+
+from efigie.models.Key import *
