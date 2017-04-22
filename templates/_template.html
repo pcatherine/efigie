@@ -276,6 +276,7 @@ desired effect
       <h1>
         {% block header %} 
 
+
         {% endblock %}
       </h1>
 
@@ -283,6 +284,7 @@ desired effect
 
     <!-- Main content -->
     <section class="content">
+      {% include "_alert.html" %}
       {% block content %} 
 
       {% endblock %}
