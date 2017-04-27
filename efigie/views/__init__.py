@@ -28,4 +28,6 @@ from efigie.views.userPasswordResetConfirm import *
 from efigie.views.userPasswordEdit import *
 
 
+from efigie.views.keyNew import *
+
 from efigie.views.errorViews import *

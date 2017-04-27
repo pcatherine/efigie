@@ -40,7 +40,7 @@ urlpatterns = [
   url(r'^user/settings/profile/$',  efigie.views.userEdit, name='userEdit'),
   url(r'^user/settings/profile/(?P<key>\w+)/$',  efigie.views.userEditConfirm, name='userEditConfirm'),
 
-
+  url(r'^key/new/$', efigie.views.keyNew, name='keyNew'),
 
 
 
