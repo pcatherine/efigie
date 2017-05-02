@@ -18,6 +18,6 @@ def userEdit(request):
     return redirect(userSettings)
 
   return render(request, 'form.html',
-    {'title': 'Editar Dados',
+    {'title': 'Edição de Dados',
      'form': form,
      'button': 'Editar'})

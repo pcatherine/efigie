@@ -18,6 +18,6 @@ def userPasswordEdit(request, form=None):
     return redirect(userLogout)
 
   return render(request, 'form.html',
-    {'title': 'Editar Senha',
+    {'title': 'Edição de Senha',
      'form': form,
      'button': 'Editar'})

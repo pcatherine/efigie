@@ -1,9 +1,9 @@
-{% extends "_template.html" %}
+{% extends '_template.html' %}
 {% load staticfiles %}
 {% load i18n %}
 
 {% block header %} 
-  <h1>{% trans "Lista de Chaves RSA" %}</h1>
+  <h1>{% trans 'Lista de Chaves RSA' %}</h1>
 {% endblock %}
 
 {% block content %}  
@@ -12,8 +12,8 @@
       <table id="keyNew" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>{% trans "Identificador" %}</th>
-            <th>{% trans "Tamanho" %}</th>
+            <th>{% trans 'Identificador' %}</th>
+            <th>{% trans 'Tamanho' %}</th>
             <th> </th>
           </tr>
         </thead>
@@ -26,7 +26,7 @@
               <td>{{ key.size }}</td>
               <td>
                 <a href="#" download class="btn btn-info"><i class="fa fa-download"></i></a> 
-                <a href="#" class="btn btn-info" ><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'keyEdit' key.id %}" class="btn btn-info" ><i class="fa fa-pencil"></i></a>
               </td>
             </tr>
           {% endfor %}

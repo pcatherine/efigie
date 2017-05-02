@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-from django.contrib.auth import authenticate, login
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 
 from efigie import *
-from efigie.controllers import *
 from efigie.forms import *
-from efigie.models import Category
 from efigie.views import *
 
 @csrf_protect
@@ -18,10 +16,10 @@ def keyNew(request):
   
   if form.is_valid():
     form.save()
-    messages.success(request, 'Chave criada com sucesso.')
-    return redirect(userSettings)
+    messages.success(request, 'Chave <b>%s</b> criada com sucesso.' % (form.cleaned_data['identifier']))
+    return redirect(keyList)
 
   return render(request, 'form.html',
-    {'title': 'Nova Chave',
+    {'title': 'Criação de Chave RSA',
      'form': form,
      'button': 'Criar Chave'})
