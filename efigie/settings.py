@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'efigie.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    'NAME': config.DATABASES_LOCALHOST_NAME,
-    'USER': config.DATABASES_LOCALHOST_USER,                 # Not used with sqlite3.
-    'PASSWORD': config.DATABASES_LOCALHOST_PASSWORD,         # Not used with sqlite3.
-    'HOST': config.DATABASES_LOCALHOST_HOST,   # Set to empty string for localhost. Not used with sqlite3.
+    'NAME': config.DATABASES_NAME,
+    'USER': config.DATABASES_USER,                 # Not used with sqlite3.
+    'PASSWORD': config.DATABASES_PASSWORD,         # Not used with sqlite3.
+    'HOST': config.DATABASES_HOST,   # Set to empty string for localhost. Not used with sqlite3.
     'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
   }
 } 
