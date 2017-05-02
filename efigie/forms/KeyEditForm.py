@@ -16,15 +16,25 @@ class KeyEditForm(KeyForm):
     self.fields['identifier'].initial = self.key.identifier 
     self.fields['size'].initial = self.key.size 
 
+  def clean_identifier(self):
+    identifier = self.cleaned_data['identifier']
+
+    if self.key.identifier != identifier and Key.objects.filter(identifier=identifier).exists():
+      raise forms.ValidationError('Chave já cadastrado com este identificador.')
+    else:
+      return identifier
 
   def save(self, commit=True):
-    user = self.user 
-    identifier = self.cleaned_data['identifier']
-    size = self.cleaned_data['size']
-    privateKey, publicKey = RSA.generate(int(size))
+    self.key.identifier = self.cleaned_data['identifier']
+    old_size = self.key.size
+    self.key.size = self.cleaned_data['size']
+    if old_size != self.cleaned_data['size']:
+      privateKey, publicKey = RSA.generate(int(self.key.size))
+      self.key.privateKey = privateKey
+      self.key.publicKey = publicKey
+
     if commit:
-      key = Key.objects.create(user=user, identifier=identifier, size=size, privateKey=privateKey, publicKey=publicKey)
-      key.save() 
+      self.key.save() 
 
   class Meta:
     model = Key
