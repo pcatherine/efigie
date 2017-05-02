@@ -21,6 +21,7 @@ def keyNew(request):
     messages.success(request, 'Chave criada com sucesso.')
     return redirect(userSettings)
 
-  return render(request, 'a_user_edit.html',
-    {'form': form,
-     'button': 'Criar Senha'})
+  return render(request, 'form.html',
+    {'title': 'Nova Chave',
+     'form': form,
+     'button': 'Criar Chave'})

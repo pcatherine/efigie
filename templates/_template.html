@@ -234,6 +234,26 @@ desired effect
             <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
           </li>
 
+
+           <li class="treeview">
+            <a href="">
+              <i class="fa fa-key text-yellow"></i> <span>{% trans "Chaves RSA" %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
+
+            <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' %} display: block; {% endif %}" class="treeview-menu menu-open">
+              <li class="{% if url_name == 'keyList' %} active {% endif %}">
+                <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans "Listar" %}</span></a>
+              </li>
+              
+              <li class="{% if url_name == 'keyNew' %} active {% endif %}">
+                <a href="{% url 'keyNew' %}"><i class="fa fa-plus text-yellow"></i><span>{% trans "Criar" %}</span></a>
+              </li>
+              
+              <li><a href="#"><i class="fa fa-upload text-yellow"></i><span>{% trans "Importar" %}</span></a></li>
+            </ul>
+          </li>
+
           <li class="{% if url_name == 'userSettings' %} active {% endif %}">
             <a href="{% url 'userSettings' %}"> <i class="fa fa-cog text-yellow"></i> <span>{% trans 'Configurações' %}</span></a>
           </li>
@@ -246,18 +266,6 @@ desired effect
             <a href="{% url 'userLogout' %}"><i class="fa fa-sign-out text-yellow"></i> <span>Logout</span></a>
           </li>
         {% endwith %}
-        <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li> -->
       </ul>
     </section>
   </aside>

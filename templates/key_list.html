@@ -1,0 +1,37 @@
+{% extends "_template.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block header %} 
+  <h1>{% trans "Lista de Chaves RSA" %}</h1>
+{% endblock %}
+
+{% block content %}  
+  <div class="box box-warning">
+    <div class="box-body">
+      <table id="keyNew" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>{% trans "Identificador" %}</th>
+            <th>{% trans "Tamanho" %}</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for key in keyList %}
+            <tr>
+              <td>
+                <a href="#" >{{ key.identifier }}</a>
+              </td>
+              <td>{{ key.size }}</td>
+              <td>
+                <a href="#" download class="btn btn-info"><i class="fa fa-download"></i></a> 
+                <a href="#" class="btn btn-info" ><i class="fa fa-pencil"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
+{% endblock %}  

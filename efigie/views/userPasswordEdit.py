@@ -15,6 +15,7 @@ def userPasswordEdit(request, form=None):
     messages.success(request, 'Senha editados com sucesso.')
     return redirect(userLogout)
 
-  return render(request, 'a_user_edit.html',
-    {'form': form,
+  return render(request, 'form.html',
+    {'title': 'Editar Senha',
+     'form': form,
      'button': 'Editar'})

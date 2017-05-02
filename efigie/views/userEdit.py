@@ -14,6 +14,7 @@ def userEdit(request):
     messages.success(request, 'Dados editados com sucesso.')
     return redirect(userSettings)
 
-  return render(request, 'a_user_edit.html',
-    {'form': form,
+  return render(request, 'form.html',
+    {'title': 'Editar Dados',
+     'form': form,
      'button': 'Editar'})
