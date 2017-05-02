@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
-from django.contrib.auth import authenticate, login
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
+from django.contrib.auth import login
 from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
 
 from efigie import *
-from efigie.controllers import *
-from efigie.forms import *
 from efigie.models import UserConfirmation, Category
 from efigie.views import *
 

@@ -16,7 +16,6 @@ from efigie.views.userLogout import *
 
 from efigie.views.userSettings import *
 
-
 from efigie.views.userNew import *
 from efigie.views.userNewConfirm import *
 from efigie.views.userDelete import *
@@ -28,8 +27,8 @@ from efigie.views.userPasswordResetConfirm import *
 from efigie.views.userPasswordEdit import *
 
 
+from efigie.views.keyDelete import *
 from efigie.views.keyNew import *
 from efigie.views.keyList import *
-
 
 from efigie.views.errorViews import *

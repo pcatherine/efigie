@@ -1,17 +1,17 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 
 from efigie import *
-from efigie.controllers import *
 from efigie.forms import *
-from efigie.models import Category
 from efigie.views import *
 
-@never_cache
 @csrf_protect
+@never_cache
 def userNew(request):
   if request.user.is_authenticated():
     return redirect(index)
@@ -24,6 +24,6 @@ def userNew(request):
     login(request, user)
     return redirect(index)
 
-  return render(request, '_template_login.html', 
+  return render(request, 'template_login.html', 
     {'form': form, 
      'button': 'Cadastrar-se'})

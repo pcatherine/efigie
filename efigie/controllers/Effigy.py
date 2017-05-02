@@ -14,7 +14,7 @@ def setEffigy(path, setting, message, key, idMessage):
     if img.mode != 'RGB':
       img = img.convert('RGB')
     print img
-  except Exception, e:
+  except Exception as e:
     raise Exception(_('Imagem nao pode ser aberta'))
 
   width, height = img.size
@@ -40,7 +40,7 @@ def setEffigy(path, setting, message, key, idMessage):
 def getEffigy(path):
   try:
     img = Image.open(path)
-  except Exception, e:
+  except Exception as e:
     raise Exception(_('Imagem nao pode ser aberta'))
 
   width, height = img.size
@@ -107,7 +107,7 @@ def getHeader(img, width, height):
       if len(msg) >= 114:
         try:
           return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [toString("".join(msg[0:48])) == IDENTIFICADOR and toString("".join(msg[-48:])) == IDENTIFICADOR] 
-        except Exception, e:
+        except Exception as e:
           return False   
 
 

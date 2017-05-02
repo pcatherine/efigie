@@ -234,28 +234,46 @@ desired effect
             <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
           </li>
 
-
-           <li class="treeview">
+           <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' %} active {% endif %}">
             <a href="">
-              <i class="fa fa-key text-yellow"></i> <span>{% trans "Chaves RSA" %}</span>
+              <i class="fa fa-key text-yellow"></i> <span>{% trans 'Chaves RSA' %}</span>
               <i class="fa fa-angle-left pull-right text-yellow"></i>
             </a>
 
             <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' %} display: block; {% endif %}" class="treeview-menu menu-open">
               <li class="{% if url_name == 'keyList' %} active {% endif %}">
-                <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans "Listar" %}</span></a>
+                <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans 'Listar' %}</span></a>
               </li>
               
               <li class="{% if url_name == 'keyNew' %} active {% endif %}">
-                <a href="{% url 'keyNew' %}"><i class="fa fa-plus text-yellow"></i><span>{% trans "Criar" %}</span></a>
+                <a href="{% url 'keyNew' %}"><i class="fa fa-plus text-yellow"></i><span>{% trans 'Criar' %}</span></a>
               </li>
               
-              <li><a href="#"><i class="fa fa-upload text-yellow"></i><span>{% trans "Importar" %}</span></a></li>
+              <li><a href="#"><i class="fa fa-upload text-yellow"></i><span>{% trans 'Importar' %}</span></a></li>
             </ul>
           </li>
 
-          <li class="{% if url_name == 'userSettings' %} active {% endif %}">
-            <a href="{% url 'userSettings' %}"> <i class="fa fa-cog text-yellow"></i> <span>{% trans 'Configurações' %}</span></a>
+          <li class="treeview {% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit' %} active {% endif %}">
+            <a href="">
+              <i class="fa fa-cog text-yellow"></i> <span>{% trans 'Conta' %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
+            <ul style="{% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit'  %} 
+                        display: block; 
+                       {% endif %}" class="treeview-menu menu-open">
+              <li class="{% if url_name == 'userSettings' %} active {% endif %}">
+                <a href="{% url 'userSettings' %}"><i class="fa fa-list-alt text-yellow"></i><span>{% trans 'Resumo da Conta' %}</span></a>
+              </li>
+
+              <li class="{% if url_name == 'userEdit' %} active {% endif %}">
+                <a href="{% url 'userEdit' %}"><i class="fa fa-user text-yellow"></i><span>{% trans 'Editar Dados' %}</span></a>
+              </li>
+              
+              <li class="{% if url_name == 'userPasswordEdit' %} active {% endif %}">
+                <a href="{% url 'userPasswordEdit' %}"><i class="fa fa-lock text-yellow"></i><span>{% trans 'Editar Senha' %}</span></a>
+              </li>
+              
+            </ul>
           </li>
 
           <li class="{% if url_name == 'about' %} active {% endif %}">
@@ -283,20 +301,15 @@ desired effect
       {% endif %}
       <h1>
         {{ title }}
-        {% block header %} 
-
-
-        {% endblock %}
+        {% block header %} {% endblock %}
       </h1>
 
     </section>
 
     <!-- Main content -->
     <section class="content">
-      {% include "_alert.html" %}
-      {% block content %} 
-
-      {% endblock %}
+      {% include '_alert.html' %}
+      {% block content %} {% endblock %}
     </section>
     <!-- /.content -->
   </div>
@@ -306,10 +319,10 @@ desired effect
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      <strong>{% trans "Versão" %}</strong>  {% version %}
+      <strong>{% trans 'Versão' %}</strong>  {% version %}
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015-2017 <a href="{% url 'index' %}">Efigie</a></strong> {% trans "Todos os direitos reservador" %}.<strong><a href="#"> Paolla Catherine</a></strong>
+    <strong>Copyright &copy; 2015-2017 <a href="{% url 'index' %}">Efigie</a></strong> {% trans 'Todos os direitos reservador' %}.<strong><a href="#"> Paolla Catherine</a></strong>
   </footer>
 
 

@@ -1,5 +1,10 @@
-from django.shortcuts import render, redirect
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
 
+from django.shortcuts import render
+
+from efigie import *
+from efigie.views import *
 
 def bad_request(request):
   return render(request, '400.html', status=400)

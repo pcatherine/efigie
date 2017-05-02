@@ -1,23 +1,23 @@
-{% extends "_template.html" %}
+{% extends '_template.html' %}
 {% load static %}
 {% load i18n %}
 
 {% load efigieSimpleTags %}
 
-{% block header %} {% trans "Configuracoes" %} {% endblock %}
+{% block header %} {% trans 'Configuracoes' %} {% endblock %}
 
 {% block content %}
   
-  {% include "user_delete.html" with form=form %}
+  {% include 'user_delete.html' with form=form %}
 
   <div class="box box-warning ">
     <div class="box-header with-border" >
-      <h1 class="box-title">{% trans "Perfil" %}</h1>
+      <h1 class="box-title">{% trans 'Perfil' %}</h1>
     </div>
 
     <div class="box-body ">
       <dl class="dl-horizontal">
-        <dt class="with-border" >{% trans "Nome Completo" %}</dt>
+        <dt class="with-border" >{% trans 'Nome Completo' %}</dt>
         <dd >{{ request.user.get_full_name }}</dd>
 
         <dt class="with-border">Username</dt>
@@ -26,15 +26,15 @@
         <dt >E-mail</dt>
         <dd >{{ request.user.email }}</dd>
 
-        <dt >{% trans "Membro desde" %}</dt>
-        <dd >{{ request.user.date_joined|date:"SHORT_DATE_FORMAT" }}</dd>
+        <dt >{% trans 'Membro desde' %}</dt>
+        <dd >{{ request.user.date_joined|date:'SHORT_DATE_FORMAT' }}</dd>
       </dl>  
     </div>
 
     <div class="box-footer">
-      <a type="button" class="btn btn-info" href="{% url 'userEdit' %}"><span>{% trans "Editar" %} {% trans "Dados" %}</span></a>
-      <a type="button" class="btn btn-info" href="{% url 'userPasswordEdit' %}" ><span>{% trans "Editar" %} {% trans "Senha" %}</span></a>
-      <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><span><i class="fa fa-times"></i> {% trans "Deletar" %}</a>
+      <a type="button" class="btn btn-info" href="{% url 'userEdit' %}"><span>{% trans 'Editar Dados' %}</span></a>
+      <a type="button" class="btn btn-info" href="{% url 'userPasswordEdit' %}" ><span>{% trans 'Editar Senha' %}</span></a>
+      <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i> <span>{% trans 'Deletar' %}</a>
     </div>
   </div>
 {% endblock %}

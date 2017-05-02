@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 from django.contrib import messages
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
-from efigie.controllers import *
-from efigie.views import *
 from efigie.forms import *
+from efigie.views import *
 
+@csrf_protect
 @login_required
 def userPasswordEdit(request, form=None):
   form = UserPasswordEditForm(user=request.user, data=request.POST or None)

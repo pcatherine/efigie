@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
-from django.contrib.auth import authenticate, login
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
-from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 
-from efigie.controllers import *
+from efigie import *
 from efigie.forms import *
 from efigie.views import *
 
-
+@csrf_protect
 def userPasswordReset(request):
   form = UserPasswordResetForm(request.POST or None)
 
@@ -16,6 +16,6 @@ def userPasswordReset(request):
     form.save(request.build_absolute_uri(None))
     return redirect(userLogin) 
 
-  return render(request, '_template_login.html', 
+  return render(request, 'template_login.html', 
     {'form': form,
      'button': 'Restar Senha'})
