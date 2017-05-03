@@ -9,6 +9,8 @@ from efigie import *
 from efigie.models import Key
 from efigie.views import *
 
+#AGARD
+
 @login_required
 def keyDelete(request, keyId):
   keyName = None

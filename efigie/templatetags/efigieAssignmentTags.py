@@ -1,6 +1,8 @@
 from django import template
+from django.contrib import messages
+from django.http import HttpResponse
 
-from efigie.models import UserConfirmation, Category
+from efigie.models import UserConfirmation, Category, Key
 
 register = template.Library()
 

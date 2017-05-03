@@ -240,7 +240,7 @@ desired effect
               <i class="fa fa-angle-left pull-right text-yellow"></i>
             </a>
 
-            <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' %} display: block; {% endif %}" class="treeview-menu menu-open">
+            <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' %} display: block; {% endif %}" class="treeview-menu menu-open">
               <li class="{% if url_name == 'keyList' %} active {% endif %}">
                 <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans 'Listar' %}</span></a>
               </li>
@@ -249,7 +249,9 @@ desired effect
                 <a href="{% url 'keyNew' %}"><i class="fa fa-plus text-yellow"></i><span>{% trans 'Criar' %}</span></a>
               </li>
               
-              <li><a href="#"><i class="fa fa-upload text-yellow"></i><span>{% trans 'Importar' %}</span></a></li>
+              <li class="{% if url_name == 'keyImport' %} active {% endif %}">
+                <a href="{% url 'keyImport' %}"><i class="fa fa-upload text-yellow"></i><span>{% trans 'Importar' %}</span></a>
+              </li>
             </ul>
           </li>
 

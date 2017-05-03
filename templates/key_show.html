@@ -1,0 +1,29 @@
+{% extends '_template.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block header %} {% trans "Chave" %}: <b>{{ key.identifier }}</b> {% endblock %}
+
+{% block content %}
+  
+  <div class="box box-warning">
+    <div class="box-body">
+      <dl class="dl-horizontal">
+        <dt>{% trans "Identificador" %}</dt>
+        <dd>{{ key.identifier }}</dd>
+        <dt>{% trans "Tamanho da Chave" %}</dt>
+        <dd>{{ key.size }}</dd>
+        <dt>{% trans "Chave" %} {% trans "Publica" %}</dt>
+        <dd>{{ key.publicKey }}</dd>
+        <dt>{% trans "Chave" %} {% trans "Privada" %}</dt>
+        <dd>{{ key.privateKey }}</dd>
+      </dl>
+    </div>
+    <div class="box-footer">
+      <a href="{% url 'keyExport' key.id %}" download class="btn btn-info" ><span><i class="fa fa-download"></i> {% trans "Exportar" %}</span></a>
+      <a href="{% url 'keyEdit' key.id %}" class="btn btn-info" ><span><i class="fa fa-pencil"></i> {% trans "Editar" %}</span></a>
+      <a href="{% url 'keyDelete' key.id %}" class="btn btn-danger" ><span><i class="fa fa-times"></i> {% trans "Deletar" %}</span></a>
+    </div>
+  </div>
+
+{% endblock %}

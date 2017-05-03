@@ -42,12 +42,11 @@ urlpatterns = [
 
   url(r'^key/new/$', efigie.views.keyNew, name='keyNew'),
   url(r'^key/list/$', efigie.views.keyList, name='keyList'),
+  url(r'^key/import/$', efigie.views.keyImport, name='keyImport'),
+  url(r'^key/(?P<keyId>[0-9]+)/show/$', efigie.views.keyShow, name='keyShow'),
   url(r'^key/(?P<keyId>[0-9]+)/edit/$', efigie.views.keyEdit, name='keyEdit'),
   url(r'^key/(?P<keyId>[0-9]+)/delete/$', efigie.views.keyDelete, name='keyDelete'),
-
-  # url(r'^key/import/$', views.keyImport, name='keyImport'),
-  # url(r'^key/(?P<keyId>[0-9]+)/show/$', views.keyShow, name='keyShow'),
-  # url(r'^key/(?P<keyId>[0-9]+)/export/$', views.keyExport, name='keyExport'),
+  url(r'^key/(?P<keyId>[0-9]+)/export/$', efigie.views.keyExport, name='keyExport'),
 
 
 
