@@ -25,4 +25,5 @@ def keyExport(request, keyId):
     return response
 
   except Exception as e:
-    return keyList(request, alert=EffigyParameters.ALERT_DANGER, description=EffigyCommunication.KEY_NOT_EXPORT)
+    messages.error(request, 'Não foi possível exportar a chave.')
+    return redirect(keyList)

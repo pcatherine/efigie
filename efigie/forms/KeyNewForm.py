@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 from django import forms
 from django.forms import ModelForm
 
@@ -26,7 +29,7 @@ SIZE_CHOICES = (
   ('4864', '4864')
 )
 
-class KeyForm(ModelForm):
+class KeyNewForm(ModelForm):
   identifier = forms.CharField( 
     widget=forms.TextInput(attrs={'placeholder':'Identifier'}))
 
@@ -37,7 +40,7 @@ class KeyForm(ModelForm):
 
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
-    super(KeyForm, self).__init__(*args, **kwargs)
+    super(KeyNewForm, self).__init__(*args, **kwargs)
 
   def clean_identifier(self):
     identifier = self.cleaned_data['identifier']

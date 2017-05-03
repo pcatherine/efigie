@@ -240,7 +240,9 @@ desired effect
               <i class="fa fa-angle-left pull-right text-yellow"></i>
             </a>
 
-            <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' %} display: block; {% endif %}" class="treeview-menu menu-open">
+            <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' %} 
+                        display: block; 
+                       {% endif %}" class="treeview-menu menu-open">
               <li class="{% if url_name == 'keyList' %} active {% endif %}">
                 <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans 'Listar' %}</span></a>
               </li>

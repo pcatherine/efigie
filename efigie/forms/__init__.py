@@ -16,6 +16,6 @@ from efigie.forms.UserPasswordEditForm import *
 from efigie.forms.UserPasswordResetForm import *
 from efigie.forms.UserSetPasswordForm import *
 
-from efigie.forms.KeyForm import *
+from efigie.forms.KeyNewForm import *
 from efigie.forms.KeyEditForm import *
 from efigie.forms.KeyImportForm import *
