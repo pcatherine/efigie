@@ -9,17 +9,15 @@ from efigie import *
 from efigie.models import Key
 from efigie.views import *
 
-#AGARD
-
 @login_required
 def keyDelete(request, keyId):
-  keyName = None
   try:
     key = Key.objects.get(id = keyId)
-    keyName = key
+    identifier = key.identifier
     key.delete()
-    messages.success(request, 'Chave <b>%s</b> deletada com sucesso.' % (keyName.identifier))
+    messages.success(request, 'Chave <b>%s</b> deletada com sucesso.' % (identifier))
   except Exception as e:
-    messages.error(request, 'Chave <b>%s</b> não pode ser deletada.' % (keyName.identifier))
+
+    messages.error(request, 'Chave não pode ser deletada.')
 
   return redirect(keyList)

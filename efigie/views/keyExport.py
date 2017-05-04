@@ -1,12 +1,5 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
-#OKAY
-__author__ = "Paolla Catherine"
-__copyright__ = "Copyright 2015-2016, Efigie"
-__credits__ = ["Paolla Catherine"]
-__version__ = "1.0.0"
-__email__ = "paollacath@gmail.com"
-__status__ = "Production"
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -21,9 +14,9 @@ def keyExport(request, keyId):
     key = Key.objects.get(id=keyId) 
     response = HttpResponse(content_type='application/text')
     response['Content-Disposition'] = 'attachment; filename="%s.key"' % (key.identifier)
-    response.write('%s%sIDENTIFIER KEY-----%s-----END IDENTIFIER SIZE KEY-----%d' % (key.privateKey, key.publicKey, key.identifier, key.size))
+    response.write('%s;%s;%s;%d' % (key.privateKey, key.publicKey, key.identifier, key.size))
     return response
 
   except Exception as e:
-    messages.error(request, 'Não foi possível exportar a chave.')
+    messages.error(request, 'Chave não pode ser exportada.')
     return redirect(keyList)

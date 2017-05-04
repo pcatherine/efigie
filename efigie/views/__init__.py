@@ -28,10 +28,10 @@ from efigie.views.userPasswordEdit import *
 
 
 from efigie.views.keyList import *
+from efigie.views.keyShow import *
 from efigie.views.keyDelete import *
 from efigie.views.keyEdit import *
 from efigie.views.keyNew import *
-from efigie.views.keyShow import *
 from efigie.views.keyExport import *
 from efigie.views.keyImport import *
 

@@ -14,7 +14,7 @@ def userEdit(request):
   form = UserEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save(request.build_absolute_uri(None))
-    messages.success(request, 'Dados editados com sucesso.')
+    messages.success(request, 'Dados editados com sucesso.', extra_tags='bla')
     return redirect(userSettings)
 
   return render(request, 'form.html',

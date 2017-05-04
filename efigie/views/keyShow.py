@@ -12,6 +12,7 @@ from efigie.views import *
 def keyShow(request, keyId):
   try:
     key = Key.objects.get(id = keyId)
+    messages.error(request, '<p>Excluiremos a chave: <b>%s</b> permanentemente.</p>' % (key.identifier) , extra_tags='model')
     return render(request, 'key_show.html',
       {'key': key})
 

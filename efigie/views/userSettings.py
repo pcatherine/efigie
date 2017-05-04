@@ -28,5 +28,6 @@ def userSettings(request):
       else:
         messages.error(request, 'Usuario nao pode ser excluido.')
 
+  messages.error(request, '<p>Excluiremos <b>imediatamente</b> todas as chaves relacionadas somente a voce, juntamente com todos os seus contatos.</p>', extra_tags='model')
   return render(request, 'user_settings.html',
     {'form': form})
