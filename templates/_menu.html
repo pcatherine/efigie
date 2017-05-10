@@ -9,14 +9,16 @@
           <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
         </li>
 
-        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' %} active {% endif %}">
+        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} 
+                              active 
+                            {% endif %}">
           <a href="">
             <i class="fa fa-key text-yellow"></i> <span>{% trans 'Chaves RSA' %}</span>
             <i class="fa fa-angle-left pull-right text-yellow"></i>
           </a>
 
-          <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' %} 
-                      display: block; 
+          <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} 
+                        display: block; 
                      {% endif %}" class="treeview-menu menu-open">
             <li class="{% if url_name == 'keyList' %} active {% endif %}">
               <a href="{% url 'keyList' %}"><i class="fa fa-list text-yellow"></i><span>{% trans 'Listar' %}</span></a>
@@ -38,7 +40,7 @@
             <i class="fa fa-angle-left pull-right text-yellow"></i>
           </a>
           <ul style="{% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit'  %} 
-                      display: block; 
+                        display: block; 
                      {% endif %}" class="treeview-menu menu-open">
             <li class="{% if url_name == 'userSettings' %} active {% endif %}">
               <a href="{% url 'userSettings' %}"><i class="fa fa-list-alt text-yellow"></i><span>{% trans 'Resumo da Conta' %}</span></a>
