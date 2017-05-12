@@ -22,8 +22,8 @@ import efigie.views
 
 
 urlpatterns = [
-  url(r'^$', efigie.views.index, name='index'),
-  url(r'^about/', efigie.views.about, name='about'),
+  url(r'^$', efigie.views.index, name='index', kwargs={'title': 'Home', 'icon': 'fa-info-circle'}),
+  url(r'^about/', efigie.views.about, name='about', kwargs={'title': 'Sobre', 'icon': 'fa-info-circle'}),
 
   url(r'^login/$', efigie.views.userLogin, name='userLogin'),
   url(r'^logout/$', efigie.views.userLogout, name='userLogout'),

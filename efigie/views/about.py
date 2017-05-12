@@ -8,5 +8,7 @@ from efigie import *
 from efigie.views import *
 
 @login_required
-def about(request):
-  return render(request, 'about.html')
+def about(request, **kwargs):
+  return render(request, 'about.html', 
+    {'kwargs': kwargs,
+     'breadcrumbs': ['index', 'about']})

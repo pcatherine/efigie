@@ -34,8 +34,8 @@
   {% include '_alert.html' %}
   {% include '_form.html' with form=form button=button %}
 
-  {% for a in links %}
-    {{ a|safe }} <br />
+  {% for link in links %}
+    <a href="{% url link.url %}"><span>{{ link.name }}</span></a> <br />
   {% endfor %} 
 
   </div>

@@ -243,18 +243,29 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    {% emailConfirmation user as confimation  %}
+    {% if confimation %}
+      <div class="callout callout-danger">
+        <h4> Alerta</h4>
+        <p><i class="icon fa fa-ban"></i> Aguardando a confirmação de e-mail ou <a href="{% url 'userEdit' %}"> clique aqui</a> para alteração.</p>
+      </div>
+    {% endif %}
+
     <section class="content-header">
-      {% emailConfirmation user as confimation  %}
-      {% if confimation %}
-        <div class="callout callout-danger">
-          <h4> Alerta</h4>
-          <p><i class="icon fa fa-ban"></i> Aguardando a confirmação de e-mail ou <a href="{% url 'userEdit' %}"> clique aqui</a> para alteração.</p>
-        </div>
-      {% endif %}
+
+
       <h1>
-        {{ title|safe }}
-        {% block header %} {% endblock %}
+        {{ kwargs.title|safe }}
       </h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li {% if forloop.last %} class="active" {% endif %}  ><a href="{% url breadcrumb.url %}"><i class="fa breadcrumb.icon text-yellow"></i><span>{{ breadcrumb.name }}</span></a> <br />
+        {% endfor %} 
+
+
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
     </section>
 
     <!-- Main content -->

@@ -8,5 +8,5 @@ from efigie import *
 from efigie.views import *
 
 @login_required
-def index(request):
+def index(request, **kwargs):
   return render(request, 'index.html')
