@@ -10,7 +10,7 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def userPasswordEdit(request, form=None):
+def userPasswordEdit(request, form=None, **kwargs):
   form = UserPasswordEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save()

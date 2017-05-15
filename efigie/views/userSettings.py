@@ -13,7 +13,7 @@ from efigie.views import *
 #AGARD
 @csrf_protect
 @login_required
-def userSettings(request):
+def userSettings(request, **kwargs):
   form = UserLoginForm(request.POST or None)
 
   if form.is_valid():

@@ -10,11 +10,11 @@ from efigie.forms import *
 
 @csrf_protect
 @login_required
-def userEdit(request):
+def userEdit(request, **kwargs):
   form = UserEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save(request.build_absolute_uri(None))
-    messages.success(request, 'Dados editados com sucesso.', extra_tags='bla')
+    messages.success(request, 'Dados editados com sucesso.')
     return redirect(userSettings)
 
   return render(request, 'form.html',

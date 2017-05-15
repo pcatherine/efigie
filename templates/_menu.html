@@ -6,12 +6,10 @@
     <ul class="sidebar-menu"> <!-- Sidebar Menu -->
       {% with request.resolver_match.url_name as url_name %}
         <li class="{% if url_name == 'index' %} active {% endif %}">
-          <a href="#"><i class="fa fa-link text-yellow"></i> <span>Link</span></a>
+          <a href="{% url 'index' %}"><i class="fa fa-home text-yellow"></i> <span>Home</span></a>
         </li>
 
-        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} 
-                              active 
-                            {% endif %}">
+        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
           <a href="">
             <i class="fa fa-key text-yellow"></i> <span>{% trans 'Chaves RSA' %}</span>
             <i class="fa fa-angle-left pull-right text-yellow"></i>

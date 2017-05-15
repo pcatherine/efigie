@@ -10,7 +10,7 @@ from efigie.models import Key
 from efigie.views import *
 
 @login_required
-def keyDelete(request, keyId):
+def keyDelete(request, keyId, **kwargs):
   try:
     key = Key.objects.get(id = keyId)
     identifier = key.identifier

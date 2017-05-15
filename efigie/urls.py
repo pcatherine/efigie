@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#-*- coding: utf-8 -*-
+
 """efigie URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -22,31 +25,53 @@ import efigie.views
 
 
 urlpatterns = [
-  url(r'^$', efigie.views.index, name='index'),
-  url(r'^about/', efigie.views.about, name='about'),
+  url(r'^$', efigie.views.index, name='index', 
+    kwargs={'title': 'Home', 'icon': 'fa-home'}),
+  url(r'^about/', efigie.views.about, name='about', 
+    kwargs={'title': 'Sobre', 'icon': 'fa-info-circle'}),
 
-  url(r'^login/$', efigie.views.userLogin, name='userLogin'),
-  url(r'^logout/$', efigie.views.userLogout, name='userLogout'),
+  url(r'^login/$', efigie.views.userLogin, name='userLogin', 
+    kwargs={'title': 'Login', 'icon': 'a-sign-in'}),
+  url(r'^logout/$', efigie.views.userLogout, name='userLogout', 
+    kwargs={'title': 'Logout', 'icon': 'fa-sign-out'}),
 
-  url(r'^user/new/$', efigie.views.userNew, name='userNew'),
-  url(r'^user/new/(?P<key>\w+)/$', efigie.views.userNewConfirm, name='userNewConfirm'),
+  url(r'^user/new/$', efigie.views.userNew, name='userNew',
+    kwargs={'title': 'Criar Usuário', 'icon': 'fa-user-plus'}),
+  url(r'^user/new/(?P<key>\w+)/$', efigie.views.userNewConfirm, name='userNewConfirm', 
+    kwargs={'title': 'Confirmar Usuário', 'icon': 'fa-user-plus'}),
+
+  url(r'^user/password/forget/$', efigie.views.userPasswordReset, name='userPasswordReset', 
+    kwargs={'title': 'Restaurar Senha', 'icon': 'fa-lock'}),
+  url(r'^user/password/forget/(?P<key>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm', 
+    kwargs={'title': 'Confirmar Senha', 'icon': 'fa-lock'}),
   
-  url(r'^user/password/forget/$', efigie.views.userPasswordReset, name='userPasswordReset'),
-  url(r'^user/password/forget/(?P<key>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm'),
-  
-  url(r'^user/settings/$', efigie.views.userSettings, name='userSettings'),
-  url(r'^user/delete/$', efigie.views.userDelete, name='userDelete'),
-  url(r'^user/settings/password/$',  efigie.views.userPasswordEdit, name='userPasswordEdit'),
-  url(r'^user/settings/profile/$',  efigie.views.userEdit, name='userEdit'),
-  url(r'^user/settings/profile/(?P<key>\w+)/$',  efigie.views.userEditConfirm, name='userEditConfirm'),
+  url(r'^user/settings/$', efigie.views.userSettings, name='userSettings', 
+    kwargs={'title': 'Exibir Dados da Conta', 'icon': 'fa-list-alt'}),
+  url(r'^user/delete/$', efigie.views.userDelete, name='userDelete', 
+    kwargs={'title': 'Deletar Usuário', 'icon': 'fa-user-times'}),
+  url(r'^user/settings/password/$',  efigie.views.userPasswordEdit, name='userPasswordEdit', 
+    kwargs={'title': 'Editar Senha', 'icon': 'fa-lock'}),
 
-  url(r'^key/new/$', efigie.views.keyNew, name='keyNew'),
-  url(r'^key/list/$', efigie.views.keyList, name='keyList'),
-  url(r'^key/import/$', efigie.views.keyImport, name='keyImport'),
-  url(r'^key/(?P<keyId>[0-9]+)/show/$', efigie.views.keyShow, name='keyShow'),
-  url(r'^key/(?P<keyId>[0-9]+)/edit/$', efigie.views.keyEdit, name='keyEdit'),
-  url(r'^key/(?P<keyId>[0-9]+)/delete/$', efigie.views.keyDelete, name='keyDelete'),
-  url(r'^key/(?P<keyId>[0-9]+)/export/$', efigie.views.keyExport, name='keyExport'),
+  url(r'^user/settings/profile/$',  efigie.views.userEdit, name='userEdit', 
+    kwargs={'title': 'Editar Usuário', 'icon': 'fa-user'}),
+  url(r'^user/settings/profile/(?P<key>\w+)/$',  efigie.views.userEditConfirm, name='userEditConfirm', 
+    kwargs={'title': 'Confirmar Edição de Usuário', 'icon': 'fa-user'}),
+
+  url(r'^key/new/$', efigie.views.keyNew, name='keyNew', 
+    kwargs={'title': 'Criar Senha', 'icon': 'fa-plus'}),
+  url(r'^key/list/$', efigie.views.keyList, name='keyList', 
+    kwargs={'title': 'Listar Chaves', 'icon': 'fa-list'}),
+  url(r'^key/import/$', efigie.views.keyImport, name='keyImport', 
+    kwargs={'title': 'Importar Chaves', 'icon': 'fa-upload'}),
+
+  url(r'^key/(?P<keyId>[0-9]+)/show/$', efigie.views.keyShow, name='keyShow', 
+    kwargs={'title': 'Exibir Chave', 'icon': 'fa-list-alt'}),
+  url(r'^key/(?P<keyId>[0-9]+)/edit/$', efigie.views.keyEdit, name='keyEdit', 
+    kwargs={'title': 'Editar Chave', 'icon': 'fa-pencil'}),
+  url(r'^key/(?P<keyId>[0-9]+)/delete/$', efigie.views.keyDelete, name='keyDelete', 
+    kwargs={'title': 'Deletar Chave', 'icon': 'fa-times'}),
+  url(r'^key/(?P<keyId>[0-9]+)/export/$', efigie.views.keyExport, name='keyExport', 
+    kwargs={'title': 'Exportar Chave', 'icon': 'fa-download'}),
 
 
 

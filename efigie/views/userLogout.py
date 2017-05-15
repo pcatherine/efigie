@@ -9,6 +9,6 @@ from efigie import *
 from efigie.views import *
 
 @login_required
-def userLogout(request):
+def userLogout(request, **kwargs):
   logout(request)
   return redirect(userLogin)

@@ -9,7 +9,7 @@ from efigie.forms import *
 from efigie.views import *
 
 @csrf_protect
-def userPasswordReset(request):
+def userPasswordReset(request, **kwargs):
   form = UserPasswordResetForm(request.POST or None)
 
   if form.is_valid(): 

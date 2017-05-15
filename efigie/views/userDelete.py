@@ -8,5 +8,5 @@ from efigie import *
 from efigie.views import *
 #AGARD
 @login_required
-def userDelete(request):
+def userDelete(request, **kwargs):
   return redirect(userSettings)

@@ -11,7 +11,7 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def keyNew(request):
+def keyNew(request, **kwargs):
   form = KeyNewForm(user=request.user, data=request.POST or None)
   
   if form.is_valid():

@@ -14,7 +14,7 @@ from efigie.views import *
 
 @csrf_protect
 @never_cache
-def userLogin(request):
+def userLogin(request, **kwargs):
   if request.user.is_authenticated():
     return redirect(index)
 
@@ -41,5 +41,5 @@ def userLogin(request):
   return render(request, 'template_login.html', 
     {'form': form,
      'button': 'Login',
-     'links': {'<a href="/user/password/forget/">Esqueci minha senha</a>', 
-               '<a href="/user/new/">Cadastrar-se</a>'}})
+     'links': [{'name':'Esqueci minha senha', 'url': 'userPasswordReset'},
+               {'name':'Cadastrar-se', 'url': 'userNew'} ]})

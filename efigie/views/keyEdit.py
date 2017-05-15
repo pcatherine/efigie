@@ -10,7 +10,7 @@ from efigie.forms import *
 
 @csrf_protect
 @login_required
-def keyEdit(request, keyId):
+def keyEdit(request, keyId, **kwargs):
   try:
     key = Key.objects.get(id = keyId)
     form = KeyEditForm(user=request.user, key=key, data=request.POST or None)

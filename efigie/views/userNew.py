@@ -12,7 +12,7 @@ from efigie.views import *
 
 @csrf_protect
 @never_cache
-def userNew(request):
+def userNew(request, **kwargs):
   if request.user.is_authenticated():
     return redirect(index)
 

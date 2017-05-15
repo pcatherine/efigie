@@ -9,7 +9,7 @@ from efigie.models import Key
 from efigie.views import *
 
 @login_required
-def keyExport(request, keyId):
+def keyExport(request, keyId, **kwargs):
   try:
     key = Key.objects.get(id=keyId) 
     response = HttpResponse(content_type='application/text')

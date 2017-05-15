@@ -8,5 +8,5 @@ from efigie import *
 from efigie.views import *
 
 @login_required
-def userEditConfirm(request, key):
+def userEditConfirm(request, key, **kwargs):
   return userNewConfirm(request, key)

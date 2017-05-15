@@ -15,7 +15,7 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def keyImport(request):
+def keyImport(request, **kwargs):
   form = KeyImportForm(request.POST or None, request.FILES or None)
   if form.is_valid():
 
