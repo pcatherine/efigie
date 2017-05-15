@@ -252,11 +252,17 @@ desired effect
     {% endif %}
 
     <section class="content-header">
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
       <h1>
         {{ kwargs.title|safe }}
       </h1>
       <ol class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
+<<<<<<< HEAD
           {% resolveUrl breadcrumbs as bla  %}
 
           <li {% if forloop.last %} class="active" {% endif %}>
@@ -266,6 +272,14 @@ desired effect
             {% if not forloop.last %} </a> {% endif %}
           </li>
         {% endfor %} 
+=======
+          <li {% if forloop.last %} class="active" {% endif %}  ><a href="{% url breadcrumb.url %}"><i class="fa breadcrumb.icon text-yellow"></i><span>{{ breadcrumb.name }}</span></a> <br />
+        {% endfor %} 
+
+
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+>>>>>>> master
       </ol>
     </section>
 

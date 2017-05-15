@@ -25,10 +25,15 @@ import efigie.views
 
 
 urlpatterns = [
+<<<<<<< HEAD
   url(r'^$', efigie.views.index, name='index', 
     kwargs={'title': 'Home', 'icon': 'fa-home'}),
   url(r'^about/', efigie.views.about, name='about', 
     kwargs={'title': 'Sobre', 'icon': 'fa-info-circle'}),
+=======
+  url(r'^$', efigie.views.index, name='index', kwargs={'title': 'Home', 'icon': 'fa-info-circle'}),
+  url(r'^about/', efigie.views.about, name='about', kwargs={'title': 'Sobre', 'icon': 'fa-info-circle'}),
+>>>>>>> master
 
   url(r'^login/$', efigie.views.userLogin, name='userLogin', 
     kwargs={'title': 'Login', 'icon': 'a-sign-in'}),
