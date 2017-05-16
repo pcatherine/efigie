@@ -14,7 +14,7 @@ from efigie.views import *
 
 @csrf_protect
 @never_cache
-def userLogin(request, **kwargs):
+def userLogin(request):
   if request.user.is_authenticated():
     return redirect(index)
 
@@ -23,12 +23,11 @@ def userLogin(request, **kwargs):
     username = form.cleaned_data['username']
     password = form.cleaned_data['password']
 
+    user = None
     if '@' in username:
-      try:
+      if User.objects.filter(email=username).exists():
         user = User.objects.get(email=username)
         user = authenticate(username=user.username, password=password)
-      except Exception as e:
-        messages.error(request, 'Username ou senha inválido.')
     else:
       user = authenticate(username=username, password=password)
     

@@ -15,12 +15,12 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def keyImport(request, **kwargs):
+def keyImport(request):
+  breadcrumbs = ['index', 'keyImport']
+
   form = KeyImportForm(request.POST or None, request.FILES or None)
   if form.is_valid():
-
     file = request.FILES['file']
-
     try:
       date = file.read().decode('utf-8')
       privateKey, publicKey, identifier, size = date.split(';')
@@ -42,4 +42,5 @@ def keyImport(request, **kwargs):
   return render(request, 'form.html',
     {'title': 'Importação de Chave',
      'form': form,
-     'button': 'Importar'})
+     'button': 'Importar',
+     'breadcrumbs': breadcrumbs})

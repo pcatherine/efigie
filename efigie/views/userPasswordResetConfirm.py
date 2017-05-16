@@ -12,7 +12,7 @@ from efigie.views import *
 
 @csrf_protect
 @never_cache
-def userPasswordResetConfirm(request, key, **kwargs):
+def userPasswordResetConfirm(request, key):
   if UserConfirmation.objects.filter(key=key, category=Category.PASSWORD, confirmed=False).exists():
     reset = get_object_or_404(UserConfirmation, key=key)
     form = UserSetPasswordForm(user=reset.user, data=request.POST or None)

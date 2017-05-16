@@ -10,7 +10,9 @@ from efigie.forms import *
 
 @csrf_protect
 @login_required
-def userEdit(request, **kwargs):
+def userEdit(request):
+  breadcrumbs = ['index', 'userEdit']
+
   form = UserEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save(request.build_absolute_uri(None))
@@ -20,4 +22,5 @@ def userEdit(request, **kwargs):
   return render(request, 'form.html',
     {'title': 'Edição de Dados',
      'form': form,
-     'button': 'Editar'})
+     'button': 'Editar',
+     'breadcrumbs': breadcrumbs})

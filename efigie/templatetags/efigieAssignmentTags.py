@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.urls import resolve, reverse
 
 from efigie.models import UserConfirmation, Category, Key
+from efigie.urls import breadcrumbResolve
+
 
 register = template.Library()
 
@@ -14,8 +16,7 @@ def emailConfirmation(user):
   return False
 
 @register.assignment_tag
-def resolveUrl(breadcrumb):
-  func, args, kwargs = reverse(breadcrumb)
-  url = {'func': func, 'args': args, 'kwargs': kwargs}
-  return url
-
+def resolveUrl(url_name):
+  title, icon = breadcrumbResolve(url_name)
+  breadcrumb = {'title': title, 'icon': icon, 'url': url_name}
+  return breadcrumb

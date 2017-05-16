@@ -10,7 +10,9 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def userPasswordEdit(request, form=None, **kwargs):
+def userPasswordEdit(request, form=None):
+  breadcrumbs = ['index', 'userPasswordEdit']
+
   form = UserPasswordEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save()
@@ -20,4 +22,5 @@ def userPasswordEdit(request, form=None, **kwargs):
   return render(request, 'form.html',
     {'title': 'Edição de Senha',
      'form': form,
-     'button': 'Editar'})
+     'button': 'Editar',
+     'breadcrumbs': breadcrumbs})

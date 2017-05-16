@@ -10,7 +10,6 @@ from efigie.models import Key
 
 
 class KeyEditForm(KeyNewForm):
-
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
     self.key = kwargs.pop('key')

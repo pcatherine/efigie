@@ -3,8 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block header %} 
-{% endblock %}
+{% block header %} {{ title|safe }} {% endblock %}
 
 {% block content %}
   <div class="box box-warning">

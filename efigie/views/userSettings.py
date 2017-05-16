@@ -13,7 +13,9 @@ from efigie.views import *
 #AGARD
 @csrf_protect
 @login_required
-def userSettings(request, **kwargs):
+def userSettings(request):
+  breadcrumbs = ['index', 'userSettings']
+
   form = UserLoginForm(request.POST or None)
 
   if form.is_valid():
@@ -30,4 +32,5 @@ def userSettings(request, **kwargs):
 
   messages.error(request, '<p>Excluiremos <b>imediatamente</b> todas as chaves relacionadas somente a voce, juntamente com todos os seus contatos.</p>', extra_tags='model')
   return render(request, 'user_settings.html',
-    {'form': form})
+    {'form': form,
+    'breadcrumbs': breadcrumbs})

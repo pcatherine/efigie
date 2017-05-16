@@ -3,13 +3,18 @@
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django import http
 
 from efigie import *
 from efigie.views import *
+from django.urls import resolve, reverse, reverse_lazy
+
+import efigie.urls 
 
 
 @login_required
-def about(request, **kwargs):
+def about(request):
+  breadcrumbs = ['index', 'about']
+
   return render(request, 'about.html', 
-    {'kwargs': kwargs,
-     'breadcrumbs': ['index', 'about']})
+    {'breadcrumbs': breadcrumbs })

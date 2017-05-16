@@ -11,7 +11,9 @@ from efigie.views import *
 
 @csrf_protect
 @login_required
-def keyNew(request, **kwargs):
+def keyNew(request):
+  breadcrumbs = ['index', 'keyNew']
+
   form = KeyNewForm(user=request.user, data=request.POST or None)
   
   if form.is_valid():
@@ -22,4 +24,5 @@ def keyNew(request, **kwargs):
   return render(request, 'form.html',
     {'title': 'Criação de Chave RSA',
      'form': form,
-     'button': 'Criar Chave'})
+     'button': 'Criar Chave',
+     'breadcrumbs': breadcrumbs})

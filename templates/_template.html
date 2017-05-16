@@ -84,11 +84,6 @@ desired effect
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
 
-
-
-
-
-
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -243,48 +238,41 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    {% emailConfirmation user as confimation  %}
-    {% if confimation %}
-      <div class="callout callout-danger">
-        <h4> Alerta</h4>
-        <p><i class="icon fa fa-ban"></i> Aguardando a confirmação de e-mail ou <a href="{% url 'userEdit' %}"> clique aqui</a> para alteração.</p>
-      </div>
-    {% endif %}
+
 
     <section class="content-header">
-<<<<<<< HEAD
-=======
 
-
->>>>>>> master
       <h1>
-        {{ kwargs.title|safe }}
-      </h1>
-      <ol class="breadcrumb">
-        {% for breadcrumb in breadcrumbs %}
-<<<<<<< HEAD
-          {% resolveUrl breadcrumbs as bla  %}
+        {% resolveUrl request.resolver_match.url_name as url %}
+        {{ url.title }}{% block header %} {% endblock %}
 
+      </h1>
+
+      <ol class="breadcrumb">
+        {% for url in breadcrumbs %}
+          {% resolveUrl url as breadcrumb %}
           <li {% if forloop.last %} class="active" {% endif %}>
-            {% if not forloop.last %} <a href="#"> {% endif %}
-              <i class="fa text-yellow"></i>
-              <span>{{ bla.kwargs.title }}</span>
+            {% if not forloop.last %} <a href="{% url breadcrumb.url %}"> {% endif %}
+              <i class="fa {{ breadcrumb.icon }}"></i>
+              <span>{{ breadcrumb.title }} </span>
             {% if not forloop.last %} </a> {% endif %}
           </li>
         {% endfor %} 
-=======
-          <li {% if forloop.last %} class="active" {% endif %}  ><a href="{% url breadcrumb.url %}"><i class="fa breadcrumb.icon text-yellow"></i><span>{{ breadcrumb.name }}</span></a> <br />
-        {% endfor %} 
-
-
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
->>>>>>> master
       </ol>
+
     </section>
 
     <!-- Main content -->
     <section class="content">
+
+      {% emailConfirmation user as confimation  %}
+      {% if confimation %}
+        <div class="callout callout-danger">
+          <h4> Alerta</h4>
+          <p><i class="icon fa fa-ban"></i> Aguardando a confirmação de e-mail ou <a href="{% url 'userEdit' %}"> clique aqui</a> para alteração.</p>
+        </div>
+      {% endif %}
+
       {% include '_alert.html' %}
       {% block content %} {% endblock %}
     </section>

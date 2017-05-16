@@ -9,12 +9,15 @@ from efigie.models import Key
 from efigie.views import *
 
 @login_required
-def keyShow(request, keyId, **kwargs):
+def keyShow(request, keyId):
+  breadcrumbs = ['index', 'keyList', 'keyShow']
+
   try:
     key = Key.objects.get(id = keyId)
     messages.error(request, '<p>Excluiremos a chave: <b>%s</b> permanentemente.</p>' % (key.identifier) , extra_tags='model')
     return render(request, 'key_show.html',
-      {'key': key})
+      {'key': key,
+      'breadcrumbs': breadcrumbs})
 
   except Exception as e:
     messages.error(request, 'Chave não pode ser exibida.')

@@ -8,11 +8,5 @@ from efigie import *
 from efigie.views import *
 
 @login_required
-def index(request, **kwargs):
-<<<<<<< HEAD
-
-  return render(request, 'index.html',
-    {'kwargs': kwargs})
-=======
+def index(request):
   return render(request, 'index.html')
->>>>>>> master

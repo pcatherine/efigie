@@ -1,13 +1,14 @@
 {% load static %}
 {% load i18n %}
 
+{% load efigieAssignmentTags %}
+
 <aside class="main-sidebar"> <!-- Left side column. contains the logo and sidebar -->
   <section class="sidebar"> <!-- sidebar: style can be found in sidebar.less -->
     <ul class="sidebar-menu"> <!-- Sidebar Menu -->
       {% with request.resolver_match.url_name as url_name %}
-        <li class="{% if url_name == 'index' %} active {% endif %}">
-          <a href="{% url 'index' %}"><i class="fa fa-home text-yellow"></i> <span>Home</span></a>
-        </li>
+        
+
 
         <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
           <a href="">
@@ -40,6 +41,9 @@
           <ul style="{% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit'  %} 
                         display: block; 
                      {% endif %}" class="treeview-menu menu-open">
+            
+
+
             <li class="{% if url_name == 'userSettings' %} active {% endif %}">
               <a href="{% url 'userSettings' %}"><i class="fa fa-list-alt text-yellow"></i><span>{% trans 'Resumo da Conta' %}</span></a>
             </li>
@@ -63,6 +67,8 @@
           <a href="{% url 'userLogout' %}"><i class="fa fa-sign-out text-yellow"></i> <span>Logout</span></a>
         </li>
       {% endwith %}
+
+
     </ul>
   </section>
 </aside>
