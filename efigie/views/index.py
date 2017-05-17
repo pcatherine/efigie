@@ -9,4 +9,7 @@ from efigie.views import *
 
 @login_required
 def index(request):
-  return render(request, 'index.html')
+  breadcrumbs = ['index']
+
+  return render(request, 'index.html', 
+    {'breadcrumbs': breadcrumbs })
