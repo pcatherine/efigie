@@ -1,6 +1,7 @@
 {% extends '_template.html' %}
 {% load static %}
 {% load i18n %}
+{% load efigieAssignmentTags %}
 
 {% block header %}: <b>{{ key.identifier }}</b> {% endblock %}
 
@@ -22,8 +23,9 @@
       </dl>
     </div>
     <div class="box-footer">
-      <a href="{% url 'keyExport' key.id %}" download class="btn btn-info" ><span><i class="fa fa-download"></i> {% trans "Exportar" %}</span></a>
-      <a href="{% url 'keyEdit' key.id %}" class="btn btn-info" ><span><i class="fa fa-pencil"></i> {% trans "Editar" %}</span></a>
+      <a href="{% url 'keyExport' key.id %}" download class="btn btn-info" ><span><i class="fa {% urlIcon 'keyExport' %} "></i> {% urlTitle 'keyExport' %} </span></a>
+      
+      <a href="{% url 'keyEdit' key.id %}" class="btn btn-info" ><span><i class="fa {% urlIcon 'keyEdit' %}"></i> {% urlTitle 'keyEdit' %} </span></a>
 
       <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i> <span>{% trans "Deletar" %}</span></a>
     </div>

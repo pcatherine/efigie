@@ -20,6 +20,7 @@ def keyShow(request, keyId):
       'breadcrumbs': breadcrumbs})
 
   except Exception as e:
+    print(e)
     messages.error(request, 'Chave não pode ser exibida.')
     return redirect(keyList)
 

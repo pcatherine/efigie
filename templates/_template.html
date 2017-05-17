@@ -243,14 +243,12 @@ desired effect
     <section class="content-header">
 
       <h1>
-        {% resolveUrl request.resolver_match.url_name as url %}
-        {{ url.title }}{% block header %} {% endblock %}
-
+        {% urlTitle request.resolver_match.url_name %}{% block header %} {% endblock %}
       </h1>
 
       <ol class="breadcrumb">
         {% for url in breadcrumbs %}
-          {% resolveUrl url as breadcrumb %}
+          {% urlResolve url as breadcrumb %}
           <li {% if forloop.last %} class="active" {% endif %}>
             {% if not forloop.last %} <a href="{% url breadcrumb.url %}"> {% endif %}
               <i class="fa {{ breadcrumb.icon }}"></i>

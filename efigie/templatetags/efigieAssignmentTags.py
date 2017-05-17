@@ -15,8 +15,21 @@ def emailConfirmation(user):
     return True
   return False
 
+
 @register.assignment_tag
-def resolveUrl(url_name):
+def urlResolve(url_name):
   title, icon = breadcrumbResolve(url_name)
   breadcrumb = {'title': title, 'icon': icon, 'url': url_name}
   return breadcrumb
+
+
+@register.assignment_tag
+def urlIcon(url_name):
+  title, icon = breadcrumbResolve(url_name)
+  return icon
+
+
+@register.assignment_tag
+def urlTitle(url_name):
+  title, icon = breadcrumbResolve(url_name)
+  return title

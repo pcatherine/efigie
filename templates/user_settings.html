@@ -1,8 +1,7 @@
 {% extends '_template.html' %}
 {% load static %}
 {% load i18n %}
-
-{% load efigieSimpleTags %}
+{% load efigieAssignmentTags %}
 
 {% block header %} {% endblock %}
 
@@ -31,9 +30,19 @@
     </div>
 
     <div class="box-footer">
-      <a type="button" class="btn btn-info" href="{% url 'userEdit' %}"><span>{% trans 'Editar Dados' %}</span></a>
-      <a type="button" class="btn btn-info" href="{% url 'userPasswordEdit' %}" ><span>{% trans 'Editar Senha' %}</span></a>
-      <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-times"></i> <span>{% trans 'Deletar' %}</a>
+
+      <a class="btn btn-info" href="{% url 'userEdit' %}">
+        <span><i class="fa {% urlIcon 'userEdit' %} "></i> {% urlTitle 'userEdit' %}</span>
+      </a>
+      
+      <a class="btn btn-info" href="{% url 'userPasswordEdit' %}" >
+        <span><i class="fa {% urlIcon 'userPasswordEdit' %} "></i> {% urlTitle 'userPasswordEdit' %}</span>
+      </a>
+      
+      <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+        <span><i class="fa {% urlIcon 'userDelete' %}"></i> {% urlTitle 'userDelete' %}</span>
+      </a>
+
     </div>
   </div>
 {% endblock %}
