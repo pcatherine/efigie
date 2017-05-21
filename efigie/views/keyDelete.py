@@ -13,9 +13,9 @@ from efigie.views import *
 def keyDelete(request, keyId):
   try:
     key = Key.objects.get(id = keyId)
-    identifier = key.identifier
+    name = key.name
     key.delete()
-    messages.success(request, 'Chave <b>%s</b> deletada com sucesso.' % (identifier))
+    messages.success(request, 'Chave <b>%s</b> deletada com sucesso.' % (name))
   except Exception as e:
     messages.error(request, 'Chave não pode ser deletada.')
   return redirect(keyList)

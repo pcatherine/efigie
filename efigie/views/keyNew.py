@@ -18,7 +18,7 @@ def keyNew(request):
   
   if form.is_valid():
     form.save()
-    messages.success(request, 'Chave <b>%s</b> criada com sucesso.' % (form.cleaned_data['identifier']))
+    messages.success(request, 'Chave <b>%s</b> criada com sucesso.' % (form.cleaned_data['name']))
     return redirect(keyList)
 
   return render(request, 'form.html',

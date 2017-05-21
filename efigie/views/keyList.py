@@ -12,7 +12,7 @@ from efigie.views import *
 def keyList(request):
   breadcrumbs = ['index', 'keyList']
 
-  keyList = Key.objects.filter(user = request.user).order_by('identifier')
+  keyList = Key.objects.filter(user = request.user).order_by('name')
   
   return render(request, 'key_list.html',
     {'keyList': keyList,

@@ -15,19 +15,11 @@ class KeyEditForm(KeyNewForm):
     self.key = kwargs.pop('key')
     super(KeyNewForm, self).__init__(*args, **kwargs)
 
-    self.fields['identifier'].initial = self.key.identifier 
+    self.fields['name'].initial = self.key.name 
     self.fields['size'].initial = self.key.size 
 
-  def clean_identifier(self):
-    identifier = self.cleaned_data['identifier']
-
-    if self.key.identifier != identifier and Key.objects.filter(identifier=identifier).exists():
-      raise forms.ValidationError('Chave já cadastrado com este identificador.')
-    else:
-      return identifier
-
   def save(self, commit=True):
-    self.key.identifier = self.cleaned_data['identifier']
+    self.key.name = self.cleaned_data['name']
     old_size = self.key.size
     self.key.size = self.cleaned_data['size']
     if old_size != self.cleaned_data['size']:
@@ -38,6 +30,14 @@ class KeyEditForm(KeyNewForm):
     if commit:
       self.key.save() 
 
+  def clean_name(self):
+    name = self.cleaned_data['name']
+
+    if self.key.name != name and Key.objects.filter(name=name).exists():
+      raise forms.ValidationError('Chave já cadastrado com este identificador.')
+    else:
+      return name
+
   class Meta:
     model = Key
-    fields = ['identifier', 'size']
+    fields = ['name', 'size']

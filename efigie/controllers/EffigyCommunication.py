@@ -11,8 +11,8 @@
 
 IMAGE_BLANK = ('A imagem esta em branco.')
 
-IDENTIFIER_EXIST = ('Identificador ja cadastrado.')
-IDENTIFIER_BLANK = ('Identificador esta em branco.')
+name_EXIST = ('Identificador ja cadastrado.')
+name_BLANK = ('Identificador esta em branco.')
 
 MESSAGE_BLANK      = ('A mensagem esta em branco.')
 MESSAGE_BLANK_SIZE = ('A quantidade de vezes que a mensagem pode ser lida deve ser um numero maior que 0 ou deixada em branco')

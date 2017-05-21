@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load efigieAssignmentTags %}
 
-{% block header %}: <b>{{ key.identifier }}</b> {% endblock %}
+{% block header %}: <b>{{ key.name }}</b> {% endblock %}
 
 {% block content %}
   
@@ -13,7 +13,7 @@
     <div class="box-body">
       <dl class="dl-horizontal">
         <dt>{% trans "Identificador" %}</dt>
-        <dd>{{ key.identifier }}</dd>
+        <dd>{{ key.name }}</dd>
         <dt>{% trans "Tamanho da Chave" %}</dt>
         <dd>{{ key.size }}</dd>
         <dt>{% trans "Chave" %} {% trans "Publica" %}</dt>

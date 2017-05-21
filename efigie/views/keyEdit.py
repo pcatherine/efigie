@@ -19,14 +19,14 @@ def keyEdit(request, keyId):
     
     if form.is_valid():
       form.save()
-      messages.success(request, 'Chave <b>%s</b> editada com sucesso.' % (form.cleaned_data['identifier']))
+      messages.success(request, 'Chave <b>%s</b> editada com sucesso.' % (form.cleaned_data['name']))
       return redirect(keyShow, keyId=keyId)
   except Exception as e:
-    messages.error(request, 'Chave <b>%s</b> não pode ser editada.' % (form.cleaned_data['identifier']))
+    messages.error(request, 'Chave <b>%s</b> não pode ser editada.' % (form.cleaned_data['name']))
     return redirect(keyList)
 
   return render(request, 'form.html',
-    {'title': ': <b>%s</b>' % (key.identifier),
+    {'title': ': <b>%s</b>' % (key.name),
      'form': form,
      'button': 'Editar',
      'breadcrumbs': breadcrumbs})

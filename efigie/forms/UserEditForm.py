@@ -44,8 +44,8 @@ class UserEditForm(forms.Form):
     if commit:
       self.user.save()
       if old_email != self.cleaned_data['email']:
-        key = utils.generateHashKey(self.user.username)
-        reset = UserConfirmation(key=key, user=self.user, category=Category.VERIFICATION)
+        token = utils.generateHashKey(self.user.username)
+        reset = UserConfirmation(token=token, user=self.user, category=Category.VERIFICATION)
         reset.save()
         
         subject = '[Efigie] E-mail Confirmation'
@@ -58,7 +58,7 @@ class UserEditForm(forms.Form):
         ''' % (self.user.first_name, self.user.email)
 
         button = 'Confirmar E-mail'
-        context = {'confirmation_url': url+reset.key, 'email':self.user.email, 'message': message, 'button': button}
+        context = {'confirmation_url': url+reset.token, 'email':self.user.email, 'message': message, 'button': button}
         
         mail.sendMailTemplate(subject, context, [self.user.email])
     return self.user

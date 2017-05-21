@@ -13,8 +13,8 @@ def keyExport(request, keyId):
   try:
     key = Key.objects.get(id=keyId) 
     response = HttpResponse(content_type='application/text')
-    response['Content-Disposition'] = 'attachment; filename="%s.key"' % (key.identifier)
-    response.write('%s;%s;%s;%d' % (key.privateKey, key.publicKey, key.identifier, key.size))
+    response['Content-Disposition'] = 'attachment; filename="%s.key"' % (key.name)
+    response.write('%s;%s;%s;%d' % (key.privateKey, key.publicKey, key.name, key.size))
     return response
 
   except Exception as e:

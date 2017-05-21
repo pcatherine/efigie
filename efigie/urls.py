@@ -32,17 +32,17 @@ urlpatterns = [
   url(r'^logout/$', efigie.views.userLogout, name='userLogout'),
 
   url(r'^user/new/$', efigie.views.userNew, name='userNew'),
-  url(r'^user/new/(?P<key>\w+)/$', efigie.views.userNewConfirm, name='userNewConfirm'),
+  url(r'^user/new/(?P<token>\w+)/$', efigie.views.userNewConfirm, name='userNewConfirm'),
 
   url(r'^user/password/forget/$', efigie.views.userPasswordReset, name='userPasswordReset'),
-  url(r'^user/password/forget/(?P<key>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm'),
+  url(r'^user/password/forget/(?P<token>\w+)/$', efigie.views.userPasswordResetConfirm, name='userPasswordResetConfirm'),
   
   url(r'^user/settings/$', efigie.views.userSettings, name='userSettings'),
   url(r'^user/delete/$', efigie.views.userDelete, name='userDelete'),
   url(r'^user/settings/password/$',  efigie.views.userPasswordEdit, name='userPasswordEdit'),
 
   url(r'^user/settings/profile/$',  efigie.views.userEdit, name='userEdit'),
-  url(r'^user/settings/profile/(?P<key>\w+)/$',  efigie.views.userEditConfirm, name='userEditConfirm'),
+  url(r'^user/settings/profile/(?P<token>\w+)/$',  efigie.views.userEditConfirm, name='userEditConfirm'),
 
   url(r'^key/new/$', efigie.views.keyNew, name='keyNew'),
   url(r'^key/list/$', efigie.views.keyList, name='keyList'),

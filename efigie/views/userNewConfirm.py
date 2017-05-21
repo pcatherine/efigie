@@ -11,9 +11,9 @@ from efigie.models import UserConfirmation, Category
 from efigie.views import *
 
 @never_cache
-def userNewConfirm(request, key):
-  if UserConfirmation.objects.filter(key=key, category=Category.VERIFICATION, confirmed=False).exists():
-    reset = get_object_or_404(UserConfirmation, key=key)
+def userNewConfirm(request, token):
+  if UserConfirmation.objects.filter(token=token, category=Category.VERIFICATION, confirmed=False).exists():
+    reset = get_object_or_404(UserConfirmation, token=token)
     reset.confirmed = True
     reset.save()
     login(request, reset.user)

@@ -12,18 +12,10 @@ class UserPasswordResetForm(forms.Form):
     widget=forms.TextInput(attrs={'placeholder':'E-mail'}))
 
 
-  def clean_email(self):
-    email = self.cleaned_data['email']
-    if User.objects.filter(email=email).exists():
-      raise forms.ValidationError('Nenhum usuário encontrado com este e-mail')
-    else:
-      return email
-
-
   def save(self, url):
     user = User.objects.get(email=self.cleaned_data['email'])
-    key = utils.generateHashKey(user.username)
-    reset = UserConfirmation(key=key, user=user, category=Category.PASSWORD)
+    token = utils.generateHashKey(user.username)
+    reset = UserConfirmation(token=token, user=user, category=Category.PASSWORD)
     reset.save()
     
     subject = '[Efigie] New Password'
@@ -37,5 +29,13 @@ class UserPasswordResetForm(forms.Form):
     button = 'Cadastrar Nova Senha'
 
 
-    context = {'confirmation_url': url+reset.key, 'email':user.email, 'message': message, 'button': button}
+  def clean_email(self):
+    email = self.cleaned_data['email']
+    if User.objects.filter(email=email).exists():
+      raise forms.ValidationError('Nenhum usuário encontrado com este e-mail')
+    else:
+      return email
+
+
+    context = {'confirmation_url': url+reset.token, 'email':user.email, 'message': message, 'button': button}
     mail.sendMailTemplate(subject, context, [user.email])

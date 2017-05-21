@@ -23,15 +23,15 @@ def keyImport(request):
     file = request.FILES['file']
     try:
       date = file.read().decode('utf-8')
-      privateKey, publicKey, identifier, size = date.split(';')
+      privateKey, publicKey, name, size = date.split(';')
 
-      valid, name = form.save(user=request.user, privateKey=privateKey, publicKey=publicKey, identifier=identifier, size=size)
+      valid, name = form.save(user=request.user, privateKey=privateKey, publicKey=publicKey, name=name, size=size)
       
       if valid:
         messages.success(request, 'Chave <b>%s</b> importada com sucesso.' % (name))
         return redirect(keyList)
       else:
-        messages.info(request, 'Chave <b>%s</b> já importada.' % (identifier))
+        messages.info(request, 'Chave <b>%s</b> já importada.' % (name))
         return redirect(keyImport)
 
     except Exception as e:

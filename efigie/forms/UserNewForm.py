@@ -37,8 +37,8 @@ class UserNewForm(UserCreationForm):
 
     if commit:
       user.save()
-      key = utils.generateHashKey(user.username)
-      reset = UserConfirmation(key=key, user=user, category=Category.VERIFICATION)
+      token = utils.generateHashKey(user.username)
+      reset = UserConfirmation(token=token, user=user, category=Category.VERIFICATION)
       reset.save()
       
       subject = '[Efigie] E-mail Confirmation'
@@ -51,7 +51,7 @@ class UserNewForm(UserCreationForm):
       ''' % (user.first_name, user.email)
 
       button = 'Confirmar E-mail'
-      context = {'confirmation_url': url+reset.key, 'email':user.email, 'message': message, 'button': button}
+      context = {'confirmation_url': url+reset.token, 'email':user.email, 'message': message, 'button': button}
       
       mail.sendMailTemplate(subject, context, [user.email])
     return user

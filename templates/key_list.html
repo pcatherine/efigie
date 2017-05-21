@@ -23,7 +23,7 @@
           {% for key in keyList %}
             <tr>
               <td>
-                <a href="{% url 'keyShow' key.id %}" >{{ key.identifier }}</a>
+                <a href="{% url 'keyShow' key.id %}" >{{ key.name }}</a>
               </td>
               <td>{{ key.size }}</td>
               <td>

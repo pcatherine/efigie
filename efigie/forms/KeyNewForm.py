@@ -30,8 +30,8 @@ SIZE_CHOICES = (
 )
 
 class KeyNewForm(ModelForm):
-  identifier = forms.CharField( 
-    widget=forms.TextInput(attrs={'placeholder':'Identifier'}))
+  name = forms.CharField( 
+    widget=forms.TextInput(attrs={'placeholder':'name'}))
 
   size = forms.ChoiceField(
         widget=forms.Select(attrs={'placeholder': 'Size'}),
@@ -42,22 +42,22 @@ class KeyNewForm(ModelForm):
     self.user = kwargs.pop('user')
     super(KeyNewForm, self).__init__(*args, **kwargs)
 
-  def clean_identifier(self):
-    identifier = self.cleaned_data['identifier']
-    if Key.objects.filter(identifier=identifier).exists():
-      raise forms.ValidationError('Chave já cadastrado com este identificador.')
-    else:
-      return identifier
-
   def save(self, commit=True):
     user = self.user 
-    identifier = self.cleaned_data['identifier']
-    size = self.cleaned_data['size']
+    key = super(KeyNewForm, self).save(commit=False)
+
     privateKey, publicKey = RSA.generate(int(size))
     if commit:
-      key = Key.objects.create(user=user, identifier=identifier, size=size, privateKey=privateKey, publicKey=publicKey)
+      key = Key.objects.create(user=user, name=name, size=size, privateKey=privateKey, publicKey=publicKey)
       key.save() 
+
+  def clean_name(self):
+    name = self.cleaned_data['name']
+    if Key.objects.filter(name=name).exists():
+      raise forms.ValidationError('Chave já cadastrado com este identificador.')
+    else:
+      return name
 
   class Meta:
     model = Key
-    fields = ['identifier', 'size']
+    fields = ['name', 'size']
