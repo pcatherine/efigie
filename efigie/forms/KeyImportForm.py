@@ -25,7 +25,6 @@ class KeyImportForm(forms.Form):
           return False, ''
 
     if commit:
-      print(name)
       key = Key.objects.create(user = user, identifier = name, size = size, privateKey = privateKey, publicKey = publicKey)
       key.save()
       return True, name

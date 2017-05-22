@@ -60,4 +60,4 @@ class KeyNewForm(ModelForm):
 
   class Meta:
     model = Key
-    fields = ['identifier', 'size']
+    fields = ('identifier', 'size')
