@@ -31,4 +31,4 @@ before_script:
   - psql -c "CREATE DATABASE efigie;" -U postgres
 
 script:
-  - python manage.py syncdb --noinput
+  - python manage.py syncdb
