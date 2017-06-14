@@ -31,4 +31,5 @@ before_script:
   - psql -c "CREATE DATABASE efigie;" -U postgres
 
 script:
-  - python manage.py syncdb
+  - python manage.py makemigrations efigie
+  - python manage.py migrate
