@@ -15,11 +15,9 @@
           </a>
 
           <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} display: block; {% endif %}" class="treeview-menu menu-open">
-
             {{ 'keyList'|menuItem:url_name }}
             {{ 'keyNew'|menuItem:url_name }}
             {{ 'keyImport'|menuItem:url_name }}
-
           </ul>
         </li>
 
@@ -34,11 +32,10 @@
             {{ 'userPasswordEdit'|menuItem:url_name }}
           </ul>
         </li>
+        
           {{ 'about'|menuItem:url_name }}
           {{ 'userLogout'|menuItem:url_name }}
       {% endwith %}
-
-
     </ul>
   </section>
 </aside>
