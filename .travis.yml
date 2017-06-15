@@ -20,7 +20,6 @@ before_script:
 
 script:
 - python manage.py migrate --run-syncdb
-- python manage.py runserver
 
 deploy:
   provider: heroku
