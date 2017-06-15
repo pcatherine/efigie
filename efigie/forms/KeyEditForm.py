@@ -40,4 +40,4 @@ class KeyEditForm(KeyNewForm):
 
   class Meta:
     model = Key
-    fields = ['name', 'size']
+    fields = ('name', 'size')
