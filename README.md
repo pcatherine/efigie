@@ -22,7 +22,7 @@ Using this template to create a new Django app is easy::
 
     $ django-admin startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile efigie
 
-You can replace ``egifie`` with your desired project name.
+You can replace ``efigie`` with your desired project name.
 
 ## Deployment to Heroku
 
