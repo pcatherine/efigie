@@ -1,0 +1,41 @@
+{% extends '_template.html' %}
+{% load static %}
+{% load i18n %}
+
+{% load efigieAssignmentTags %}
+
+{% block header %} {% endblock %}
+
+{% block content %}  
+  <div class="box box-warning">
+    <div class="box-body">
+      <table id="keyNew" class="table table-bordered table-hover table-striped">
+        <thead>
+          {% if keyList %}
+          <tr>
+            <th>{% trans 'Identificador' %}</th>
+            <th>{% trans 'Tamanho' %}</th>
+            <th> </th>
+          </tr>
+          {%endif%}
+        </thead>
+        <tbody>
+          {% for key in keyList %}
+            <tr>
+              <td>
+                <a href="{% url 'keyShow' key.id %}" >{{ key.name }}</a>
+              </td>
+              <td>{{ key.size }}</td>
+              <td>
+                <a href="{% url 'keyExport' key.id %}" download class="btn btn-info btn-sm"><i class="fa {% urlIcon 'keyExport' %} fa-download"></i></a>
+                <a href="{% url 'keyEdit' key.id %}" class="btn btn-info btn-sm" ><i class="fa {% urlIcon 'keyEdit' %}"></i></a>
+              </td>
+            </tr>
+          {% empty %}
+            {% trans 'Nenhuma chave encontrada' %}  
+          {% endfor %}
+        </tbody>
+      </table>
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
+{% endblock %}  
