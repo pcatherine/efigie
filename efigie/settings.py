@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 import dj_database_url
 
+import efigie.config as config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'efigie',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'efigie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,12 +80,23 @@ WSGI_APPLICATION = 'efigie.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+    'NAME': config.DATABASES_LOCALHOST_NAME,
+    'USER': config.DATABASES_LOCALHOST_USER,                 # Not used with sqlite3.
+    'PASSWORD': config.DATABASES_LOCALHOST_PASSWORD,         # Not used with sqlite3.
+    'HOST': config.DATABASES_LOCALHOST_HOST,   # Set to empty string for localhost. Not used with sqlite3.
+    'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
+  }
+} 
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,3 +146,22 @@ STATICFILES_DIRS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#Efigie configs
+# SITE_NAME = "efigie"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = '/login/'
+# AUTH_USER_MODEL = 'efigie.User'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD 
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+MIN_PASSWORD_LENGTH = 8

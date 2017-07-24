@@ -1,0 +1,9 @@
+# Save as config.py 
+
+DATABASES_LOCALHOST_NAME = 'efigie'  
+DATABASES_LOCALHOST_USER =  'name'               
+DATABASES_LOCALHOST_PASSWORD = 'password'    
+DATABASES_LOCALHOST_HOST = 'host'      
+ 
+EMAIL_HOST_USER = 'email' 
+EMAIL_HOST_PASSWORD = 'password'
