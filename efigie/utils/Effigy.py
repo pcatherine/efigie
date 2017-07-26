@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from PIL import Image    
-from efigie.controllers.Encryption import RSA    
+from efigie.utils.Encryption import RSA    
 import re
 
 IDENTIFICADOR = u"efigie"

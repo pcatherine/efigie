@@ -5,7 +5,7 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect, reverse
 from django.utils.decorators import available_attrs
 
-from efigie.controllers import invariants
+from efigie.utils import invariants
 
 def model_required(Model, url, parm=None):
   def decorator(func):
