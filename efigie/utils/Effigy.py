@@ -1,11 +1,11 @@
 #-*- coding: utf-8 -*-
-from PIL import Image    
-from efigie.utils.Encryption import RSA    
+from PIL import Image
+from efigie.utils.Encryption import RSA
 import re
 
 IDENTIFICADOR = u"efigie"
 
-#AGARD
+#AGARD testar
 
 def setEffigy(path, setting, message, key, idMessage):
   print path
@@ -52,7 +52,7 @@ def getEffigy(path):
     else:
       raise Exception(_('Imagem nao autentica'))
   else:
-    raise Exception(_('Imagem nao autentica'))  
+    raise Exception(_('Imagem nao autentica'))
 
 
 
@@ -101,14 +101,14 @@ def getHeader(img, width, height):
   for row in xrange(2, height-1):
     for col in xrange(2, width-1):
       (r, g, b) = img.getpixel((col, row))
-      msg += ('{0:08b}'.format(r))[6:8] 
+      msg += ('{0:08b}'.format(r))[6:8]
       msg += ('{0:08b}'.format(g))[6:8]
       msg += ('{0:08b}'.format(b))[6:8]
       if len(msg) >= 114:
         try:
-          return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [toString("".join(msg[0:48])) == IDENTIFICADOR and toString("".join(msg[-48:])) == IDENTIFICADOR] 
+          return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [toString("".join(msg[0:48])) == IDENTIFICADOR and toString("".join(msg[-48:])) == IDENTIFICADOR]
         except Exception as e:
-          return False   
+          return False
 
 
 def setHeader(img, setting, width, height):
@@ -128,22 +128,22 @@ def setHeader(img, setting, width, height):
 
       img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
       index+= 6
-      
+
       if index >= len(setting):
         return row+1, col+1
-  
+
 
   '''
   efigie
-  pixel X+2 
+  pixel X+2
   R 00000011 - 0 vermelho e 1 verde
   G 00000011 - 2 azul e 3 0
-  B 00000011 - 4 1 e 5 2 
-  pixel X+3  
+  B 00000011 - 4 1 e 5 2
+  pixel X+3
   R 00000011 - 6 3 e 7 4
-  G 00000011 - 8 5 e 9 6 
+  G 00000011 - 8 5 e 9 6
   B 00000010 - 10 7 e 11 NADA
-  pixel X+4  
+  pixel X+4
   R 00000011 - 12 13 par ou impar ou ambos (10 01 11)
   G 00000011 - 14 chave publica 15 chave privada
   B 00000000 - 16 17 NADA
@@ -184,15 +184,15 @@ def setMessage(img, message, setting, width, height, i, j):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
       if((teste == 0 and setting[12:14] == ["1","0"]) or (teste != 0 and setting[12:14] == ["0","1"]) or (setting[12:14] == ["1","1"])):
-        
+
         r_bits = list('{0:08b}'.format(r))
         for i in xrange (0, 8):
           if setting[0] == '1' and setting[3+i] == '1' and index < len(message):
             r_bits[i] = message[index]
             index+=1
-          
+
         g_bits = list('{0:08b}'.format(g))
-        
+
         for i in xrange (0, 8):
           if setting[1] == '1' and setting[3+i]  == '1' and index < len(message):
             g_bits[i] = message[index]
@@ -205,7 +205,7 @@ def setMessage(img, message, setting, width, height, i, j):
             index+=1
       img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
       if index >= len(message):
-        break            
+        break
     if index >= len(message):
       break
 
@@ -214,11 +214,11 @@ def identifySizeImagem(setting, message):
   j = 0;
   k = 0;
   for i in xrange (0, 3):
-    if setting[i] == '1': 
+    if setting[i] == '1':
       j += 1
-  
+
   for i in xrange(3,11):
     if setting[i] == '1':
-      k += 1 
+      k += 1
 
-  return 4 + (len(setting) / 6)  + (len(message) / (j * k)) + 1 
+  return 4 + (len(setting) / 6)  + (len(message) / (j * k)) + 1

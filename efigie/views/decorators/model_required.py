@@ -8,6 +8,24 @@ from django.utils.decorators import available_attrs
 from efigie.utils import invariants
 
 def model_required(Model, url, parm=None):
+  """
+  Checks if an item exists on a specific 'model', if it exists,
+  execute the view, if it doesn't exist, set an error
+  message and redirect to 'url'. Usage:
+
+    @model_required(MyModel, 'url_name')
+    def my_view(request, param1):
+      ...
+
+  or
+
+    @model_required(MyModel1, 'url_name1', 'param1')
+    @model_required(MyModel2, ('url_name1', 'param1'), 'param2')
+    def my_view(request, param1, param2):
+    ...
+
+  """
+
   def decorator(func):
     @wraps(func, assigned=available_attrs(func))
     def inner(request, *args, **kwargs):

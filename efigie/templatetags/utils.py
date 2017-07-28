@@ -16,6 +16,9 @@ register = template.Library()
 def version():
   """
   Returns the current version.
+
+  Examples:
+    {% version %}
   """
   return "0.3.1070"
 
@@ -24,11 +27,14 @@ def version():
 def addcssclass(field, css):
   """
   Replaces in form's field placeholder by field's label and css class by css param.
+
+  Examples:
+    {{ field|addcssclass:'form-control input-lg' }}
   """
   return field.as_widget(attrs={"class":css, "placeholder": '%s%s' % ('* ' if field.field.required else '', field.label)})
 
 
-#AGARD
+#AGARD arrmar daqui para baixo
 @register.filter(needs_autoescape=True)
 def menuTree(name, icon, autoescape=True):
   title, icon = breadcrumbResolve(url_name)
