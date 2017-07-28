@@ -19,3 +19,13 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+def breadcrumbResolve(url_name):
+  urls = [
+
+
+  ]
+
+  for url in urls:
+    if url['name'] == url_name:
+      return url['title'], url['icon']
