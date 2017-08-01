@@ -22,7 +22,11 @@ def model_required(Model, url, parm=None):
     @model_required(MyModel1, 'url_name1', 'param1')
     @model_required(MyModel2, ('url_name1', 'param1'), 'param2')
     def my_view(request, param1, param2):
-    ...
+      ...
+
+  Note: It is necessary to make an explicit param name when the
+  view has 2 or more params and it is possible to redirect to a
+  view with params.
 
   """
 
