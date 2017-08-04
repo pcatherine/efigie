@@ -4,10 +4,11 @@
 from django import forms
 from django.forms import ModelForm
 
-from efigie.controllers import RSA
+from efigie.utils import RSA
 from efigie.models import Key
 
 SIZE_CHOICES = (
+  ('', '* %s' % (Key._meta.get_field('size').verbose_name)),
   ('1024', '1024'),
   ('1280', '1280'),
   ('1536', '1536'),
@@ -28,11 +29,12 @@ SIZE_CHOICES = (
   ('4608', '4608'),
   ('4864', '4864')
 )
+
 #AGARD verificar no new e edit
 class KeyForm(ModelForm):
   size = forms.ChoiceField(
-    widget=forms.Select(label = Key._meta.get_field('size').verbose_name),
-    choices=SIZE_CHOICES,
+    label = Key._meta.get_field('size').verbose_name,
+    choices=SIZE_CHOICES
   )
 
   def __init__(self, *args, **kwargs):
@@ -40,12 +42,14 @@ class KeyForm(ModelForm):
     super(KeyForm, self).__init__(*args, **kwargs)
 
   def save(self, commit = True):
+    print(self.instance)
     key = super(KeyForm, self).save(commit=False)
-    privateKey, publicKey = RSA.generate(int(self.size))
+    key.user = self.user
+
+    privateKey, publicKey = RSA.generate(int(key.size))
     if commit:
-      if self.instance == None:
-        key.privateKey = privateKey
-        key.publicKey = publicKey
+      key.privateKey = privateKey
+      key.publicKey = publicKey
       key.save()
     return key
 

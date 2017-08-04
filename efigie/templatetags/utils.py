@@ -1,5 +1,8 @@
+from collections import OrderedDict
+
 from django import template
 from django.contrib import messages
+from django.forms.models import model_to_dict, fields_for_model
 from django.http import HttpResponse
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
@@ -32,6 +35,8 @@ def addcssclass(field, css):
     {{ field|addcssclass:'form-control input-lg' }}
   """
   return field.as_widget(attrs={"class":css, "placeholder": '%s%s' % ('* ' if field.field.required else '', field.label)})
+  # return field.as_widget(attrs={"class":css})
+
 
 
 #AGARD arrmar daqui para baixo
@@ -56,10 +61,15 @@ def menuTree(name, icon, autoescape=True):
 @register.filter(needs_autoescape=True)
 def menuItem(url_name, url_current, autoescape=True):
   title, icon = breadcrumbResolve(url_name)
+
+  subtitle = title.split("'")
+  if len(subtitle) > 1:
+    title = ('%s%s') % (subtitle[0],'s')
+
   url = reverse(url_name)
   cssClass = ''
   if url_name == url_current:
-  	cssClass = 'active'
+    cssClass = 'active'
 
   if autoescape:
     esc = conditional_escape
@@ -67,7 +77,7 @@ def menuItem(url_name, url_current, autoescape=True):
     esc = lambda x: x
   result = '''
     <li class="%s">
-      <a href="%s"><i class="fa %s text-yellow"></i> <span>%s</span></a>
+      <a href="%s"><i class="fa %s "></i> <span>%s</span></a>
     </li>''' % (esc(cssClass), esc(url), esc(icon), esc(title))
   return mark_safe(result)
 
@@ -96,3 +106,42 @@ def urlIcon(url_name):
 def urlTitle(url_name):
   title, icon = breadcrumbResolve(url_name)
   return title
+
+
+
+
+
+
+@register.simple_tag
+def modelName(Model):
+  """
+  Returns verbose_name for a Model.
+  """
+  return eval(str(Model))._meta.verbose_name
+
+
+@register.simple_tag
+def modelFieldName(Model, field_name):
+  """
+  Returns verbose_name for a field.
+  """
+  return eval(str(Model))._meta.get_field(field_name).verbose_name.title()
+
+
+@register.assignment_tag
+def modelDict(Model, instance):
+  """
+  Return a dict containing the data in ``instance`` suitable for passing as
+  a Form's ``initial`` keyword argument in order.
+  """
+  d = model_to_dict(instance, exclude='id')
+  data = {}
+  for key, value in d.items():
+    data.update({key:getattr(instance, key)})
+
+  fields = fields_for_model(eval(str(Model)), exclude='id')
+  r = OrderedDict(data)
+  for field in fields:
+    r.move_to_end(field)
+
+  return r

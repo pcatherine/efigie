@@ -1,0 +1,81 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}">
+{% endblock %}
+
+{% block header %}{{ title|safe }}{% endblock %}
+
+{% block content %}
+
+  {% with 'Key' as model %}
+    {% include '_modal.html' with modal=model type='delete' %}
+
+     <div class="box box-warning">
+        {% comment %}
+          <div class="box-header">
+            <h3 class="box-title">
+              <a class="btn btn-primary" href="{% url 'keyNew' %}"><i class="fa fa-plus "></i> <span>{% urlTitle 'keyNew' %}</span> </a>
+            </h3>
+          </div>
+        {% endcomment %}
+
+      <div class="box-body">
+        <table id="list{{ model }}" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              {% for column in tableHead %}
+                <th>{% modelFieldName model column %}</th>
+              {% endfor %}
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key in keys %}
+              <tr>
+                <td>
+                  <a href="{% url 'keyShow' key.id %}">
+                    {{ key.name }}
+                  </a>
+                </td>
+                <td>
+                  {{ key.size }}
+                </td>
+                <td>
+                  <a href="{% url 'keyExport' key.id %}" download class="btn btn-xs btn-default ">
+                    <i class="fa {% urlIcon 'keyExport' %} text-blue"></i>
+                  </a>
+
+                  <a href="{% url 'keyEdit' key.id %}" class="btn btn-xs btn-default">
+                    <span class="fa {% urlIcon 'keyEdit' %} text-blue"></span>
+                  </a>
+
+                  <a type="button" class="btn btn-xs btn-default command-delete-btn" data-toggle="modal" data-target="#deleteModal{{ model }}" data-name="{{ key.name }}" data-model="{% url 'keyDelete' key.id %}">
+                    <span class="fa {% urlIcon 'keyDelete' %} text-red"></span>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  {% endwith %}
+
+{% endblock content %}
+
+
+{% block script %}
+  <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+  <script>
+    var id_list = 'listKey';
+    var id_modal = 'deleteModalKey';
+  </script>
+  <script src="{% static 'efigie/dataTables.js' %}"></script>
+{% endblock %}

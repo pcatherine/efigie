@@ -14,6 +14,9 @@
         form-group has-feedback
       {% endif %}
     ">
+    {% comment %}
+      {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
+    {% endcomment %}
 
     {{ field|addcssclass:'form-control input-lg' }}
 
@@ -21,19 +24,13 @@
       <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
     {% endfor %}
 
+
     </div>
   {% endfor %}
   </div>
 
   <div class="box-footer">
     <input type="submit" name="commit" value="{{ button }}" class="btn btn-success">
-      {% if breadcrumbs %}
-        {% for url in breadcrumbs %}
-          {% urlResolve url as breadcrumb %}
-          {% if forloop.counter|add:'+1' == breadcrumbs|length %}
-            <a href="{{ breadcrumb.url }}" class="btn btn-danger">{% trans 'Cancel' %} </a>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+    <a href="{{ request.META.efigie.back }}" class="btn btn-danger">{% trans 'Cancel' %} </a>
   </div>
 </form>

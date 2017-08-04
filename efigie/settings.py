@@ -96,7 +96,7 @@ DATABASES = {
     'HOST': config.DATABASES_LOCALHOST_HOST,   # Set to empty string for localhost. Not used with sqlite3.
     'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
   }
-} 
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -135,17 +135,17 @@ ALLOWED_HOSTS = ['*']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #Efigie configs
 # SITE_NAME = "efigie"
@@ -160,7 +160,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD 
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

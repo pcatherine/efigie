@@ -1,0 +1,28 @@
+{% extends '_templ.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block body %}
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        {% urlTitle request.resolver_match.url_name %}{% block header %} {% endblock %}
+      </h1>
+
+      {{ request.META.efigie.breadcrumbs|safe }}
+    </section>
+
+    <section class="content">
+      {% include '_alert.html' %}
+      {% block content %} {% endblock %}
+    </section>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('input[type=checkbox]').removeClass('form-control');
+  </script>
+{% endblock %}

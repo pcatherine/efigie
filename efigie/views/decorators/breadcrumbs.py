@@ -67,7 +67,6 @@ def breadcrumbs(items):
       breadcrumbs += '</ol>'
 
       request.META['efigie']['breadcrumbs'] = breadcrumbs
-
       return func(request, *args, **kwargs)
     return inner
   return decorator

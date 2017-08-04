@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% comment %}
+    <p>Lateral Menu</p>
+{% endcomment %}
+
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <ul class="sidebar-menu">
+      {% with request.resolver_match.url_name as url_name %}
+        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
+          <a href="">
+            <i class="fa fa-key text-yellow"></i> <span>{% trans 'RSA Keys' %}</span>
+            <i class="fa fa-angle-left pull-right text-yellow"></i>
+          </a>
+
+          <ul style="{% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} display: block; {% endif %}" class="treeview-menu menu-open">
+            {{ 'keyList'|menuItem:url_name }}
+            {{ 'keyNew'|menuItem:url_name }}
+            {{ 'keyImport'|menuItem:url_name }}
+          </ul>
+        </li>
+        {% if request.user.is_superuser %}
+          <li>
+            <a href="{% url 'admin:index' %}">
+              <i class="fa fa-user-secret text-yellow"></i> <span>{% trans 'Administration' %}</span>
+            </a>
+          </li>
+        {% endif %}
+      {% endwith %}
+    </ul>
+  </section>
+</aside>

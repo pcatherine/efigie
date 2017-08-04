@@ -33,7 +33,7 @@ LOGGING = {
             'level': 'CRITICAL',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(BASE_DIR,'..', 'logs/critical.log'),
-            'maxBytes' : 1024*1024*10, 
+            'maxBytes' : 1024*1024*10,
             'formatter': 'simple',
         },
 
@@ -58,7 +58,7 @@ LOGGING = {
   }
 
 import logging
-  #  from optisensor.controllers import log
+  #  from efigie.utils import log
   #  log.error('Erro: Form inválido') #LOGGER ERROR EXEMPLE
   #  log.critical('Erro Crítico: Form inválido') #LOGGER CRITICAL EXEMPLE
 logger = logging.getLogger(__name__)
