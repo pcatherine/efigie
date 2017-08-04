@@ -15,7 +15,7 @@ from efigie.views import *
 from efigie.views.key import *
 
 @login_required
-@breadcrumbs(['index', 'keyImport'])
+@breadcrumbs(['index', 'keyList', 'keyImport'])
 @csrf_protect
 def keyImport(request):
   form = KeyImportForm(request.POST or None, request.FILES or None)

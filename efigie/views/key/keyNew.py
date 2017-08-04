@@ -11,7 +11,7 @@ from efigie.views import *
 from efigie.views.key import *
 
 @login_required
-@breadcrumbs(['index', 'keyNew'])
+@breadcrumbs(['index', 'keyList', 'keyNew'])
 @csrf_protect
 def keyNew(request):
   """
