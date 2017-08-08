@@ -11,6 +11,8 @@ class Command(BaseCommand):
   def handle(self, *args, **options):
     os.system("travis login")
     os.system("travis encrypt-file efigie/config.py")
+    os.system("git add .")
+    os.system("git commit -m 'teste'")
     os.system("git push github")
 
     # os.system("python manage.py makemigrations efigie")
