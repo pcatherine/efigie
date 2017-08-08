@@ -20,6 +20,8 @@ script:
 - python manage.py migrate --run-syncdb
 before_deploy:
   - replace "efigie/config.py" "XYZ" -- .gitignore
+  - git add .
+
 deploy:
   provider: heroku
   api_key:
