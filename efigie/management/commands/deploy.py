@@ -10,7 +10,7 @@ class Command(BaseCommand):
   help = ""
   def handle(self, *args, **options):
     os.system("travis login")
-    os.system("travis encrypt-file efigie/config.py")
+    os.system("travis encrypt-file efigie/config.py --add")
     os.system("git add .")
     os.system("git commit -m 'teste'")
     os.system("git push github")
