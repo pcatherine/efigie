@@ -1,0 +1,40 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block header %}: <b>{{ key.name }}</b>{% endblock %}
+
+{% block content %}
+
+  {% with 'Key' as model %}
+    {% include '_modal.html' with modal=model %}
+    <div class="box box-warning">
+      <div class="box-body">
+        <dl class="dl-horizontal">
+          {% modelDict model key as values %}
+
+          {% for key, value in values.items %}
+            <h4><dt>{% modelFieldName model key %}</dt></h4>
+            <h4><dd>{% if value is not None %}{{ value }}{% else %}&nbsp;{% endif %}</dd></h4>
+          {% endfor %}
+
+        </dl>
+      </div>
+        <div class="box-footer">
+          <a class="btn btn-primary" href="{% url 'keyEdit' key.id %}">{% trans 'Edit' %}</a>
+
+          <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ model }}" data-name="{{ key.name }}" data-model="{% url 'keyDelete' key.id %}">{% trans 'Delete' %}</a>
+        </div>
+    </div>
+  {% endwith %}
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    var id_modal = 'deleteModalKey';
+  </script>
+  <script src="{% static 'efigie/dataTables.js' %}"></script>
+{% endblock %}

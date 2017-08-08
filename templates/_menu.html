@@ -1,16 +1,18 @@
 {% load static %}
 {% load i18n %}
+{% load utils %}
 
-{% load efigieFilterTags %}
+{% comment %}
+    <p>Lateral Menu</p>
+{% endcomment %}
 
-<aside class="main-sidebar"> <!-- Left side column. contains the logo and sidebar -->
-  <section class="sidebar"> <!-- sidebar: style can be found in sidebar.less -->
-    <ul class="sidebar-menu"> <!-- Sidebar Menu -->
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <ul class="sidebar-menu">
       {% with request.resolver_match.url_name as url_name %}
-  
         <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
           <a href="">
-            <i class="fa fa-key text-yellow"></i> <span>{% trans 'Chaves RSA' %}</span>
+            <i class="fa fa-key text-yellow"></i> <span>{% trans 'RSA Keys' %}</span>
             <i class="fa fa-angle-left pull-right text-yellow"></i>
           </a>
 
@@ -20,21 +22,13 @@
             {{ 'keyImport'|menuItem:url_name }}
           </ul>
         </li>
-
-        <li class="treeview {% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit' %} active {% endif %}">
-          <a href="">
-            <i class="fa fa-cog text-yellow"></i> <span>{% trans 'Configurações' %}</span>
-            <i class="fa fa-angle-left pull-right text-yellow"></i>
-          </a>
-          <ul style="{% if url_name == 'userSettings' or url_name == 'userEdit' or url_name == 'userPasswordEdit'  %} display: block; {% endif %}" class="treeview-menu menu-open">
-            {{ 'userSettings'|menuItem:url_name }}
-            {{ 'userEdit'|menuItem:url_name }}
-            {{ 'userPasswordEdit'|menuItem:url_name }}
-          </ul>
-        </li>
-        
-          {{ 'about'|menuItem:url_name }}
-          {{ 'userLogout'|menuItem:url_name }}
+        {% if request.user.is_superuser %}
+          <li>
+            <a href="{% url 'admin:index' %}">
+              <i class="fa fa-user-secret text-yellow"></i> <span>{% trans 'Administration' %}</span>
+            </a>
+          </li>
+        {% endif %}
       {% endwith %}
     </ul>
   </section>

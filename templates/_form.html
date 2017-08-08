@@ -1,10 +1,11 @@
 {% load static %}
 {% load i18n %}
+{% load utils %}
 
-{% load efigieFilterTags %}
-
-<form action="#" method="post" enctype="multipart/form-data">
+<form action="#" id="id_form" method="post" enctype="multipart/form-data">
   {% csrf_token %}
+
+  <div class="box-body">
   {% for field in form %}
     <div class="
       {% if field.errors %}
@@ -13,15 +14,23 @@
         form-group has-feedback
       {% endif %}
     ">
+    {% comment %}
+      {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
+    {% endcomment %}
+
+    {{ field|addcssclass:'form-control input-lg' }}
 
     {% for error in field.errors %}
       <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
     {% endfor %}
-    {{ field|addcssclass:'form-control input-lg' }}
+
+
     </div>
   {% endfor %}
-
-  <div class="form-group has-feedback">
-    <button type="submit" class="btn btn-warning btn-block btn-lg">{{ button }}</button>
   </div>
-</form> 
+
+  <div class="box-footer">
+    <input type="submit" name="commit" value="{{ button }}" class="btn btn-success">
+    <a href="{{ request.META.efigie.back }}" class="btn btn-danger">{% trans 'Cancel' %} </a>
+  </div>
+</form>

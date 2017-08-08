@@ -1,0 +1,21 @@
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% if type == 'delete' %}
+  <div class="modal fade" id="deleteModal{{ modal }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ modal }}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deleteModalLabel{{ modal }}">{% trans 'Delete' %} {% modelName modal %}</h4>
+        </div>
+        <div class="modal-body">{% trans 'Deleting' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+          <a href="" class="btn btn-danger">{% trans 'Delete' %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

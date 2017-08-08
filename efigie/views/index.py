@@ -4,12 +4,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from efigie import *
+from django.views.decorators.csrf import csrf_protect
+
+from efigie.views.decorators import breadcrumbs
 from efigie.views import *
 
 @login_required
+@breadcrumbs(['index'])
 def index(request):
-  breadcrumbs = ['index']
 
-  return render(request, 'index.html', 
-    {'breadcrumbs': breadcrumbs })
+  return render(request, '_blank.html')
