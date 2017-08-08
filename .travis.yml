@@ -24,3 +24,6 @@ deploy:
   app: efigie
   on:
     repo: pcatherine/efigie
+  run:
+    - "python manege.py makemigrations"
+    - "python manege.py migrate"
