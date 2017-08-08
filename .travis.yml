@@ -16,6 +16,7 @@ install:
 before_script:
 - psql -c "CREATE DATABASE efigie;" -U postgres
 script:
+
 - python manage.py migrate --run-syncdb
 deploy:
   provider: heroku
@@ -24,3 +25,6 @@ deploy:
   app: efigie
   on:
     repo: pcatherine/efigie
+  run:
+    - python manage.py makemigrations
+    - python manage.py migrate
