@@ -21,6 +21,7 @@ script:
 before_deploy:
   - replace "efigie/config.py" "XYZ" -- .gitignore
   - git add .
+  - git commit -m "Added config.py"
 
 deploy:
   provider: heroku
