@@ -25,9 +25,3 @@ deploy:
   app: efigie
   on:
     repo: pcatherine/efigie
-after_deploy:
-  - replace "efigie/config.py" "XYZ" -- .gitignore
-  - git add .
-  - git commit -m "Added config.py"
-  - git push heroku master
-  - replace "XYZ" "efigie/config.py" -- .gitignore
