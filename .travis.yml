@@ -18,13 +18,14 @@ before_script:
 - psql -c "CREATE DATABASE efigie;" -U postgres
 script:
 - python manage.py migrate --run-syncdb
+before_deploy:
+  - replace "efigie/config.py" "XYZ" -- .gitignore
 deploy:
   provider: heroku
   api_key:
-    secure: LTwCByke7vEqTKTjgeAy+Aia3e5/efI9KpocmCDo5FP8UKzdNmJAS1ICdV2zq8FzAYc75SMVx6Sum81qJiIUJIdKtmGu3RY7T0GrPP0wigvfo0EsrA444Mi3QPLHXIQdpGjHFRrLeGL0gsPfD6peFU+XobMl9E1gZAkQ/oZ/OD8yr1mmffqJINKiE7bmZGv1bAJEArjzhuPAifn1LsWChEMH/W6ddBwtP6WDifv/EKMnry/KZ55tfwNVKLlOenDcUETMUoZkjcqW8PolhlhEW438Zz5QakkzcwKggyTDSQvhPMRLqW3APcQDoK8hvEJZItzCWMiG7l54uPxstH9rx4I6olhD0rS8314rVZujFsFjOGMBE+cjqG8gxnZ6rPBBzb94GBh3CTKmq53MzP6yufjrj5g0PTdlL+Lf/dm1gJfsoeVYb+mfuhMJA58kJWcStEX+3gmJzL7pPyMpD9N6RiX/qzcIA3XDkXtyDUSFjDwWKed/jmiUOb5YJLXYM1Ea31vTyIBgFYXYNfvo04/u1djvv9Dh2UXYc7UR2jWv8hn48Qt5heWlpls1aNjN1L5QeM+DAg5kRta4a51GVvJ7TQ1+ztYE58bO/a+piuZRys+I/5JYAUVEh9F+szAVQBIJeNOvsrc1wDCPyMHPlvoSRP/yfX1YmocwSHMAVLgXvVA=
+    secure: Cchi3qr6omjoYItjyKfv4lvnOWeYhxDxjMwPgbfXtLetZLw6ixGejJco+GJbY5sNpZBClCfCpR/BMo9ozoacKR2SfUVAlEnX8EH0Z7Wc2iQQz3QN1H48XN6TpLcK/CykOz7qjlF2Iz8Po4BFjIJJoefEHwvKH4s0nnj1Y/Fn81BwV2wXIL0h0QddgPY7yanb7/ePhMGeSMne6Ain5cuMB8g60Z9bTmfF5LVEaORxYUgqUs+FAURqgWdKAjKuuTG0fjno7wDrKzGPB4NMMHmdV0fc1cc3xVLbX6QHPUKOZSW115pTOaaOBMewGX4juaTP+2vZe5LvSRhxAD7f8ZQGqlY416E+D1+ncM5OjNVRcuf5kVOxRyRA/u5ZRqpqSw55MBq2xmDdTW3ym/TKB9ii2sSoJo7W2yR83wz0uSwzgmOuj3iAndkJjDEgh0Od5vsr81MXf+4kWX7YV47DQ8f/wQsC7/vokQlR1aQ9tA1h12D10hEUZ4KT6OMsd1DAsvSGH7N2SuC7IpzrFyBh1zzKOtkNeK9bHXndFpzkdkm1VarKiO0W5BBEy0FVHPCq4ynFVWHRYy97HSv1MxP1mB8Dv0uiXBjognogChYT17JvM0petZzd9fEd/kDsXgFvJJCdYjVhPeh+W4v1MZ4LpQEgu1RjK9Iqx41GNgEsYqsqv2s=
   app: efigie
   on:
     repo: pcatherine/efigie
-  run:
-  - python manage.py makemigrations
-  - python manage.py migrate
+after_deploy:
+  - replace "XYZ" "efigie/config.py" -- .gitignore
