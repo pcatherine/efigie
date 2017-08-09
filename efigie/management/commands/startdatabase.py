@@ -16,18 +16,18 @@ class Command(BaseCommand):
     #    parser.add_argument('author' , nargs='+', type=str)
 
   def handle(self, *args, **options):
-    # bookid = options['book_id'] 
+    # bookid = options['book_id']
     # author = options['author']
 
     con = None
     try:
-      con = connect(dbname='postgres', 
-        user=settings.DATABASES['default']['USER'], 
+      con = connect(dbname='postgres',
+        user=settings.DATABASES['default']['USER'],
         password=settings.DATABASES['default']['PASSWORD'],
         host=settings.DATABASES['default']['HOST'])
     except Exception as e:
       print("FATAL:  password authentication failed for user '%s'" % (settings.DATABASES['default']['USER']))
-    
+
 
     if con != None:
       con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)

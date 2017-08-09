@@ -13,4 +13,4 @@ class Command(BaseCommand):
     os.system("python manage.py makemigrations")
     os.system("python manage.py makemigrations efigie")
     os.system("python manage.py migrate")
-    # os.system("python manage.py loaddata initial")
+    os.system("python manage.py loaddata initial")
