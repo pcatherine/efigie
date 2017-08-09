@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from efigie.views.decorators import breadcrumbs
 from efigie.views import *
 
-# @login_required
+@login_required
 @breadcrumbs(['index'])
 def index(request):
 

@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 
-{% load efigieFilterTags %}
+{% load utils %}
 
 <!DOCTYPE html>
 <html>
@@ -25,18 +25,50 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Efigie</b> 
+    <b>Efigie</b>
   </div>
   <!-- /.login-logo -->
 
   <div class="login-box-body">
 
   {% include '_alert.html' %}
-  {% include '_form.html' with form=form button=button %}
+
+  <form action="#" id="id_form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="box-body">
+    {% for field in form %}
+      <div class="
+        {% if field.errors %}
+          form-group has-error
+        {% else %}
+          form-group has-feedback
+        {% endif %}
+      ">
+      {% comment %}
+        {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
+      {% endcomment %}
+
+      {{ field|addcssclass:'form-control input-lg' }}
+
+      {% for error in field.errors %}
+        <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
+      {% endfor %}
+
+
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="box-footer">
+      <input type="submit" name="commit" value="{{ button }}" class="btn btn-warning btn-block btn-lg">
+    </div>
+  </form>
+
 
   {% for link in links %}
     <a href="{% url link.url %}"><span>{{ link.name }}</span></a> <br />
-  {% endfor %} 
+  {% endfor %}
 
   </div>
   <!-- /.login-box-body -->

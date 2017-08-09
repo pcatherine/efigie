@@ -27,6 +27,10 @@ urlpatterns = [
 
   url(r'^$', views.index, name='index'),
 
+  url(r'^user/new/$', views.userNew, name='userNew'),
+  url(r'^login/$', views.userLogin, name='userLogin'),
+  url(r'^logout/$', views.userLogout, name='userLogout'),
+
   url(r'^key/$', views.keyList, name='keyList'),
   url(r'^key/new/$', views.keyNew, name='keyNew'),
   url(r'^key/(?P<keyId>[0-9]+)/$', views.keyShow, name='keyShow'),
@@ -41,6 +45,11 @@ urlpatterns = [
 def breadcrumbResolve(url_name):
   urls = [
     {'name': 'index', 'title': _('Home'), 'icon': 'fa-home'},
+
+    {'name': 'userNew', 'title': _("New User"), 'icon': 'fa-list'},
+    {'name': 'userLogin', 'title': _("Login"), 'icon': 'fa-sign-in'},
+    {'name': 'userLogout', 'title': _("Logout"), 'icon': 'fa-sign-out'},
+
 
     {'name': 'keyList', 'title': _("Key's List"), 'icon': 'fa-list'},
     {'name': 'keyNew', 'title': _('New Key'), 'icon': 'fa-plus'},
