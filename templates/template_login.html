@@ -62,13 +62,17 @@
 
     <div class="box-footer">
       <input type="submit" name="commit" value="{{ button }}" class="btn btn-warning btn-block btn-lg">
+
+      <br/>
+
+      {% for link in links %}
+        <a href="{% url link.url %}"><span>{{ link.name }}</span></a> <br />
+      {% endfor %}
     </div>
   </form>
 
 
-  {% for link in links %}
-    <a href="{% url link.url %}"><span>{{ link.name }}</span></a> <br />
-  {% endfor %}
+
 
   </div>
   <!-- /.login-box-body -->
