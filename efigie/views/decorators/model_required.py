@@ -63,16 +63,6 @@ def model_required(Model, url, parm=None, user=False):
             args.append(int(kwargs[url[x]]))
           return redirect(reverse(url[0], args=args))
 
-      if not query:
-        messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
-        if isinstance(url, str):
-          return redirect(url)
-        else:
-          args = []
-          for x in range(1 , len(url)):
-            args.append(int(kwargs[url[x]]))
-          return redirect(reverse(url[0], args=args))
-
       return func(request, *args, **kwargs)
     return inner
   return decorator
