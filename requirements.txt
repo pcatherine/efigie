@@ -11,4 +11,19 @@ whitenoise==3.2
 setuptools==34.3.3
 wheel==0.29.0
 
-https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz
+https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gzappdirs==1.4.3
+boto3==1.0.0
+botocore==1.0.0
+dj-database-url==0.4.1
+Django==1.10.6
+docutils==0.14
+futures==2.2.0
+gunicorn==19.4.5
+jmespath==0.9.3
+packaging==16.8
+psycopg2==2.6.2
+pycrypto==2.6.1
+pyparsing==2.2.0
+python-dateutil==2.6.1
+six==1.10.0
+whitenoise==3.2

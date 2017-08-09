@@ -3,9 +3,9 @@ python:
 - 3.6.1
 services: postgresql
 env:
-- DJANGO=1.10.6
+- DJANGO=1.11.2
 before_install:
-- openssl aes-256-cbc -K $encrypted_e417b2f92282_key -iv $encrypted_e417b2f92282_iv
+- openssl aes-256-cbc -K $encrypted_8f09a5331830_key -iv $encrypted_8f09a5331830_iv
   -in config.py.enc -out efigie/config.py -d
 - export DJANGO_SETTINGS_MODULE=efigie.settings
 - export PYTHONPATH=$HOME/builds/pcatherine/efigie
@@ -21,7 +21,6 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: Cchi3qr6omjoYItjyKfv4lvnOWeYhxDxjMwPgbfXtLetZLw6ixGejJco+GJbY5sNpZBClCfCpR/BMo9ozoacKR2SfUVAlEnX8EH0Z7Wc2iQQz3QN1H48XN6TpLcK/CykOz7qjlF2Iz8Po4BFjIJJoefEHwvKH4s0nnj1Y/Fn81BwV2wXIL0h0QddgPY7yanb7/ePhMGeSMne6Ain5cuMB8g60Z9bTmfF5LVEaORxYUgqUs+FAURqgWdKAjKuuTG0fjno7wDrKzGPB4NMMHmdV0fc1cc3xVLbX6QHPUKOZSW115pTOaaOBMewGX4juaTP+2vZe5LvSRhxAD7f8ZQGqlY416E+D1+ncM5OjNVRcuf5kVOxRyRA/u5ZRqpqSw55MBq2xmDdTW3ym/TKB9ii2sSoJo7W2yR83wz0uSwzgmOuj3iAndkJjDEgh0Od5vsr81MXf+4kWX7YV47DQ8f/wQsC7/vokQlR1aQ9tA1h12D10hEUZ4KT6OMsd1DAsvSGH7N2SuC7IpzrFyBh1zzKOtkNeK9bHXndFpzkdkm1VarKiO0W5BBEy0FVHPCq4ynFVWHRYy97HSv1MxP1mB8Dv0uiXBjognogChYT17JvM0petZzd9fEd/kDsXgFvJJCdYjVhPeh+W4v1MZ4LpQEgu1RjK9Iqx41GNgEsYqsqv2s=
   app: efigie
   on:
     repo: pcatherine/efigie
