@@ -53,7 +53,6 @@ def model_required(Model, url, parm=None, user=False):
       else:
         query = Model.objects.filter(id=value, user=request.user).exists()
 
-
       if not query:
         messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
         if isinstance(url, str):
