@@ -1,0 +1,14 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block header %} {{ title|safe }} {% endblock %}
+
+{% block content %}
+  <div class="box box-warning">
+    <section class="content">
+      {% include '_form.html' with form=form button=button %}
+    </section>
+  </div>
+{% endblock %}

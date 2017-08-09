@@ -90,13 +90,13 @@ WSGI_APPLICATION = 'efigie.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    'NAME': config.DATABASES_LOCALHOST_NAME,
-    'USER': config.DATABASES_LOCALHOST_USER,                 # Not used with sqlite3.
-    'PASSWORD': config.DATABASES_LOCALHOST_PASSWORD,         # Not used with sqlite3.
-    'HOST': config.DATABASES_LOCALHOST_HOST,   # Set to empty string for localhost. Not used with sqlite3.
+    'NAME': config.DATABASES_NAME,
+    'USER': config.DATABASES_USER,                 # Not used with sqlite3.
+    'PASSWORD': config.DATABASES_PASSWORD,         # Not used with sqlite3.
+    'HOST': config.DATABASES_HOST,   # Set to empty string for localhost. Not used with sqlite3.
     'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
   }
-}
+} 
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -123,8 +123,8 @@ USE_L10N = True
 USE_TZ = True
 
 # Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -147,10 +147,12 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#Efigie configs
-# SITE_NAME = "efigie"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#Site Configs
+# SITE_NAME = "efigie"
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'index'
@@ -160,7 +162,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

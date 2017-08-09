@@ -7,7 +7,7 @@ from django.utils.decorators import available_attrs
 
 from efigie.utils import invariants
 
-def model_required(Model, url, user=False, parm=None):
+def model_required(Model, url, parm=None, user=False):
   """
   Checks if an item exists on a specific 'model', if it exists,
   execute the view, if it doesn't exist, set an error
@@ -24,10 +24,17 @@ def model_required(Model, url, user=False, parm=None):
     def my_view(request, param1, param2):
       ...
 
-  Note: It is necessary to make an explicit param name when the
-  view has 2 or more params and it is possible to redirect to a
-  view with params.
+    Note: It is necessary to make an explicit param name when the
+    view has 2 or more params and it is possible to redirect to a
+    view with params.
 
+  or
+
+    @model_required(MyModel, 'url_name', user=True)
+    def my_view(request, param1):
+      ...
+
+    Note: It is necessary filter some things by user
   """
 
   def decorator(func):
@@ -42,26 +49,20 @@ def model_required(Model, url, user=False, parm=None):
         value = kwargs[parm]
 
       if not user:
-        if not Model.objects.filter(id=value).exists():
-          messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
-          if isinstance(url, str):
-            return redirect(url)
-          else:
-            args = []
-            for x in range(1 , len(url)):
-              args.append(int(kwargs[url[x]]))
-            return redirect(reverse(url[0], args=args))
+        query = Model.objects.filter(id=value).exists()
       else:
-        if not Model.objects.filter(id=value, user=request.user).exists():
-          messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
-          if isinstance(url, str):
-            return redirect(url)
-          else:
-            args = []
-            for x in range(1 , len(url)):
-              args.append(int(kwargs[url[x]]))
-            return redirect(reverse(url[0], args=args))
+        query = Model.objects.filter(id=value, user=request.user).exists()
 
+
+      if not query:
+        messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
+        if isinstance(url, str):
+          return redirect(url)
+        else:
+          args = []
+          for x in range(1 , len(url)):
+            args.append(int(kwargs[url[x]]))
+          return redirect(reverse(url[0], args=args))
 
       return func(request, *args, **kwargs)
     return inner
