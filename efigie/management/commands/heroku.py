@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
-  help = ""
+  help = "Heroku Deployment"
   def handle(self, *args, **options):
 
     # os.system("travis login")
