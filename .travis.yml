@@ -22,7 +22,8 @@ before_deploy:
 - git remote -v
 deploy:
   provider: heroku
-  api_key: 
+  api_key:
+    secure: c1USOsMES4Ul8gzgFMB3+nR126BVeuACSYbIuWK3ku5Te1v2Z35BayRr5Sn7vr89y67i80zuGzvQN/F//d2eE9ZD7aoukdBCmvh39D//FG84vp5TXVdG+ev8Z2djAqgIpdK6vQDQ5ES70u096JnBmbUXtSlv075f1AngVj9rCSKgnpz8wvdYcEiI+zDj9eEfoIUlh/c2b4I7Ozs+sPqGCqg5TUgrTf/uhxMBTxgTjW+/xSaozOzC5yGk2EzgFzsoeAyf9btGLpWK3t99q68YFczpC/pEtnNhAE3SNtnUtl+fvB1rk9/2mQ0IBlFXllgfDK7Ta43nnuAtbsuMpwqt0UKNxcSrC3wUyq3Zl9UEaqyJ0eNHa67feTLBt4g03vAmr+Cb+qIsNSpR5HrmXLITKd+72YBoqD34HfZ6A4pv+5vIii9MvM449NIfhqbDs5uZVFhSkm296O6VG1cwqY805KDsaov6nDurVg95L8DapTP4ogKH6HvujyNDunD5oKJef8c1LuRoRyZbETpfW3QmXvUacu8vWSCk74/f/xBL2P/CSJ1MmVElDugTnHXWwH6VTbIi62BQU5IAvv5n+NVRVKzGQp9UY1My/rOXzM1VD0cN15j7RQibO+dGK2G+6K8MUeh62BG16CaLI8bE0w4664FAE7ikwVH3wJcKbqld4LU=
   app: efigie
   on:
     repo: pcatherine/efigie
