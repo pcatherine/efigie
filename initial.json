@@ -1,0 +1,20 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$WCZwaWFg4Y09$FhZlykC5obKXYu0l+fuqjGm6PqMbO0knSaLhAXwZ+VM=",
+      "last_login": "2017-08-08T15:19:24.537Z",
+      "is_superuser": true,
+      "username": "pcatherine",
+      "first_name": "",
+      "last_name": "",
+      "email": "paollacath@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2017-08-04T18:30:08.673Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
