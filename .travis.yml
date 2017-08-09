@@ -7,8 +7,6 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_e417b2f92282_key -iv $encrypted_e417b2f92282_iv
   -in config.py.enc -out efigie/config.py -d
-- openssl aes-256-cbc -K $encrypted_8f09a5331830_key -iv $encrypted_8f09a5331830_iv
-  -in config.py.enc -out efigie/config.py -d
 - export DJANGO_SETTINGS_MODULE=efigie.settings
 - export PYTHONPATH=$HOME/builds/pcatherine/efigie
 - export PIP_USE_MIRRORS=true
