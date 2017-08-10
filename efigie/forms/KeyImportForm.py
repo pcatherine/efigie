@@ -7,7 +7,7 @@ from efigie.forms import *
 class KeyImportForm(forms.Form):
   file = forms.FileField(
     widget=forms.FileInput(attrs={'accept':'.key'}))
-  
+
   def save(self, user, name, size, privateKey, publicKey, commit=True,):
     name = name
     count = 0
@@ -16,7 +16,7 @@ class KeyImportForm(forms.Form):
     while True:
       if not Key.objects.filter(name=name).exists():
         break
-      else: 
+      else:
         keyVerify = Key.objects.get(name=name)
         if keyVerify.privateKey != privateKey or keyVerify.publicKey != publicKey:
           name = name + '_' + str(count)
@@ -27,4 +27,4 @@ class KeyImportForm(forms.Form):
     if commit:
       key = Key.objects.create(user = user, name = name, size = size, privateKey = privateKey, publicKey = publicKey)
       key.save()
-      return True, name
+      return key

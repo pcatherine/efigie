@@ -77,7 +77,7 @@ def menuItem(url_name, url_current, autoescape=True):
     esc = lambda x: x
   result = '''
     <li class="%s">
-      <a href="%s"><i class="fa %s "></i> <span>%s</span></a>
+      <a href="%s"><i class="fa %s text-yellow"></i> <span>%s</span></a>
     </li>''' % (esc(cssClass), esc(url), esc(icon), esc(title))
   return mark_safe(result)
 

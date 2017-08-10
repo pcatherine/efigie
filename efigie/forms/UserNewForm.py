@@ -4,6 +4,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.text import capfirst
 
 from efigie import settings
 from efigie.utils import utils
@@ -12,6 +13,8 @@ from efigie.forms import *
 from efigie.models import UserConfirmation, Category
 
 class UserNewForm(UserCreationForm):
+
+  email = forms.EmailField(label=capfirst(User._meta.get_field('email').verbose_name))
 
   def clean_username(self):
     username = self.cleaned_data['username']

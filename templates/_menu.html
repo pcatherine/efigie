@@ -22,6 +22,8 @@
             {{ 'keyImport'|menuItem:url_name }}
           </ul>
         </li>
+
+        {{ 'userLogout'|menuItem:url_name }}
         {% if request.user.is_superuser %}
           <li>
             <a href="{% url 'admin:index' %}">

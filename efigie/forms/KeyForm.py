@@ -30,7 +30,6 @@ SIZE_CHOICES = (
   ('4864', '4864')
 )
 
-#AGARD verificar no new e edit
 class KeyForm(ModelForm):
   size = forms.ChoiceField(
     label = Key._meta.get_field('size').verbose_name,
@@ -40,16 +39,17 @@ class KeyForm(ModelForm):
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
     super(KeyForm, self).__init__(*args, **kwargs)
+    self.size = self.instance.size
 
   def save(self, commit = True):
-    print(self.instance)
     key = super(KeyForm, self).save(commit=False)
     key.user = self.user
 
     privateKey, publicKey = RSA.generate(int(key.size))
     if commit:
-      key.privateKey = privateKey
-      key.publicKey = publicKey
+      if self.size == None or self.size != key.size:
+        key.privateKey = privateKey
+        key.publicKey = publicKey
       key.save()
     return key
 

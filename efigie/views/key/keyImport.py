@@ -25,21 +25,15 @@ def keyImport(request):
       date = file.read().decode('utf-8')
       privateKey, publicKey, name, size = date.split(';')
 
-      valid, name = form.save(user=request.user, privateKey=privateKey, publicKey=publicKey, name=name, size=size)
+      key = form.save(user=request.user, privateKey=privateKey, publicKey=publicKey, name=name, size=size)
 
-      if valid:
-        messages.success(request, 'Chave <b>%s</b> importada com sucesso.' % (name))
-        return redirect(keyList)
-      else:
-        messages.info(request, 'Chave <b>%s</b> já importada.' % (name))
-        return redirect(keyImport)
+      messages.info(request, 'Chave <b>%s</b> já importada.' % (key.name))
+      return redirect(keyImport)
 
     except Exception as e:
       messages.error(request, 'O arquivo não pode ser importado.')
       return redirect(keyImport)
 
-
   return render(request, 'form.html',
-    {'title': 'Importação de Chave',
-     'form': form,
+    {'form': form,
      'button': 'Importar'})

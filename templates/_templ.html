@@ -7,6 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
   <title>Efigie</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -31,99 +32,97 @@
 
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Main Header -->
-  <header class="main-header">
+    <!-- Main Header -->
+    <header class="main-header">
 
-    <!-- Logo -->
-   <a href="{% url 'index' %}" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Efg</b></span>
-            <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Efigie</b></span>
-    </a>
-
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+      <!-- Logo -->
+     <a href="{% url 'index' %}" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>Efg</b></span>
+              <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Efigie</b></span>
       </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <i class="fa fa-user visible-xs"></i>
+                    <span class="hidden-xs"><i class="fa fa-user"></i>  {{ request.user.email }}</span>
+                  </a>
+
+                  {% comment %}
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-gear"></i>{% trans 'Settings' %}
+                        </a>
+                      </li>
+
+                      <li>
+                        <a rel="nofollow" data-method="delete" href="{% url 'userLogout' %}">
+                          <i class="fa fa-sign-out"></i>{% urlTitle 'userLogout' %}
+                        </a>
+                      </li>
+                    </ul>
+                  {% endcomment %}
 
 
+                </li>
+                <li><a href="#" data-toggle="modal" data-target="#helpModal"><i class="fa fa-life-bouy"></i></a></li>
 
+              </ul>
+            </div>
 
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                  <i class="fa fa-user visible-xs"></i>
-                  <span class="hidden-xs"><i class="fa fa-user"></i>  {{ request.user.email }}</span>
-                </a>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-gear"></i>{% trans 'Settings' %}
-                    </a>
-                  </li>
+     {% include '_menu.html' %}
 
-                  <li>
-                    <a rel="nofollow" data-method="delete" href="{% url 'userLogout' %}">
-                      <i class="fa fa-sign-out"></i>{% urlTitle 'userLogout' %}
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-
-              <li><a href="#" data-toggle="modal" data-target="#helpModal"><i class="fa fa-life-bouy"></i></a></li>
-
-
-            </ul>
-          </div>
-
-        </ul>
+    {% block body %} {% endblock %}
+    <div class="control-sidebar-bg"></div>
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> {% version %}
       </div>
-    </nav>
-  </header>
-
-   {% include '_menu.html' %}
-
-  {% block body %} {% endblock %}
-  <div class="control-sidebar-bg"></div>
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> {% version %}
-    </div>
-    <strong>Copyright © 2015-2017 <a href="https://adminlte.io">Efigie</a>.</strong> All rights
-    reserved.
-  </footer>
-</div>
-<!-- ./wrapper -->
+      <strong>Copyright © 2015-2017 <a href="https://adminlte.io">Efigie</a>.</strong> All rights
+      reserved.
+    </footer>
+  </div>
+  <!-- ./wrapper -->
 
 
 
-<!-- REQUIRED JS SCRIPTS -->
+  <!-- REQUIRED JS SCRIPTS -->
 
-<!-- Bootstrap 3.3.6 -->
-<script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'dist/js/app.min.js' %}"></script>
-<script src="{% static 'dist/js/demo.js' %}"></script>
-<script >
-  var language = ""
-  {% get_current_language as LANGUAGE_CODE %}
-  {% if LANGUAGE_CODE == 'pt-br' %}
-    var language = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
-  {% endif %}
-</script>
-{% block script %}{% endblock %}
+  <!-- Bootstrap 3.3.6 -->
+  <script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'dist/js/app.min.js' %}"></script>
+  <script src="{% static 'dist/js/demo.js' %}"></script>
+  <script >
+    var language = ""
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE == 'pt-br' %}
+      var language = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+    {% endif %}
+  </script>
+  {% block script %}{% endblock %}
 
 </body>
 </html>
