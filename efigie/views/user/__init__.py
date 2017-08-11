@@ -12,4 +12,6 @@ from efigie.views.user.userLogin import *
 from efigie.views.user.userLogout import *
 
 from efigie.views.user.userNew import *
+from efigie.views.user.userPasswordEdit import *
+from efigie.views.user.userSettings import *
 

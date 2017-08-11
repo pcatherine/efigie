@@ -13,4 +13,4 @@ from efigie.views import *
 @breadcrumbs(['index'])
 def index(request):
 
-  return render(request, 'about.html')
+  return render(request, 'index.html')

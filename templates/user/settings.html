@@ -1,12 +1,13 @@
 {% extends '_template.html' %}
+
 {% load static %}
 {% load i18n %}
-{% load efigieAssignmentTags %}
+{% load utils %}
 
 {% block header %} {% endblock %}
 
 {% block content %}
-  {% include '_model.html' with form=form %}
+  {% include '_modal.html' with form=form type='user_delete' %}
 
   <div class="box box-warning ">
     <div class="box-header with-border" >
@@ -31,11 +32,11 @@
 
     <div class="box-footer">
 
-      <a class="btn btn-info" href="{% url 'userEdit' %}">
+      <a class="btn btn-primary" href="">
         <span><i class="fa {% urlIcon 'userEdit' %} "></i> {% urlTitle 'userEdit' %}</span>
       </a>
       
-      <a class="btn btn-info" href="{% url 'userPasswordEdit' %}" >
+      <a class="btn btn-primary" href="{% url 'userPasswordEdit' %}" >
         <span><i class="fa {% urlIcon 'userPasswordEdit' %} "></i> {% urlTitle 'userPasswordEdit' %}</span>
       </a>
       

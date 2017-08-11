@@ -30,16 +30,6 @@ class UserNewForm(UserCreationForm):
     else:
       return email
 
-  def clean_password2(self):
-    password_length = settings.MIN_PASSWORD_LENGTH
-    password1 = self.cleaned_data.get("password1")
-    if len(password1) < password_length:
-      raise forms.ValidationError("Password must be longer than " "{} characters".format(password_length))
-    password2 = self.cleaned_data.get("password2")
-    if password1 and password2 and password1 != password2:
-      raise forms.ValidationError("The passwords are not equal.")
-    return password2
-
   def save(self, url, commit=True):
     user = super(UserNewForm, self).save(commit=False)
     user.set_password(self.cleaned_data['password1'])

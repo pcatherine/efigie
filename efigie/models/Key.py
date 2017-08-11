@@ -29,7 +29,8 @@ class Key(models.Model):
     editable = False)
 
   friends = models.ManyToManyField(settings.AUTH_USER_MODEL,
-    related_name=_('Friends'))
+    related_name=_('Friends'),
+    blank=True)
 
   def __str__(self):
     return '{0} created at {1} by {2}'.format(self.name, self.created_at, self.user)

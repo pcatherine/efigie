@@ -26,10 +26,17 @@ urlpatterns = [
   url(r'^admin/', admin.site.urls),
 
   url(r'^$', views.index, name='index'),
+  url(r'^about/$', views.about, name='about'),
 
-  url(r'^user/new/$', views.userNew, name='userNew'),
+
   url(r'^login/$', views.userLogin, name='userLogin'),
   url(r'^logout/$', views.userLogout, name='userLogout'),
+
+  url(r'^user/new/$', views.userNew, name='userNew'),
+  url(r'^user/settings/$', views.userSettings, name='userSettings'),
+  url(r'^user/settings/password/$', views.userPasswordEdit, name='userPasswordEdit'),
+
+
 
   url(r'^key/$', views.keyList, name='keyList'),
   url(r'^key/new/$', views.keyNew, name='keyNew'),
@@ -45,10 +52,15 @@ urlpatterns = [
 def breadcrumbResolve(url_name):
   urls = [
     {'name': 'index', 'title': _('Home'), 'icon': 'fa-home'},
+    {'name': 'about', 'title': _('About'), 'icon': 'fa-info-circle'},
 
-    {'name': 'userNew', 'title': _("New User"), 'icon': 'fa-list'},
     {'name': 'userLogin', 'title': _("Login"), 'icon': 'fa-sign-in'},
     {'name': 'userLogout', 'title': _("Logout"), 'icon': 'fa-sign-out'},
+
+    {'name': 'userNew', 'title': _("New User"), 'icon': 'fa-list'},
+    {'name': 'userSettings', 'title': _("User Settings"), 'icon': 'fa-user'},
+    {'name': 'userPasswordEdit', 'title': _("Edit Password"), 'icon': 'fa-pencil'},
+
 
 
     {'name': 'keyList', 'title': _("Key's List"), 'icon': 'fa-list'},

@@ -3,24 +3,22 @@
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.views.decorators.csrf import csrf_protect
 
-from efigie.forms import *
 from efigie.views import *
 
-@csrf_protect
 @login_required
+@csrf_protect
+@breadcrumbs(['index', 'userSettings' ,'userPasswordEdit'])
 def userPasswordEdit(request, form=None):
-  breadcrumbs = ['index', 'userPasswordEdit']
 
-  form = UserPasswordEditForm(user=request.user, data=request.POST or None)
+  form = PasswordChangeForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save()
     messages.success(request, 'Senha editados com sucesso.')
     return redirect(userLogout)
 
-  return render(request, 'form.html',
-    {'title': 'Edição de Senha',
-     'form': form,
-     'button': 'Editar',
-     'breadcrumbs': breadcrumbs})
+  return render(request, 'user/form.html',
+    {'form': form,
+     'button': 'Editar'})

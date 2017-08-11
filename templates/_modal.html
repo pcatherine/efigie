@@ -18,4 +18,41 @@
       </div>
     </div>
   </div>
+
+{% elif type == 'user_delete' %}
+
+  <div class="modal fade modal-danger" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deleteModalLabel">{% trans 'Você tem certeza que deseja fazer isso?' %}</h4>
+        </div>
+        <form action="#" method="post">
+
+          <div class="modal-body">
+            {% trans '<p>Excluiremos <b>imediatamente</b> todas as chaves relacionadas somente a voce, juntamente com todos os seus contatos.</p>' %}  
+            
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="form-group has-feedback">
+              
+              {% for error in field.errors %}
+                <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
+              {% endfor %}
+
+              {{ field|addcssclass:'form-control' }}
+              </div>
+            {% endfor %}
+          </div> 
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger btn-outline" ><i class="fa fa-times"></i> <span>{% trans 'Deletar' %}</span></button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
 {% endif %}

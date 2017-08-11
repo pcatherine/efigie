@@ -8,8 +8,10 @@ from django.utils.text import capfirst
 from efigie.forms import *
 
 class UserLoginForm(forms.Form):
-  username = forms.CharField(label="%s or %s" % (capfirst(User._meta.get_field('password').verbose_name), capfirst(User._meta.get_field('password').verbose_name))
-    widget=forms.TextInput(attrs={'placeholder':'Username or E-mail'}))
+  username = forms.CharField(
+  	label="%s or %s" % 
+  		(capfirst(User._meta.get_field('username').verbose_name), 
+  		 capfirst(User._meta.get_field('email').verbose_name)))
 
   password = forms.CharField(label=capfirst(User._meta.get_field('password').verbose_name),
     widget=forms.PasswordInput())

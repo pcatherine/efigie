@@ -13,8 +13,8 @@ import efigie.urls
 
 
 @login_required
+@breadcrumbs(['index', 'about'])
 def about(request):
-  breadcrumbs = ['index', 'about']
 
   return render(request, 'about.html', 
     {'breadcrumbs': breadcrumbs })
