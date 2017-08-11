@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-11 16:55-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: models/Key.py:15
+msgid "User"
+msgstr ""
+
+#: models/Key.py:17
+msgid "Name"
+msgstr ""
+
+#: models/Key.py:21
+msgid "Size"
+msgstr ""
+
+#: models/Key.py:23
+msgid "Public Key"
+msgstr ""
+
+#: models/Key.py:25
+msgid "Private Key"
+msgstr ""
+
+#: models/Key.py:27 models/UserConfirmation.py:25
+msgid "Created at"
+msgstr ""
+
+#: models/Key.py:32
+msgid "Friends"
+msgstr ""
+
+#: models/Key.py:39 urls.py:78
+msgid "Key"
+msgstr ""
+
+#: models/Key.py:40
+msgid "Keys"
+msgstr ""
+
+#: models/UserConfirmation.py:21
+msgid "Token"
+msgstr ""
+
+#: models/UserConfirmation.py:28
+msgid "Category"
+msgstr ""
+
+#: models/UserConfirmation.py:32
+msgid "Confirmed?"
+msgstr ""
+
+#: models/UserConfirmation.py:36
+msgid "Confirmed at"
+msgstr ""
+
+#: models/UserConfirmation.py:40
+msgid "Confirmed by"
+msgstr ""
+
+#: models/UserConfirmation.py:55
+msgid "User Confirmation"
+msgstr ""
+
+#: models/UserConfirmation.py:56
+msgid "User Confirmations"
+msgstr ""
+
+#: settings.py:123
+msgid "English"
+msgstr ""
+
+#: settings.py:124
+msgid "Portuguese"
+msgstr ""
+
+#: urls.py:57
+msgid "Home"
+msgstr ""
+
+#: urls.py:58
+msgid "About"
+msgstr ""
+
+#: urls.py:59
+msgid "System Settings"
+msgstr ""
+
+#: urls.py:61
+msgid "Login"
+msgstr ""
+
+#: urls.py:62
+msgid "Logout"
+msgstr ""
+
+#: urls.py:63
+msgid "New User"
+msgstr ""
+
+#: urls.py:64
+msgid "Delete User"
+msgstr ""
+
+#: urls.py:66 urls.py:68 urls.py:73
+msgid "Confirm"
+msgstr ""
+
+#: urls.py:67
+msgid "Reset Password"
+msgstr ""
+
+#: urls.py:70
+msgid "User Settings"
+msgstr ""
+
+#: urls.py:71
+msgid "Edit Password"
+msgstr ""
+
+#: urls.py:72
+msgid "Edit User"
+msgstr ""
+
+#: urls.py:75
+msgid "Key's List"
+msgstr ""
+
+#: urls.py:76
+msgid "New Key"
+msgstr ""
+
+#: urls.py:77
+msgid "Import Key"
+msgstr ""
+
+#: urls.py:79
+msgid "Edit Key"
+msgstr ""
+
+#: urls.py:80
+msgid "Delete Key"
+msgstr ""
+
+#: urls.py:81
+msgid "Export Key"
+msgstr ""
+
+#: utils/Effigy.py:18 utils/Effigy.py:44
+msgid "Imagem nao pode ser aberta"
+msgstr ""
+
+#: utils/Effigy.py:30
+msgid "Imagem pequena demais para o tamanho da mensagem"
+msgstr ""
+
+#: utils/Effigy.py:53 utils/Effigy.py:55 utils/Effigy.py:175
+#: utils/Effigy.py:176
+msgid "Imagem nao autentica"
+msgstr ""
+
+#. Translators: This message appears on alert with %(model_name)s and %(item_name)s
+#: utils/invariants.py:4
+#, python-format
+msgid "%s <b>%s</b> was successfully added."
+msgstr ""
+
+#: utils/invariants.py:5
+#, python-format
+msgid "%s <b>%s</b> was successfully updated."
+msgstr ""
+
+#: utils/invariants.py:6
+#, python-format
+msgid "%s <b>%s</b> was successfully deleted."
+msgstr ""
+
+#: utils/invariants.py:8
+#, python-format
+msgid "%s <b>%s</b> could not be deleted."
+msgstr ""
+
+#. Translators: This message appears on button with %(model_name)s
+#: utils/invariants.py:12
+#, python-format
+msgid "Update %s"
+msgstr ""
+
+#: utils/invariants.py:13
+#, python-format
+msgid "Create %s"
+msgstr ""
+
+#: utils/invariants.py:15
+msgid "Confirm your account"
+msgstr ""
+
+#: utils/invariants.py:16
+msgid "Set Password"
+msgstr ""
+
+#: utils/invariants.py:17
+#, python-format
+msgid "Insert %s"
+msgstr ""

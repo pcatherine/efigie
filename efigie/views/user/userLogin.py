@@ -39,5 +39,5 @@ def userLogin(request):
   return render(request, 'template_login.html',
     {'form': form,
      'button': 'Login',
-     'links': [{'name':'Esqueci minha senha', 'url': 'userNew'},
+     'links': [{'name':'Esqueci minha senha', 'url': 'userPasswordReset'},
                {'name':'Cadastrar-se', 'url': 'userNew'} ]})

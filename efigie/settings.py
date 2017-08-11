@@ -96,7 +96,7 @@ DATABASES = {
     'HOST': config.DATABASES_HOST,   # Set to empty string for localhost. Not used with sqlite3.
     'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
   }
-} 
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,7 +117,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+
+ugettext = lambda s: s
+LANGUAGES = (
+  ('en', ugettext('English')),
+  ('pt-br', ugettext('Portuguese')),
+)
+
+LOCALE_PATHS = [
+  os.path.join(BASE_DIR, 'locale'),
+]
+TIME_ZONE = 'America/Chicago'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -162,7 +173,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD 
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

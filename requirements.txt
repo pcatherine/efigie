@@ -11,5 +11,7 @@ whitenoise==3.2
 setuptools==34.3.3
 wheel==0.29.0
 
+docutils==0.13.1
+
 https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz
 

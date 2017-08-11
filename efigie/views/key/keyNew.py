@@ -5,8 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
+from efigie.utils import invariants
+from efigie.views.decorators import model_required, breadcrumbs
+
 from efigie import *
 from efigie.forms import *
+from efigie.models import Key
 from efigie.views import *
 from efigie.views.key import *
 
@@ -34,10 +38,10 @@ def keyNew(request):
   form = KeyForm(user=request.user, data=request.POST or None)
 
   if form.is_valid():
-    form.save()
-    messages.success(request, 'Chave <b>%s</b> criada com sucesso.' % (form.cleaned_data['name']))
+    key = form.save()
+    messages.success(request, invariants.alert_add_success % (Key._meta.verbose_name, key.name ) )
     return redirect(keyList)
 
   return render(request, 'key/form.html',
     {'form': form,
-     'button': 'Criar Chave'})
+     'button': invariants.button_new % (Key._meta.verbose_name)})

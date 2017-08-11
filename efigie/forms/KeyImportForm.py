@@ -22,7 +22,7 @@ class KeyImportForm(forms.Form):
           name = name + '_' + str(count)
           count += 1
         else:
-          return False, ''
+          return None
 
     if commit:
       key = Key.objects.create(user = user, name = name, size = size, privateKey = privateKey, publicKey = publicKey)

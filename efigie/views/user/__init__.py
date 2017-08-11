@@ -11,7 +11,11 @@ __status__ = "Production"
 from efigie.views.user.userLogin import *
 from efigie.views.user.userLogout import *
 
-from efigie.views.user.userNew import *
-from efigie.views.user.userPasswordEdit import *
 from efigie.views.user.userSettings import *
+from efigie.views.user.userNew import *
+from efigie.views.user.userDelete import *
+from efigie.views.user.userPasswordEdit import *
+from efigie.views.user.userPasswordReset import *
+from efigie.views.user.userEdit import *
 
+from efigie.views.user.userConfirm import *
