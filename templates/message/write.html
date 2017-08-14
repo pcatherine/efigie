@@ -1,0 +1,26 @@
+{% extends "_template.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block header %} 
+  <h1>{% trans "Escrever" %} {%trans "Mensagem" %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% include "_alert.html" with description=description alert=alert %}
+  <div class="box box-warning">
+    <form method="POST" action="{% url 'messageWrite' %}" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="box-body">
+        <input type="file" class="form-control input-lg" id="image" name="image" accept="image/*" placeholder="{% trans "Selecione uma imagem" %}" >
+        <br />
+        <input type="input" class="form-control input-lg" name="count" id="count" placeholder="{% trans "Numero de vezes a mensagem podera ser lida (opcional)" %}" value="{{ count }}">
+        <br/>
+        <textarea name="message" id="message" class="form-control input-lg" rows="3" placeholder="{% trans "Mensagem" %}" value="{{ message }}"></textarea>
+      </div>
+      <div class="box-footer"> 
+        <button type="submit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i> <span>{% trans "Escrever" %}</span></button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

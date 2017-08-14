@@ -10,38 +10,40 @@
   {% include '_modal.html' with form=form type='user_delete' %}
 
   <div class="box box-warning ">
-    <div class="box-header with-border" >
-      <h1 class="box-title">{% trans 'Dados Pessoais' %}</h1>
-    </div>
+    {% comment %}
+      <div class="box-header with-border" >
+        <h1 class="box-title">{% trans 'Dados Pessoais' %}</h1>
+      </div>
+    {% endcomment %}
 
     <div class="box-body ">
       <dl class="dl-horizontal">
-        <dt class="with-border" >{% trans 'Nome Completo' %}</dt>
-        <dd >{{ request.user.get_full_name }}</dd>
+        <h4><dt class="with-border" >{% trans 'Nome Completo' %}</dt></h4>
+        <h4><dd >{{ request.user.get_full_name }}</dd></h4>
 
-        <dt class="with-border">Username</dt>
-        <dd >{{ request.user.username }}</dd>
+        <h4><dt class="with-border">Username</dt></h4>
+        <h4><dd >{{ request.user.username }}</dd></h4>
 
-        <dt >E-mail</dt>
-        <dd >{{ request.user.email }}</dd>
+        <h4><dt >E-mail</dt></h4>
+        <h4><dd >{{ request.user.email }}</dd></h4>
 
-        <dt >{% trans 'Membro desde' %}</dt>
-        <dd >{{ request.user.date_joined|date:'SHORT_DATE_FORMAT' }}</dd>
-      </dl>  
+        <h4><dt >{% trans 'Membro desde' %}</dt></h4>
+        <h4><dd >{{ request.user.date_joined|date:'SHORT_DATE_FORMAT' }}</dd></h4>
+      </dl>
     </div>
 
     <div class="box-footer">
 
-      <a class="btn btn-primary" href="">
-        <span><i class="fa {% urlIcon 'userEdit' %} "></i> {% urlTitle 'userEdit' %}</span>
+      <a class="btn btn-primary" href="{% url 'userEdit' %}">
+        <span> {% urlTitle 'userEdit' %}</span>
       </a>
-      
+
       <a class="btn btn-primary" href="{% url 'userPasswordEdit' %}" >
-        <span><i class="fa {% urlIcon 'userPasswordEdit' %} "></i> {% urlTitle 'userPasswordEdit' %}</span>
+        <span> {% urlTitle 'userPasswordEdit' %}</span>
       </a>
-      
+
       <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-        <span><i class="fa {% urlIcon 'userDelete' %}"></i> {% urlTitle 'userDelete' %}</span>
+        <span> {% urlTitle 'userDelete' %}</span>
       </a>
 
     </div>

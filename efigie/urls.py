@@ -19,57 +19,86 @@ from django.utils.translation import ugettext_lazy as _
 
 import efigie.views as views
 
+admin.site.site_header = 'Efigie Administration'
 
 urlpatterns = [
   url(r'^i18n/', include('django.conf.urls.i18n')),
-  # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+  url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
   url(r'^admin/', admin.site.urls),
 
   url(r'^$', views.index, name='index'),
   url(r'^about/$', views.about, name='about'),
-
+  url(r'^settings/$', views.systemSettings, name='systemSettings'),
 
   url(r'^login/$', views.userLogin, name='userLogin'),
   url(r'^logout/$', views.userLogout, name='userLogout'),
-
   url(r'^user/new/$', views.userNew, name='userNew'),
+  url(r'^user/new/(?P<token>\w+)/$', views.userConfirm, name='userNewConfirm'),
+
+  url(r'^user/password/forget/$', views.userPasswordReset, name='userPasswordReset'),
+  url(r'^user/password/forget/(?P<token>\w+)/$', views.userConfirm, name='userPasswordResetConfirm'),
+
   url(r'^user/settings/$', views.userSettings, name='userSettings'),
   url(r'^user/settings/password/$', views.userPasswordEdit, name='userPasswordEdit'),
+  url(r'^user/settings/profile/$',  views.userEdit, name='userEdit'),
+  url(r'^user/settings/profile/(?P<token>\w+)/$',  views.userConfirm, name='userEditConfirm'),
 
-
+  url(r'^message/read$', views.messageRead, name='messageRead'),
+  url(r'^message/set$', views.messageSet, name='messageSet'),
+  url(r'^message/write$', views.messageWrite, name='messageWrite'),
+  url(r'^message/settings$', views.messageSettings, name='messageSettings'),
 
   url(r'^key/$', views.keyList, name='keyList'),
   url(r'^key/new/$', views.keyNew, name='keyNew'),
+  url(r'^key/import/$', views.keyImport, name='keyImport'),
   url(r'^key/(?P<keyId>[0-9]+)/$', views.keyShow, name='keyShow'),
   url(r'^key/(?P<keyId>[0-9]+)/edit/$', views.keyEdit, name='keyEdit'),
   url(r'^key/(?P<keyId>[0-9]+)/delete/$', views.keyDelete, name='keyDelete'),
   url(r'^key/(?P<keyId>[0-9]+)/export/$', views.keyExport, name='keyExport'),
-  url(r'^key/import/$', views.keyImport, name='keyImport'),
-
-
 ]
 
+
 def breadcrumbResolve(url_name):
+
+  from efigie.models import Key, Message
+  from django.contrib.auth.models import User
+  from django.utils.text import capfirst
+
+  message_name = Message._meta.verbose_name
+  key_name = Key._meta.verbose_name
+  user_name = capfirst(User._meta.verbose_name)
+
   urls = [
     {'name': 'index', 'title': _('Home'), 'icon': 'fa-home'},
     {'name': 'about', 'title': _('About'), 'icon': 'fa-info-circle'},
+    {'name': 'systemSettings', 'title': _('System Settings'), 'icon': 'fa-cog'},
 
     {'name': 'userLogin', 'title': _("Login"), 'icon': 'fa-sign-in'},
     {'name': 'userLogout', 'title': _("Logout"), 'icon': 'fa-sign-out'},
+    {'name': 'userNew', 'title': _("New %s") % (user_name), 'icon': 'fa-plus'},
+    {'name': 'userDelete', 'title': _("Delete %s") % (user_name), 'icon': 'fa-trash-o'},
 
-    {'name': 'userNew', 'title': _("New User"), 'icon': 'fa-list'},
-    {'name': 'userSettings', 'title': _("User Settings"), 'icon': 'fa-user'},
-    {'name': 'userPasswordEdit', 'title': _("Edit Password"), 'icon': 'fa-pencil'},
+    {'name': 'userNewConfirm', 'title': _("Confirmation"), 'icon': 'fa-plus'},
+    {'name': 'userPasswordReset', 'title': _("Reset Password"), 'icon': 'fa-lock'},
+    {'name': 'userPasswordResetConfirm', 'title': _("Confirmation"), 'icon': 'fa-lock'},
+
+    {'name': 'userSettings', 'title': _("%s Settings") % (user_name), 'icon': 'fa-user'},
+    {'name': 'userPasswordEdit', 'title': _("Edit Password"), 'icon': 'fa-lock'},
+    {'name': 'userEdit', 'title': _('Edit %s') % (user_name),  'icon': 'fa-pencil'},
+    {'name': 'userEditConfirm', 'title': _('Confirmation'),  'icon': 'fa-pencil'},
+
+    {'name': 'messageWrite', 'title': _("Encrypt %s") % (message_name), 'icon': 'fa-lock'},
+    {'name': 'messageRead', 'title': _("Decrypt %s") % (message_name), 'icon': 'fa-unlock-alt'},
+    {'name': 'messageSettings', 'title': _("%s Settings") % (message_name), 'icon': 'fa-comments-o'},
 
 
-
-    {'name': 'keyList', 'title': _("Key's List"), 'icon': 'fa-list'},
-    {'name': 'keyNew', 'title': _('New Key'), 'icon': 'fa-plus'},
-    {'name': 'keyShow', 'title': _('Key'), 'icon': 'fa-home'},
-    {'name': 'keyEdit', 'title': _('Edit Key'), 'icon': 'fa-pencil'},
-    {'name': 'keyDelete', 'title': _('Delete Key'), 'icon': 'fa-trash-o'},
-    {'name': 'keyExport', 'title': _('Export Key'), 'icon': 'fa-download'},
-    {'name': 'keyImport', 'title': _('Import Key'), 'icon': 'fa-upload'},
+    {'name': 'keyList', 'title': _("%s's List") % (key_name), 'icon': 'fa-list'},
+    {'name': 'keyNew', 'title': _('New %s') % (key_name), 'icon': 'fa-plus'},
+    {'name': 'keyImport', 'title': _('Import %s') % (key_name), 'icon': 'fa-upload'},
+    {'name': 'keyShow', 'title': _('%s') % (key_name), 'icon': 'fa-home'},
+    {'name': 'keyEdit', 'title': _('Edit %s') % (key_name), 'icon': 'fa-pencil'},
+    {'name': 'keyDelete', 'title': _('Delete %s') % (key_name), 'icon': 'fa-trash-o'},
+    {'name': 'keyExport', 'title': _('Export %s') % (key_name), 'icon': 'fa-download'},
 
   ]
 

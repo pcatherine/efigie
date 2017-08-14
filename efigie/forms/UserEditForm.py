@@ -5,12 +5,24 @@ from django import forms
 from django.contrib.auth.models import User
 
 from efigie import settings
-from efigie.controllers import utils
-from efigie.controllers import mail
+from efigie.utils import utils
+from efigie.utils import mail
 from efigie.forms import *
 from efigie.models import UserConfirmation, Category
 
 class UserEditForm(forms.Form):
+  first_name = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder':'First Name'}))
+
+  last_name = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
+
+  username = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder':'Username'}))
+
+  email = forms.EmailField(
+    widget=forms.TextInput(attrs={'placeholder':'E-mail'}))
+
 
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
@@ -32,8 +44,8 @@ class UserEditForm(forms.Form):
     if commit:
       self.user.save()
       if old_email != self.cleaned_data['email']:
-        token = utils.generateHashKey(self.user.username)
-        reset = UserConfirmation(token=token, user=self.user, category=Category.VERIFICATION)
+        key = utils.generateHashKey(self.user.username)
+        reset = UserConfirmation(key=key, user=self.user, category=Category.VERIFICATION)
         reset.save()
 
         subject = '[Efigie] E-mail Confirmation'
@@ -46,7 +58,11 @@ class UserEditForm(forms.Form):
         ''' % (self.user.first_name, self.user.email)
 
         button = 'Confirmar E-mail'
-        context = {'confirmation_url': url+reset.token, 'email':self.user.email, 'message': message, 'button': button}
+        context = {'confirmation_url': url+reset.key,
+          'email':self.user.email,
+          'message': message,
+          'button': button,
+          'name': self.user.email}
 
         mail.sendMailTemplate(subject, context, [self.user.email])
     return self.user
@@ -67,7 +83,3 @@ class UserEditForm(forms.Form):
       raise forms.ValidationError('Usuário já cadastrado com este e-mail')
     else:
       return email
-
-  class Meta:
-    model = User
-    fields = ("first_name","last_name","username", "email")

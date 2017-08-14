@@ -50,7 +50,11 @@ class UserNewForm(UserCreationForm):
       ''' % (user.first_name, user.email)
 
       button = 'Confirmar E-mail'
-      context = {'confirmation_url': url+reset.token, 'email':user.email, 'message': message, 'button': button}
+      context = {'confirmation_url': url+reset.token,
+        'email':user.email,
+        'message': message,
+        'button': button,
+        'name': user.first_name}
 
       mail.sendMailTemplate(subject, context, [user.email])
     return user

@@ -5,7 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from efigie.utils import invariants
+from efigie.views.decorators import model_required, breadcrumbs
+
 from efigie.forms import *
+from efigie.models import Key
 from efigie.views import *
 from efigie.views.key import *
 
@@ -45,4 +49,4 @@ def keyEdit(request, keyId):
   return render(request, 'key/form.html',
     {'title': ': <b>%s</b>' % (key.name),
      'form': form,
-     'button': invariants.button_update % (model_name)})
+     'button': invariants.button_edit % (model_name)})

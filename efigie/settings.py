@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'efigie',
 ]
 
@@ -53,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
 ]
 
 ROOT_URLCONF = 'efigie.urls'
@@ -68,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
             'debug': DEBUG,
         },
@@ -96,7 +101,7 @@ DATABASES = {
     'HOST': config.DATABASES_HOST,   # Set to empty string for localhost. Not used with sqlite3.
     'PORT': '5432',                     # Set to empty string for default. Not used with sqlite3.
   }
-} 
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,7 +122,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+
+ugettext = lambda s: s
+LANGUAGES = (
+  ('en', ugettext('English')),
+  ('pt-br', ugettext('Portuguese')),
+)
+
+LOCALE_PATHS = [
+  os.path.join(BASE_DIR, 'locale'),
+]
+
+TIME_ZONE = 'America/Chicago'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -162,8 +179,8 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD 
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-MIN_PASSWORD_LENGTH = 8
+# MIN_PASSWORD_LENGTH = 8

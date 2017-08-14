@@ -8,6 +8,9 @@ from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
+from efigie.utils import invariants
+from efigie.views.decorators import model_required, breadcrumbs
+
 from efigie import *
 from efigie.forms import *
 from efigie.models import Key
@@ -26,7 +29,7 @@ def keyImport(request):
       privateKey, publicKey, name, size = date.split(';')
 
       key = form.save(user=request.user, privateKey=privateKey, publicKey=publicKey, name=name, size=size)
-
+      #AGARD trans
       messages.info(request, 'Chave <b>%s</b> já importada.' % (key.name))
       return redirect(keyImport)
 
@@ -34,6 +37,6 @@ def keyImport(request):
       messages.error(request, 'O arquivo não pode ser importado.')
       return redirect(keyImport)
 
-  return render(request, 'form.html',
+  return render(request, 'key/form.html',
     {'form': form,
      'button': 'Importar'})

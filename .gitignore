@@ -6,3 +6,4 @@ staticfiles
 __pycache__
 efigie/config.py
 efigie/migrations/*
+docs/*
