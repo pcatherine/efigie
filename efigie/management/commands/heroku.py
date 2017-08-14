@@ -17,7 +17,7 @@ class Command(BaseCommand):
     os.system("git add .")
     os.system("git commit -m 'deploy'")
     os.system("git push heroku --force")
-    os.system('replace "XYZ" "efigie/config.py"  -- .gitignore')
+    os.system('replace "XYZ" "efigie/config.py" -- .gitignore')
 
 
     # os.system("python manage.py makemigrations efigie")
