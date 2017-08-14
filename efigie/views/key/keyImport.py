@@ -37,6 +37,6 @@ def keyImport(request):
       messages.error(request, 'O arquivo não pode ser importado.')
       return redirect(keyImport)
 
-  return render(request, 'form.html',
+  return render(request, 'key/form.html',
     {'form': form,
      'button': 'Importar'})

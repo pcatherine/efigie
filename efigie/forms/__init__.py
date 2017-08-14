@@ -4,6 +4,8 @@
 from efigie.forms.KeyForm import *
 from efigie.forms.KeyImportForm import *
 
+from efigie.forms.MessageWriteForm import *
+
 from efigie.forms.UserNewForm import *
 from efigie.forms.UserEditForm import *
 from efigie.forms.UserLoginForm import *

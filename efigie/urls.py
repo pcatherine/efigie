@@ -43,6 +43,11 @@ urlpatterns = [
   url(r'^user/settings/profile/$',  views.userEdit, name='userEdit'),
   url(r'^user/settings/profile/(?P<token>\w+)/$',  views.userConfirm, name='userEditConfirm'),
 
+  url(r'^message/read$', views.messageRead, name='messageRead'),
+  url(r'^message/set$', views.messageSet, name='messageSet'),
+  url(r'^message/write$', views.messageWrite, name='messageWrite'),
+  url(r'^message/settings$', views.messageSettings, name='messageSettings'),
+
   url(r'^key/$', views.keyList, name='keyList'),
   url(r'^key/new/$', views.keyNew, name='keyNew'),
   url(r'^key/import/$', views.keyImport, name='keyImport'),
@@ -55,10 +60,11 @@ urlpatterns = [
 
 def breadcrumbResolve(url_name):
 
-  from efigie.models import Key
+  from efigie.models import Key, Message
   from django.contrib.auth.models import User
   from django.utils.text import capfirst
 
+  message_name = Message._meta.verbose_name
   key_name = Key._meta.verbose_name
   user_name = capfirst(User._meta.verbose_name)
 
@@ -80,6 +86,11 @@ def breadcrumbResolve(url_name):
     {'name': 'userPasswordEdit', 'title': _("Edit Password"), 'icon': 'fa-lock'},
     {'name': 'userEdit', 'title': _('Edit %s') % (user_name),  'icon': 'fa-pencil'},
     {'name': 'userEditConfirm', 'title': _('Confirmation'),  'icon': 'fa-pencil'},
+
+    {'name': 'messageWrite', 'title': _("Encrypt %s") % (message_name), 'icon': 'fa-lock'},
+    {'name': 'messageRead', 'title': _("Decrypt %s") % (message_name), 'icon': 'fa-unlock-alt'},
+    {'name': 'messageSettings', 'title': _("%s Settings") % (message_name), 'icon': 'fa-comments-o'},
+
 
     {'name': 'keyList', 'title': _("%s's List") % (key_name), 'icon': 'fa-list'},
     {'name': 'keyNew', 'title': _('New %s') % (key_name), 'icon': 'fa-plus'},

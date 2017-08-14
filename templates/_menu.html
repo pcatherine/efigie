@@ -10,6 +10,18 @@
   <section class="sidebar">
     <ul class="sidebar-menu">
       {% with request.resolver_match.url_name as url_name %}
+        <li class="treeview {% if url_name == 'messageWrite' or url_name == 'messageRead' %} active {% endif %}">
+          <a href="">
+            <i class="fa fa-comments-o text-yellow"></i> <span>{% trans 'Message' %}</span>
+            <i class="fa fa-angle-left pull-right text-yellow"></i>
+          </a>
+
+          <ul style="{% if url_name == 'messageWrite' or url_name == 'messageRead' %} display: block; {% endif %}" class="treeview-menu menu-open">
+            {{ 'messageWrite'|menuItem:url_name }}
+            {{ 'messageRead'|menuItem:url_name }}
+          </ul>
+        </li>
+
         <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyEdit' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
           <a href="">
             <i class="fa fa-key text-yellow"></i> <span>{% trans 'RSA Keys' %}</span>
@@ -30,8 +42,10 @@
           </a>
 
           <ul style="{% if url_name == 'userSettings' or url_name == 'userPasswordEdit' %} display: block; {% endif %}" class="treeview-menu menu-open">
+            {{ 'messageSettings'|menuItem:url_name }}
             {{ 'userSettings'|menuItem:url_name }}
             {{ 'systemSettings'|menuItem:url_name }}
+
           </ul>
         </li>
         {{ 'about'|menuItem:url_name }}
