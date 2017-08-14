@@ -52,7 +52,16 @@ urlpatterns = [
   url(r'^key/(?P<keyId>[0-9]+)/export/$', views.keyExport, name='keyExport'),
 ]
 
+
 def breadcrumbResolve(url_name):
+
+  from efigie.models import Key
+  from django.contrib.auth.models import User
+  from django.utils.text import capfirst
+
+  key_name = Key._meta.verbose_name
+  user_name = capfirst(User._meta.verbose_name)
+
   urls = [
     {'name': 'index', 'title': _('Home'), 'icon': 'fa-home'},
     {'name': 'about', 'title': _('About'), 'icon': 'fa-info-circle'},
@@ -60,25 +69,25 @@ def breadcrumbResolve(url_name):
 
     {'name': 'userLogin', 'title': _("Login"), 'icon': 'fa-sign-in'},
     {'name': 'userLogout', 'title': _("Logout"), 'icon': 'fa-sign-out'},
-    {'name': 'userNew', 'title': _("New User"), 'icon': 'fa-plus'},
-    {'name': 'userDelete', 'title': _("Delete User"), 'icon': 'fa-trash-o'},
+    {'name': 'userNew', 'title': _("New %s") % (user_name), 'icon': 'fa-plus'},
+    {'name': 'userDelete', 'title': _("Delete %s") % (user_name), 'icon': 'fa-trash-o'},
 
-    {'name': 'userNewConfirm', 'title': _("Confirm"), 'icon': 'fa-plus'},
+    {'name': 'userNewConfirm', 'title': _("Confirmation"), 'icon': 'fa-plus'},
     {'name': 'userPasswordReset', 'title': _("Reset Password"), 'icon': 'fa-lock'},
-    {'name': 'userPasswordResetConfirm', 'title': _("Confirm"), 'icon': 'fa-lock'},
+    {'name': 'userPasswordResetConfirm', 'title': _("Confirmation"), 'icon': 'fa-lock'},
 
-    {'name': 'userSettings', 'title': _("User Settings"), 'icon': 'fa-user'},
+    {'name': 'userSettings', 'title': _("%s Settings") % (user_name), 'icon': 'fa-user'},
     {'name': 'userPasswordEdit', 'title': _("Edit Password"), 'icon': 'fa-lock'},
-    {'name': 'userEdit', 'title': _('Edit User'),  'icon': 'fa-pencil'},
-    {'name': 'userEditConfirm', 'title': _('Confirm'),  'icon': 'fa-pencil'},
+    {'name': 'userEdit', 'title': _('Edit %s') % (user_name),  'icon': 'fa-pencil'},
+    {'name': 'userEditConfirm', 'title': _('Confirmation'),  'icon': 'fa-pencil'},
 
-    {'name': 'keyList', 'title': _("Key's List"), 'icon': 'fa-list'},
-    {'name': 'keyNew', 'title': _('New Key'), 'icon': 'fa-plus'},
-    {'name': 'keyImport', 'title': _('Import Key'), 'icon': 'fa-upload'},
-    {'name': 'keyShow', 'title': _('Key'), 'icon': 'fa-home'},
-    {'name': 'keyEdit', 'title': _('Edit Key'), 'icon': 'fa-pencil'},
-    {'name': 'keyDelete', 'title': _('Delete Key'), 'icon': 'fa-trash-o'},
-    {'name': 'keyExport', 'title': _('Export Key'), 'icon': 'fa-download'},
+    {'name': 'keyList', 'title': _("%s's List") % (key_name), 'icon': 'fa-list'},
+    {'name': 'keyNew', 'title': _('New %s') % (key_name), 'icon': 'fa-plus'},
+    {'name': 'keyImport', 'title': _('Import %s') % (key_name), 'icon': 'fa-upload'},
+    {'name': 'keyShow', 'title': _('%s') % (key_name), 'icon': 'fa-home'},
+    {'name': 'keyEdit', 'title': _('Edit %s') % (key_name), 'icon': 'fa-pencil'},
+    {'name': 'keyDelete', 'title': _('Delete %s') % (key_name), 'icon': 'fa-trash-o'},
+    {'name': 'keyExport', 'title': _('Export %s') % (key_name), 'icon': 'fa-download'},
 
   ]
 
