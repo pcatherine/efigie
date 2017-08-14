@@ -36,5 +36,10 @@ class UserPasswordResetForm(forms.Form):
 
     button = 'Cadastrar Nova Senha'
 
-    context = {'confirmation_url': url+reset.token, 'email':user.email, 'message': message, 'button': button}
+    context = {'confirmation_url': url+reset.token,
+      'email':user.email,
+      'message': message,
+      'button': button,
+      'name': user.first_name}
+
     mail.sendMailTemplate(subject, context, [user.email])

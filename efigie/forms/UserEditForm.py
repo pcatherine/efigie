@@ -58,7 +58,11 @@ class UserEditForm(forms.Form):
         ''' % (self.user.first_name, self.user.email)
 
         button = 'Confirmar E-mail'
-        context = {'confirmation_url': url+reset.key, 'email':self.user.email, 'message': message, 'button': button}
+        context = {'confirmation_url': url+reset.key,
+          'email':self.user.email,
+          'message': message,
+          'button': button,
+          'name': self.user.email}
 
         mail.sendMailTemplate(subject, context, [self.user.email])
     return self.user
