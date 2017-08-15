@@ -4,6 +4,6 @@ ve
 staticfiles
 .env
 __pycache__
-efigie/config.py
+XYZ
 efigie/migrations/*
 docs/*
