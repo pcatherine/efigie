@@ -56,7 +56,7 @@ def messageWrite(request):
       messages.error(request, 'O arquivo não pode ser importado.')
       return redirect(keyImport)
 
-  return render(request, 'form.html',
+  return render(request, 'message/form.html',
     {'form': form,
      'button': 'Encrypt'})
 

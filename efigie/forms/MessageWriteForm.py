@@ -6,7 +6,7 @@ from efigie.forms import *
 from efigie.models import Message
 
 class MessageWriteForm(ModelForm):
-  file = forms.FileField(
+  file = forms.FileField(label='Image',
     widget=forms.FileInput(attrs={'accept':'image/*'}))
 
   message = forms.CharField(label=Message._meta.verbose_name,
