@@ -2,7 +2,6 @@ appdirs==1.4.3
 packaging==16.8
 pyparsing==2.2.0
 six==1.10.0
-
 dj-database-url==0.4.1
 Django==1.11.2
 gunicorn==19.4.5
@@ -12,6 +11,4 @@ setuptools==34.3.3
 wheel==0.29.0
 requests==2.18.3
 docutils==0.13.1
-
 https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz
-
