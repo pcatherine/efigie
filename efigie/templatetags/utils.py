@@ -34,8 +34,8 @@ def addcssclass(field, css):
   Examples:
     {{ field|addcssclass:'form-control input-lg' }}
   """
-  return field.as_widget(attrs={"class":css, "placeholder": '%s%s' % ('* ' if field.field.required else '', field.label)})
-  # return field.as_widget(attrs={"class":css})
+  # return field.as_widget(attrs={"class":css, "placeholder": '%s%s' % ('* ' if field.field.required else '', field.label)})
+  return field.as_widget(attrs={"class":css})
 
 
 
