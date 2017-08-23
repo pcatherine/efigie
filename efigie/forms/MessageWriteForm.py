@@ -25,7 +25,7 @@ class MessageWriteForm(ModelForm):
     file = self.cleaned_data['file']
     message = self.cleaned_data['message']
 
-    imageEfigie = Effigy.setEffigy(file, '0010000001000000', message, "", 1)
+    imageEfigie = Effigy.setEffigy(file, '00100000001000000', message, "", 1)
 
     b = BytesIO()
     imageEfigie.save(b, format="PNG")

@@ -20,10 +20,6 @@ def toBinary(message):
   return bin(reduce(lambda x, y : (x<<8)+y, (ord(c) for c in message), 1))[3:]
 
 def toString(binary):
-  # print(binary)
-  # print(len(binary))
-  # print(len(binary)/8)
-  # print(chr(int(binary[i*8:i*8+8],2)) for i in range(len(binary)/8))
   return removeNotChar("".join([chr(int(binary[i*8:i*8+8],2)) for i in range(int(len(binary)/8))]))
 
 def removeNotChar(message):
@@ -31,20 +27,13 @@ def removeNotChar(message):
     if ord("".join(list(message)[i-1:i])) > 30 and ord("".join(list(message)[i-1:i])) < 256:
       return "".join(list(message)[:i])
 
-# import efigie.config
-# import efigie.settings
 
-# def sendNotificationDeveloper(eventName, message):
-#   insta = Instapush(user_token=config.INSTAPUSH_USER_TOKEN)
-#   app = App(appid=config.INSTAPUSH_APPID, secret=config.INSTAPUSH_SECRET)
-#   app.notify(event_name=eventName, trackers={'message': message})
+# if __name__ == "__main__":
+  # print('01100101011001100110100101100111011010010110010100100000001000000011001010110011001101001011001110110100101100101')
+  # oi = "00100000001000000"
+  # print('%s%s%s' % (toBinary('efigie'),oi,toBinary('efigie')))
+  # print(identifySizeImagem('00100000001000000', 'PaOLLA'))
 
-# def alert(description, alert):
-#   return {'description': description,
-#     'alert': alert}
-
-# def confirm(confirmTitle, confirmDescription, confirmUrl, confirmButton):
-#   return {'confirmTitle': confirmTitle,
-#     'confirmDescription': confirmDescription,
-#     'confirmUrl': confirmUrl,
-#     'confirmButton': confirmButton}
+  # message = toBinary('##' + str(1) + '##') + toBinary('PAOLLA') + ('00000000' * 8)
+  # print(message)
+  # print(toString(message).decode('utf-8') )
