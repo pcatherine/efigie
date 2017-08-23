@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from PIL import Image
-from efigie.utils.Encryption import RSA
+from efigie.utils import RSA, utils
 import re
 
 IDENTIFICADOR = u"efigie"
@@ -8,14 +8,14 @@ IDENTIFICADOR = u"efigie"
 #AGARD testar
 
 def setEffigy(path, setting, message, key, idMessage):
-  print path
+  print(path)
   try:
     img = Image.open(path)
     if img.mode != 'RGB':
       img = img.convert('RGB')
-    print img
+    print(img)
   except Exception as e:
-    raise Exception(_('Imagem nao pode ser aberta'))
+    raise Exception(('Imagem nao pode ser aberta'))
 
   width, height = img.size
 
@@ -24,10 +24,10 @@ def setEffigy(path, setting, message, key, idMessage):
   if setting[15] == '1':
     message = RSA.signData(key, 'sha1') + (('00000000' * 8))
 
-  message = toBinary('##' + str(idMessage) + '##') + toBinary(message) + ('00000000' * 8)
+  message = utils.toBinary('##' + str(idMessage) + '##') + utils.toBinary(message) + ('00000000' * 8)
 
   if (width * height - 4) < identifySizeImagem(setting, message):
-    raise Exception(_('Imagem pequena demais para o tamanho da mensagem'))
+    raise Exception(('Imagem pequena demais para o tamanho da mensagem'))
 
   authenticate(img, width, height)
   row, col = setHeader(img, setting, width, height)
@@ -41,7 +41,7 @@ def getEffigy(path):
   try:
     img = Image.open(path)
   except Exception as e:
-    raise Exception(_('Imagem nao pode ser aberta'))
+    raise Exception(('Imagem nao pode ser aberta'))
 
   width, height = img.size
 
@@ -50,14 +50,14 @@ def getEffigy(path):
     if header:
       return(getMessage(img, setting, width, height, row, col))
     else:
-      raise Exception(_('Imagem nao autentica'))
+      raise Exception(('Imagem nao autentica'))
   else:
-    raise Exception(_('Imagem nao autentica'))
+    raise Exception(('Imagem nao autentica'))
 
 
 
 def authenticate(img, width, height):
-  validationBin = list(toBinary(IDENTIFICADOR))
+  validationBin = list(utils.toBinary(IDENTIFICADOR))
   setAuthenticate(img, (0,0), validationBin[0:12])
   setAuthenticate(img, (width-1, 0), validationBin[12:24])
   setAuthenticate(img, (0, height-1), validationBin[24:36])
@@ -91,32 +91,32 @@ def isAuthenticate(img, width, height):
   validationBin += getAuthenticate(img, (width-1, 0))
   validationBin += getAuthenticate(img, (0, height-1))
   validationBin += getAuthenticate(img, (width-1, height-1))
-  validationStr = toString("".join(validationBin))
-  # print(validationStr)
+  validationStr = utils.toString("".join(validationBin))
+  print(validationStr)
   return(False, True)[validationStr == IDENTIFICADOR]
 
 
 def getHeader(img, width, height):
   msg = ""
-  for row in xrange(2, height-1):
-    for col in xrange(2, width-1):
+  for row in range(2, height-1):
+    for col in range(2, width-1):
       (r, g, b) = img.getpixel((col, row))
       msg += ('{0:08b}'.format(r))[6:8]
       msg += ('{0:08b}'.format(g))[6:8]
       msg += ('{0:08b}'.format(b))[6:8]
       if len(msg) >= 114:
         try:
-          return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [toString("".join(msg[0:48])) == IDENTIFICADOR and toString("".join(msg[-48:])) == IDENTIFICADOR]
+          return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [utils.toString("".join(msg[0:48])) == IDENTIFICADOR and utils.toString("".join(msg[-48:])) == IDENTIFICADOR]
         except Exception as e:
           return False
 
 
 def setHeader(img, setting, width, height):
-  validationBin = toBinary(IDENTIFICADOR)
+  validationBin = utils.toBinary(IDENTIFICADOR)
   setting = list(validationBin + setting + validationBin)
   index = 0
-  for row in xrange(2, height-1):
-    for col in xrange(2, width-1):
+  for row in range(2, height-1):
+    for col in range(2, width-1):
       (r, g, b) = img.getpixel((col, row))
       r_bits = list('{0:08b}'.format(r))
       g_bits = list('{0:08b}'.format(g))
@@ -158,8 +158,8 @@ def setHeader(img, setting, width, height):
 def getMessage(img, setting, width, height, i, j):
   message = ""
   setting = list(setting)
-  for row in xrange(i, height-1):
-    for col in xrange(j, width-1):
+  for row in range(i, height-1):
+    for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
       if((teste == 0 and setting[12:14] == ['1','0']) or (teste != 0 and setting[12:14] == ['0','1']) or (setting[12:14] == ['1','1'])):
@@ -167,43 +167,44 @@ def getMessage(img, setting, width, height, i, j):
         message += "".join(map(lambda x: ('{0:08b}'.format(g)[x[0]] if x[1] == '1' and setting[1] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
         message += "".join(map(lambda x: ('{0:08b}'.format(b)[x[0]] if x[1] == '1' and setting[2] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
       if len(message)>=8 and "".join(list(message)[-16:]) == ('00000000'*2):
-        message = toString(message[:-16])
+        message = utils.toString(message[:-16])
+        print(message)
         try:
           idMessage = re.match('^[#]{2}(\d+)[#]{2}',message).groups(0)
           return int("".join(idMessage)), message[len(idMessage)+5:]
         except Exception:
-          raise Exception(_('Imagem nao autentica'))
-  raise Exception(_('Imagem nao autentica'))
+          raise Exception(('Imagem nao autentica'))
+  raise Exception(('Imagem nao autentica'))
 
 
 def setMessage(img, message, setting, width, height, i, j):
   index = 0
   setting = list(setting)
-  for row in xrange(i, height-1):
-    for col in xrange(j, width-1):
+  for row in range(i, height-1):
+    for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
       if((teste == 0 and setting[12:14] == ["1","0"]) or (teste != 0 and setting[12:14] == ["0","1"]) or (setting[12:14] == ["1","1"])):
 
         r_bits = list('{0:08b}'.format(r))
-        for i in xrange (0, 8):
+        for i in range (0, 8):
           if setting[0] == '1' and setting[3+i] == '1' and index < len(message):
             r_bits[i] = message[index]
             index+=1
 
         g_bits = list('{0:08b}'.format(g))
 
-        for i in xrange (0, 8):
+        for i in range (0, 8):
           if setting[1] == '1' and setting[3+i]  == '1' and index < len(message):
             g_bits[i] = message[index]
             index+=1
 
         b_bits = list('{0:08b}'.format(b))
-        for i in xrange (0, 8):
+        for i in range (0, 8):
           if setting[2] == '1'and setting[3+i] == '1' and index < len(message):
             b_bits[i] = message[index]
             index+=1
-      img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
+        img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
       if index >= len(message):
         break
     if index >= len(message):
@@ -213,11 +214,11 @@ def setMessage(img, message, setting, width, height, i, j):
 def identifySizeImagem(setting, message):
   j = 0;
   k = 0;
-  for i in xrange (0, 3):
+  for i in range (0, 3):
     if setting[i] == '1':
       j += 1
 
-  for i in xrange(3,11):
+  for i in range(3,11):
     if setting[i] == '1':
       k += 1
 

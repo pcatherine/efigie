@@ -12,3 +12,5 @@ wheel==0.29.0
 requests==2.18.3
 docutils==0.13.1
 https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz
+
+https://pypi.python.org/packages/b4/6d/f313f1bff98f6d1e353918e0a4e8e17a22af86f0ad10c231228342edf74d/Pillow-2.2.1.zip#md5=d1d20d3db5d1ab312da0951ff061e6bf

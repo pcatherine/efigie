@@ -12,8 +12,9 @@ from django.utils.safestring import mark_safe
 
 # from efigie.controller import Effigy, EffigyParameters, EffigyCommunication
 from efigie.models import Message, Key
-import efigie.config
-import json
+# import efigie.config
+# import json
+from efigie.forms import *
 from efigie.views import *
 
 @login_required

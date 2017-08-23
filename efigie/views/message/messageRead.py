@@ -1,25 +1,39 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
 from django.template import loader, Context, Template, RequestContext
 from django.utils.safestring import mark_safe
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 from efigie.utils import *
 
 from efigie.models import Message, Key
-# from efigie.controller import Effigy, EffigyParameters, EffigyCommunication
-import efigie.config
-import json
+# import efigie.config
+# import json
+from efigie.forms import *
 from efigie.views import *
 
 @login_required
 @breadcrumbs(['index', 'messageRead'])
+@csrf_protect
 def messageRead(request):
+  form = MessageReadForm(request.POST or None, request.FILES or None)
+  if form.is_valid():
+    idMessage, m = form.save()
+
+    messages.success(request, "%s %s" % (idMessage, m))
+
+  return render(request, 'message/form.html',
+    {'form': form,
+     'button': 'Decrypt'})
+
+
 
   # if request.method == 'POST':
   #   image = request.FILES.get('image', '')
@@ -64,4 +78,3 @@ def messageRead(request):
 
   #   return HttpResponse(message)
   # return render(request, EffigyParameters.MESSAGE_READ)
-  return render(request, 'index.html')
