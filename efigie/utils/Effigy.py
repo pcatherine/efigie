@@ -14,12 +14,10 @@ def setEffigy(path, setting, msg, key, idMessage):
   """
     OKAY
   """
-  print(path)
   try:
     img = Image.open(path)
     if img.mode != 'RGB':
       img = img.convert('RGB')
-    print(img)
   except Exception as e:
     raise Exception(('setEffigy - Image cannot be open'))
 
@@ -157,13 +155,12 @@ def getMessage(img, setting, width, height, i, j):
     for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
-      if((teste == 0 and setting[12:14] == '10') or (teste != 0 and setting[12:14] == '01') or (setting[12:14] == '11')):
+      if((teste == 0 and setting[11:13] == '10') or (teste != 0 and setting[11:13] == '01') or (setting[11:13] == '11')):
         message += "".join(map(lambda x: ('{0:08b}'.format(r)[x[0]] if x[1] == '1' and setting[0] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
         message += "".join(map(lambda x: ('{0:08b}'.format(g)[x[0]] if x[1] == '1' and setting[1] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
         message += "".join(map(lambda x: ('{0:08b}'.format(b)[x[0]] if x[1] == '1' and setting[2] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
       if len(message)>=16 and "".join(list(message)[-16:]) == ('00000000'*2):
         message = utils.toString("".join(list(message)[:-16]))
-        print(message)
         try:
           idMessage = re.match('^[#]{2}(\d+)[#]{2}', message).groups(0)[0]
           return idMessage, message[len("".join(idMessage))+4:]
@@ -181,7 +178,7 @@ def setMessage(img, message, setting, width, height, i, j):
     for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
-      if((teste == 0 and setting[12:14] == "10") or (teste != 0 and setting[12:14] == "01") or (setting[12:14] == "11")):
+      if((teste == 0 and setting[11:13] == "10") or (teste != 0 and setting[11:13] == "01") or (setting[11:13] == "11")):
 
         r_bits = list('{0:08b}'.format(r))
         for i in range (0, 8):
@@ -200,7 +197,6 @@ def setMessage(img, message, setting, width, height, i, j):
           if setting[2] == '1'and setting[3+i] == '1' and index < len(message):
             b_bits[i] = message[index]
             index+=1
-        print(int("".join(r_bits),  2))
         img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
       if index >= len(message):
         break
