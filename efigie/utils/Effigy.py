@@ -166,7 +166,7 @@ def getMessage(img, setting, width, height, i, j):
         print(message)
         try:
           idMessage = re.match('^[#]{2}(\d+)[#]{2}', message).groups(0)[0]
-          return idMessage, message[len("".join(idMessage))+5:]
+          return idMessage, message[len("".join(idMessage))+4:]
         except Exception:
           raise Exception(('getMessage 1 - Imagem nao autentica'))
   raise Exception(('getMessage 2 - Imagem nao autentica'))
