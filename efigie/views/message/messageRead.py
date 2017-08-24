@@ -10,12 +10,6 @@ from django.template import loader, Context, Template, RequestContext
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-
-from efigie.utils import *
-
-from efigie.models import Message, Key
-# import efigie.config
-# import json
 from efigie.forms import *
 from efigie.views import *
 
@@ -27,7 +21,7 @@ def messageRead(request):
   if form.is_valid():
     idMessage, m = form.save()
 
-    messages.success(request, "%s %s" % (idMessage, m))
+    messages.success(request, "%s" % (m))
 
   return render(request, 'message/form.html',
     {'form': form,

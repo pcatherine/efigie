@@ -16,8 +16,6 @@ class MessageReadForm(forms.Form):
 
     return Effigy.getEffigy(file)
 
-
-
   class Meta:
     model = Message
     fields = ('count', )

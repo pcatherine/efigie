@@ -1,13 +1,19 @@
+#!/usr/bin/python
 #-*- coding: utf-8 -*-
-from PIL import Image
-from efigie.utils import RSA, utils
+
 import re
+from PIL import Image
+
+from efigie.utils import RSA, utils
 
 IDENTIFICADOR = u"efigie"
 
 #AGARD testar
 
 def setEffigy(path, setting, msg, key, idMessage):
+  """
+    OKAY
+  """
   print(path)
   try:
     img = Image.open(path)
@@ -34,11 +40,9 @@ def setEffigy(path, setting, msg, key, idMessage):
 
   authenticate(img, width, height)
   row, col = setHeader(img, setting, width, height)
-  # print(row, col)
   setMessage(img, message, setting, width, height, row, col)
-  # print('AQUI FOI')
   return img
-  # # img.save("static/path.png")
+  # img.save("static/path.png")
 
 
 
@@ -51,10 +55,7 @@ def getEffigy(path):
   width, height = img.size
 
   if isAuthenticate(img, width, height):
-    # print('HEADER')
     header, setting, row, col = getHeader(img, width, height)
-    # print('HEADER')
-    # print(header, setting, row, col)
     if header:
       return(getMessage(img, setting, width, height, row, col))
     else:
@@ -73,7 +74,6 @@ def authenticate(img, width, height):
   setAuthenticate(img, (width-1, 0), validationBin[12:24])
   setAuthenticate(img, (0, height-1), validationBin[24:36])
   setAuthenticate(img, (width-1, height-1), validationBin[36:48])
-  # print('OKAY')
 
 
 def getAuthenticate(img, coo):
@@ -104,11 +104,13 @@ def isAuthenticate(img, width, height):
   validationBin += getAuthenticate(img, (0, height-1))
   validationBin += getAuthenticate(img, (width-1, height-1))
   validationStr = utils.toString("".join(validationBin))
-  # print(validationStr)
   return(False, True)[validationStr == IDENTIFICADOR]
 
 
 def getHeader(img, width, height):
+  """
+    OKAY
+  """
   msg = ""
   for row in range(2, height-1):
     for col in range(2, width-1):
@@ -118,7 +120,7 @@ def getHeader(img, width, height):
       msg += ('{0:08b}'.format(b))[6:8]
       if len(msg) >= 114:
         try:
-          return((True, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [utils.toString("".join(msg[0:48])) == IDENTIFICADOR and utils.toString("".join(msg[-48:])) == IDENTIFICADOR]
+          return((False, "", row+1, col+1), (True, "".join(msg[48:-48]), row+1, col+1)) [utils.toString("".join(list(msg)[0:48])) == IDENTIFICADOR and utils.toString("".join(list(msg)[0:48])) == IDENTIFICADOR]
         except Exception as e:
           return False
 
@@ -129,7 +131,6 @@ def setHeader(img, setting, width, height):
   """
   validationBin = utils.toBinary(IDENTIFICADOR)
   settingL = list(validationBin + setting + validationBin)
-  # print(''.join(settingL))
   index = 0
   for row in range(2, height-1):
     for col in range(2, width-1):
@@ -149,52 +150,23 @@ def setHeader(img, setting, width, height):
         return row+1, col+1
 
 
-  '''
-  efigie
-  pixel X+2
-  R 00000011 - 0 vermelho e 1 verde
-  G 00000011 - 2 azul e 3 0
-  B 00000011 - 4 1 e 5 2
-  pixel X+3
-  R 00000011 - 6 3 e 7 4
-  G 00000011 - 8 5 e 9 6
-  B 00000010 - 10 7 e 11 NADA
-  pixel X+4
-  R 00000011 - 12 13 par ou impar ou ambos (10 01 11)
-  G 00000011 - 14 chave publica 15 chave privada
-  B 00000000 - 16 17 NADA
-  efigie
-  chave especial: true; false
-  tamanho chave: >= 1024
-  tamanho da imagem: calc
-  quantidade de cores: 0
-  '''
-
-
 def getMessage(img, setting, width, height, i, j):
   message = ""
-  # print(message)
-  # AGARD
-  # setting = list(setting)
-  setting = list('0010000001000000')
-  # print(setting)
+
   for row in range(i, height-1):
     for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
-      if((teste == 0 and setting[12:14] == ['1','0']) or (teste != 0 and setting[12:14] == ['0','1']) or (setting[12:14] == ['1','1'])):
+      if((teste == 0 and setting[12:14] == '10') or (teste != 0 and setting[12:14] == '01') or (setting[12:14] == '11')):
         message += "".join(map(lambda x: ('{0:08b}'.format(r)[x[0]] if x[1] == '1' and setting[0] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
         message += "".join(map(lambda x: ('{0:08b}'.format(g)[x[0]] if x[1] == '1' and setting[1] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
         message += "".join(map(lambda x: ('{0:08b}'.format(b)[x[0]] if x[1] == '1' and setting[2] == '1' else ""), [(idx,val) for (idx,val) in enumerate(setting[3:11])]))
-      if len(message)>=8 and "".join(list(message)[-16:]) == ('00000000'*2):
-        print(message)
-        message = utils.toString(message[:-16])
-        print('AQUI')
+      if len(message)>=16 and "".join(list(message)[-16:]) == ('00000000'*2):
+        message = utils.toString("".join(list(message)[:-16]))
         print(message)
         try:
-          idMessage = re.match('^[#]{2}(\d+)[#]{2}', message).groups(0)
-          print(idMessage)
-          return int("".join(idMessage)), message[len(idMessage)+5:]
+          idMessage = re.match('^[#]{2}(\d+)[#]{2}', message).groups(0)[0]
+          return idMessage, message[len("".join(idMessage))+5:]
         except Exception:
           raise Exception(('getMessage 1 - Imagem nao autentica'))
   raise Exception(('getMessage 2 - Imagem nao autentica'))
@@ -205,12 +177,11 @@ def setMessage(img, message, setting, width, height, i, j):
     OKAY
   """
   index = 0
-  # settingL = list(setting)
   for row in range(i, height-1):
     for col in range(j, width-1):
       (r, g, b) = img.getpixel((col, row))
       teste = (col * row) % 2
-      if((teste == 0 and setting[12:14] == ["1","0"]) or (teste != 0 and setting[12:14] == ["0","1"]) or (setting[12:14] == ["1","1"])):
+      if((teste == 0 and setting[12:14] == "10") or (teste != 0 and setting[12:14] == "01") or (setting[12:14] == "11")):
 
         r_bits = list('{0:08b}'.format(r))
         for i in range (0, 8):
@@ -219,7 +190,6 @@ def setMessage(img, message, setting, width, height, i, j):
             index+=1
 
         g_bits = list('{0:08b}'.format(g))
-
         for i in range (0, 8):
           if setting[1] == '1' and setting[3+i]  == '1' and index < len(message):
             g_bits[i] = message[index]
@@ -230,6 +200,7 @@ def setMessage(img, message, setting, width, height, i, j):
           if setting[2] == '1'and setting[3+i] == '1' and index < len(message):
             b_bits[i] = message[index]
             index+=1
+        print(int("".join(r_bits),  2))
         img.putpixel((col, row), (int("".join(r_bits),  2), int("".join(g_bits),  2) , int("".join(b_bits),  2)))
       if index >= len(message):
         break
@@ -240,8 +211,31 @@ def setMessage(img, message, setting, width, height, i, j):
 def identifySizeImagem(setting, message):
   """
     OKAY
-    Min settings possible: "00100000001000000"
+    Min settings possible:
+      "00100000001010000"
+      "RGB12345678******"
+
+    efigie
+    pixel X+2
+    R 00000011 - 0 vermelho e 1 verde
+    G 00000011 - 2 azul e 3 0
+    B 00000011 - 4 1 e 5 2
+    pixel X+3
+    R 00000011 - 6 3 e 7 4
+    G 00000011 - 8 5 e 9 6
+    B 00000010 - 10 7 e 11 NADA
+    pixel X+4
+    R 00000011 - 12 13 par ou impar ou ambos (10 01 11)
+    G 00000011 - 14 chave publica 15 chave privada
+    B 00000000 - 16 17 NADA
+    efigie
+    chave especial: true; false
+    tamanho chave: >= 1024
+    tamanho da imagem: calc
+    quantidade de cores: 0
+
   """
+
   j = 0;
   k = 0;
   for i in range (0, 3):
