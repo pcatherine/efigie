@@ -16,5 +16,13 @@
       "groups": [],
       "user_permissions": []
     }
+  },
+  {
+    "model": "efigie.usereffigy",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "settings": "00100000001010000"
+    }
   }
 ]

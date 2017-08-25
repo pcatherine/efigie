@@ -14,9 +14,8 @@
         form-group has-feedback
       {% endif %}
     ">
-    {% comment %}
-      {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
-    {% endcomment %}
+
+    {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
 
     {{ field|addcssclass:'form-control input-lg' }}
 

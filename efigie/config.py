@@ -1,5 +1,7 @@
 # Save as config.py
 
+SECRET_KEY = "lsfty5=#t0e&s^b$q%m0t%lllb+8v-no0s00+a7(%#ur!h+6)d"
+
 DATABASES_NAME = 'efigie'
 DATABASES_USER =  'paolla'
 DATABASES_PASSWORD = 'paolla'

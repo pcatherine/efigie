@@ -40,6 +40,9 @@ class UserNewForm(UserCreationForm):
       reset = UserConfirmation(token=token, user=user, category=Category.VERIFICATION)
       reset.save()
 
+      uf = UserEffigy(user = self.user, settings='00100000001010000')
+      uf.save()
+
       subject = '[Efigie] E-mail Confirmation'
 
       message = '''Olá %s, <br/>

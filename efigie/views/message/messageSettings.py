@@ -2,23 +2,18 @@
 #-*- coding: utf-8 -*-
 
 from django.contrib.auth.decorators import login_required
-from django.db import models
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, render_to_response
-from django.template import loader, Context, Template, RequestContext
-from django.utils.safestring import mark_safe
+from django.shortcuts import render, redirect
 
-# from django.core.servers.basehttp import FileWrapper
-
-# from efigie.controller import Effigy, EffigyParameters, EffigyCommunication
-from efigie.models import Message, Key
-import efigie.config
-import json
+from efigie.forms import *
 from efigie.views import *
 
 @login_required
 def messageSettings(request):
-  # CATHERINE salvar no banco
+  form = MessageSettingsForm(request.POST or None, request.FILES or None, user=request.user)
+  if form.is_valid():
+    form.save()
 
-  # return render(request, EffigyParameters.MESSAGE_SETTINGS)
-  return render(request, 'index.html')
+
+  return render(request, 'message/form.html',
+    {'form': form,
+     'button': 'Save'})

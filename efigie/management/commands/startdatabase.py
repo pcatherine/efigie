@@ -27,6 +27,7 @@ class Command(BaseCommand):
         host=settings.DATABASES['default']['HOST'])
     except Exception as e:
       print("FATAL:  password authentication failed for user '%s'" % (settings.DATABASES['default']['USER']))
+      print(e)
 
 
     if con != None:

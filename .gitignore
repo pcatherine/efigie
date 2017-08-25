@@ -1,9 +1,8 @@
 ve
-
+*.zip
 *.pyc
 staticfiles
 .env
 __pycache__
 efigie/config.py
 efigie/migrations/*
-docs/*
