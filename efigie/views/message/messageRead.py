@@ -19,7 +19,9 @@ from efigie.views import *
 def messageRead(request):
   form = MessageReadForm(request.POST or None, request.FILES or None)
   if form.is_valid():
-    idMessage, m = form.save()
+    idMessage, m, s = form.save()
+    # AGARD idMessage verificar se a mensagem pode ser lida
+    # AGARD s verificar se a mensagem precisa ser descriptografada
 
     messages.success(request, "%s" % (m))
 

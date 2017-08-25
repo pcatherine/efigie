@@ -8,7 +8,6 @@ from efigie.utils import RSA
 from efigie.models import Key
 
 SIZE_CHOICES = (
-  ('', '* %s' % (Key._meta.get_field('size').verbose_name)),
   ('1024', '1024'),
   ('1280', '1280'),
   ('1536', '1536'),

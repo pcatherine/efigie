@@ -8,9 +8,9 @@ from efigie.utils import RSA, utils
 
 IDENTIFICADOR = u"efigie"
 
-#AGARD testar
+# CATHERINE aparentemente okay
 
-def setEffigy(path, setting, msg, key, idMessage):
+def setEffigy(path, setting, msg, idMessage):
   """
     OKAY
   """
@@ -22,14 +22,6 @@ def setEffigy(path, setting, msg, key, idMessage):
     raise Exception(('setEffigy - Image cannot be open'))
 
   width, height = img.size
-
-  message = utils.toBinary('##' + str(idMessage) + '##') + utils.toBinary(msg) + ('00000000' * 8)
-
-  # RSA
-  # if setting[14] == '1':
-  #   msg = RSA.encrypt(key, msg)
-  # if setting[15] == '1':
-  #   msg = RSA.signData(key, 'sha1') + (('00000000' * 8))
 
   message = utils.toBinary('##' + str(idMessage) + '##') + utils.toBinary(msg) + ('00000000' * 8)
 
@@ -55,7 +47,7 @@ def getEffigy(path):
   if isAuthenticate(img, width, height):
     header, setting, row, col = getHeader(img, width, height)
     if header:
-      return(getMessage(img, setting, width, height, row, col))
+      return getMessage(img, setting, width, height, row, col), setting
     else:
       raise Exception(('getEffigy - Imagem nao autentica'))
   else:
@@ -149,6 +141,9 @@ def setHeader(img, setting, width, height):
 
 
 def getMessage(img, setting, width, height, i, j):
+  """
+    OKAY
+  """
   message = ""
 
   for row in range(i, height-1):

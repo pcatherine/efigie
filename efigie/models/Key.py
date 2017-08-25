@@ -33,7 +33,8 @@ class Key(models.Model):
     blank=True)
 
   def __str__(self):
-    return '{0} created at {1} by {2}'.format(self.name, self.created_at, self.user)
+    # return '{0} created at {1} by {2}'.format(self.name, self.created_at, self.user)
+    return self.name
 
   class Meta:
     verbose_name = _('Key')
