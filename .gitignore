@@ -5,4 +5,4 @@ staticfiles
 .env
 __pycache__
 efigie/migrations/*
-docs/*
+docs
