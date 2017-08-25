@@ -22,7 +22,9 @@ def messageWrite(request):
   # AGARD ADD GOOGLE
   form = MessageWriteForm(request.POST or None, request.FILES or None)
   if form.is_valid():
-    image = form.save()
+
+    uf = UserEffigy.objects.get(user = request.user)
+    image = form.save(uf.settings)
 
     return render(request, 'message/write_ok.html',
       {'image': image })

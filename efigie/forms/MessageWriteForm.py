@@ -19,13 +19,12 @@ class MessageWriteForm(ModelForm):
   message = forms.CharField(label=Message._meta.verbose_name,
     widget=forms.Textarea(attrs={'rows': 2}))
 
-
-  def save(self, commit=True):
+  def save(self, settings, commit=True):
     count = self.cleaned_data['count']
     file = self.cleaned_data['file']
     message = self.cleaned_data['message']
 
-    imageEfigie = Effigy.setEffigy(file, '00100000001110000', message, "", 1)
+    imageEfigie = Effigy.setEffigy(file, settings, message, "", 1)
 
     b = BytesIO()
     imageEfigie.save(b, format="PNG")

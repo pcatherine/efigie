@@ -12,8 +12,8 @@ class UserEffigy(models.Model):
   """
 
   user = models.ForeignKey(settings.AUTH_USER_MODEL,
-    on_delete=models.CASCADE,
-    verbose_name='User')
+    on_delete = models.CASCADE,
+    verbose_name = _('User'))
 
   settings = models.CharField(_('Settings'),
     max_length = 255)

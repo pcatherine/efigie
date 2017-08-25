@@ -50,11 +50,25 @@ class MessageSettingsForm(forms.Form):
     self.user = kwargs.pop('user')
     super(MessageSettingsForm, self).__init__(*args, **kwargs)
 
-    uf = UserEffigy(user = self.user)
-    print('PAOLLA')
-    print(uf.settings)
+    uf = UserEffigy.objects.get(user = self.user)
 
-    self.fields['colors'].initial = [0,1]
+    colors = []
+    for i in range (0,3):
+      if uf.settings[i] == '1':
+        colors += [i] 
+    self.fields['colors'].initial = colors
+
+    bits = []
+    for i in range (3,11):
+      if uf.settings[i] == '1':
+        bits += [i] 
+    self.fields['bits'].initial = bits
+
+    pixel = []
+    for i in range (11,13):
+      if uf.settings[i] == '1':
+        pixel += [i] 
+    self.fields['pixel'].initial = pixel
 
 
   def save(self, commit=True):
@@ -74,3 +88,7 @@ class MessageSettingsForm(forms.Form):
 
     for x in pixel:
       settings[int(x)] = '1'
+
+    uf = UserEffigy.objects.get(user = self.user)
+    uf.settings = ''.join(settings)
+    uf.save()

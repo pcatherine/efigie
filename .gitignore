@@ -4,5 +4,8 @@ ve
 staticfiles
 .env
 __pycache__
+<<<<<<< HEAD
 XYZ
+=======
+>>>>>>> 5906b72604e711a43d407b8c66b3c4a5958fc033
 efigie/migrations/*
