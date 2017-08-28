@@ -101,7 +101,7 @@ def encrypt(public_key_loc, message):
   rsakey = RSA.importKey(public_key_loc)
   rsakey = PKCS1_OAEP.new(rsakey)
   encrypted = rsakey.encrypt(bytes(message, 'utf-8'))
-  print(encrypted)
+  # print(encrypted)
   return b64encode(encrypted)
 
 

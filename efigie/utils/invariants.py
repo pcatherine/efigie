@@ -15,3 +15,5 @@ button_new = _("Create %s")
 button_account_confirm = _('Confirm your account')
 button_set_password = _('Set Password')
 button_insert = _("Insert %s")
+
+mail_success = _("%s was successfully sent.")

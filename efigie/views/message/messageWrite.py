@@ -20,7 +20,7 @@ from efigie.views.message import *
 @csrf_protect
 def messageWrite(request):
   # AGARD ADD GOOGLE
-  form = MessageWriteForm(request.POST or None, request.FILES or None)
+  form = MessageWriteForm(request.POST or None, request.FILES or None, user=request.user)
   if form.is_valid():
 
     uf = UserEffigy.objects.get(user = request.user)

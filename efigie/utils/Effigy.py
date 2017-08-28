@@ -43,11 +43,12 @@ def getEffigy(path):
     raise Exception(('Imagem nao pode ser aberta'))
 
   width, height = img.size
-
   if isAuthenticate(img, width, height):
+
     header, setting, row, col = getHeader(img, width, height)
     if header:
-      return getMessage(img, setting, width, height, row, col), setting
+      idMessage, m = getMessage(img, setting, width, height, row, col)
+      return idMessage, m, setting
     else:
       raise Exception(('getEffigy - Imagem nao autentica'))
   else:
@@ -94,7 +95,7 @@ def isAuthenticate(img, width, height):
   validationBin += getAuthenticate(img, (0, height-1))
   validationBin += getAuthenticate(img, (width-1, height-1))
   validationStr = utils.toString("".join(validationBin))
-  return(False, True)[validationStr == IDENTIFICADOR]
+  return True if validationStr == IDENTIFICADOR else False
 
 
 def getHeader(img, width, height):

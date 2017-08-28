@@ -11,13 +11,14 @@ from efigie.models import Message, Key
 from efigie.utils import Effigy, RSA
 
 class MessageWriteForm(ModelForm):
-  count = forms.IntegerField(label='How many times the message can be read')
+  count = forms.IntegerField(label='Times the message can be read',
+    required=False)
 
   file = forms.FileField(label='Image',
     widget=forms.FileInput(attrs={'accept':'image/*'}))
 
   # AGARD FILTRAR POR AMIGO
-  key = forms.ModelChoiceField(label='Encrypt the message with a RSA key',
+  key = forms.ModelChoiceField(label='RSA key to encrypt the message',
     queryset=Key.objects.all(),
     required=False)
 
@@ -28,8 +29,7 @@ class MessageWriteForm(ModelForm):
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
     super(MessageWriteForm, self).__init__(*args, **kwargs)
-
-    # AGARD receber o usuário e set key aqui
+    # AGARD receber o usuário e set key by friend
 
 
   def save(self, settings, commit=True):
@@ -38,13 +38,16 @@ class MessageWriteForm(ModelForm):
     message = self.cleaned_data['message']
     key = self.cleaned_data['key']
 
-    # AGARD salvar no banco a mensagem e pegar o id, trocar o ultimo valor
+    msg = Message(count=(-1 if count == None else count))
+    msg.save()
 
-    if key == None:
-      imageEfigie = Effigy.setEffigy(file, settings, message, 1)
-    else:
-      # AGARD AQUI MUDAR AS COISAS PARA CRIPTOGRAFAR A MENSAGEM
-      pass
+    if key != None:
+      s = list(settings)
+      s[13] = '1'
+      settings = ''.join(s)
+      message = RSA.encrypt(key.publicKey, message).decode('utf-8')
+
+    imageEfigie = Effigy.setEffigy(file, settings, message, msg.id)
 
     b = BytesIO()
     imageEfigie.save(b, format="PNG")
