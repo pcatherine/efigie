@@ -8,46 +8,69 @@
 
 <aside class="main-sidebar">
   <section class="sidebar">
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu" >
       {% with request.resolver_match.url_name as url_name %}
-        <li class="treeview {% if url_name == 'messageWrite' or url_name == 'messageRead' %} active {% endif %}">
-          <a href="">
-            <i class="fa fa-comments-o text-yellow"></i> <span>{% trans 'Message' %}</span>
-            <i class="fa fa-angle-left pull-right text-yellow"></i>
-          </a>
 
-          <ul style="{% if url_name == 'messageWrite' or url_name == 'messageRead' %} display: block; {% endif %}" class="treeview-menu menu-open">
-            {{ 'messageWrite'|menuItem:url_name }}
-            {{ 'messageRead'|menuItem:url_name }}
-          </ul>
-        </li>
+        {% with 'friendSearch friendSearchResults friendList friendShow friendBlockedList' as urls %}
+          <li class="treeview {% if url_name in urls %} active {% endif %}">
+            <a href="">
+              <i class="fa fa-users text-yellow"></i> <span>{% trans 'Friend' %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
 
-        <li class="treeview {% if url_name == 'keyNew' or url_name == 'keyEdit' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} active {% endif %}">
-          <a href="">
-            <i class="fa fa-key text-yellow"></i> <span>{% trans 'RSA Keys' %}</span>
-            <i class="fa fa-angle-left pull-right text-yellow"></i>
-          </a>
+            <ul style="{% if url_name in urls %} display: block; {% endif %}" class="treeview-menu menu-open">
+              {{ 'friendSearch'|menuItem:url_name }}
+              {{ 'friendList'|menuItem:url_name }}
+              {{ 'friendBlockedList'|menuItem:url_name }}
+            </ul>
+          </li>
+        {% endwith %}
 
-          <ul style="{% if url_name == 'keyNew' or url_name == 'keyEdit' or url_name == 'keyList' or url_name == 'keyImport' or url_name == 'keyShow' %} display: block; {% endif %}" class="treeview-menu menu-open">
-            {{ 'keyList'|menuItem:url_name }}
-            {{ 'keyNew'|menuItem:url_name }}
-            {{ 'keyImport'|menuItem:url_name }}
-          </ul>
-        </li>
+        {% with 'messageWrite messageRead' as urls %}
+          <li class="treeview {% if url_name in urls %} active {% endif %}">
+            <a href="">
+              <i class="fa fa-comments-o text-yellow"></i> <span>{% trans 'Message' %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
 
-        <li class="treeview {% if url_name == 'userSettings' or url_name == 'userPasswordEdit' %} active {% endif %}">
-          <a href="">
-            <i class="fa fa-cogs text-yellow"></i> <span>{% trans 'Settings' %}</span>
-            <i class="fa fa-angle-left pull-right text-yellow"></i>
-          </a>
+            <ul style="{% if url_name in urls %} display: block; {% endif %}" class="treeview-menu menu-open">
+              {{ 'messageWrite'|menuItem:url_name }}
+              {{ 'messageRead'|menuItem:url_name }}
+            </ul>
+          </li>
+        {% endwith %}
 
-          <ul style="{% if url_name == 'userSettings' or url_name == 'userPasswordEdit' %} display: block; {% endif %}" class="treeview-menu menu-open">
-            {{ 'messageSettings'|menuItem:url_name }}
-            {{ 'userSettings'|menuItem:url_name }}
-            {{ 'systemSettings'|menuItem:url_name }}
+        {% with 'keyNew keyEdit keyList keyImport keyShow' as urls %}
+          <li class="treeview {% if url_name in urls %} active {% endif %}">
+            <a href="">
+              <i class="fa fa-key text-yellow"></i> <span>{% trans 'RSA Keys' %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
 
-          </ul>
-        </li>
+            <ul style="{% if url_name in urls %} display: block; {% endif %}" class="treeview-menu menu-open">
+              {{ 'keyList'|menuItem:url_name }}
+              {{ 'keyNew'|menuItem:url_name }}
+              {{ 'keyImport'|menuItem:url_name }}
+            </ul>
+          </li>
+        {% endwith %}
+
+        {% with 'userSettings userPasswordEdit messageSettings systemSettings' as urls %}
+          <li class="treeview {% if url_name in urls %} active {% endif %}">
+            <a href="">
+              <i class="fa fa-cogs text-yellow"></i> <span>{% trans 'Settings' %}</span>
+              <i class="fa fa-angle-left pull-right text-yellow"></i>
+            </a>
+
+            <ul style="{% if url_name in urls %} display: block; {% endif %}" class="treeview-menu menu-open">
+              {{ 'messageSettings'|menuItem:url_name }}
+              {{ 'userSettings'|menuItem:url_name }}
+              {{ 'systemSettings'|menuItem:url_name }}
+
+            </ul>
+          </li>
+        {% endwith %}
+
         {{ 'about'|menuItem:url_name }}
         {% if request.user.is_superuser %}
           <li>

@@ -5,21 +5,23 @@ from base64 import b64encode
 from io import BytesIO
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from efigie.forms import *
 from efigie.models import Message, Key
 from efigie.utils import Effigy, RSA
 
 class MessageWriteForm(ModelForm):
-  count = forms.IntegerField(label='Times the message can be read',
+
+  count = forms.IntegerField(label=_('Times the message can be read'),
     required=False)
 
-  file = forms.FileField(label='Image',
-    widget=forms.FileInput(attrs={'accept':'image/*'}))
+  file = forms.FileField(label=_('Image'),
+    widget=forms.FileInput(attrs={'accept':'image/*'}),
+    required=False)
 
-  # AGARD FILTRAR POR AMIGO
-  key = forms.ModelChoiceField(label='RSA key to encrypt the message',
-    queryset=Key.objects.all(),
+  key = forms.ModelChoiceField(label=_('RSA key to encrypt the message'),
+    queryset=None,
     required=False)
 
   message = forms.CharField(label=Message._meta.verbose_name,
@@ -29,12 +31,12 @@ class MessageWriteForm(ModelForm):
   def __init__(self, *args, **kwargs):
     self.user = kwargs.pop('user')
     super(MessageWriteForm, self).__init__(*args, **kwargs)
-    # AGARD receber o usuário e set key by friend
+    self.fields['key'].queryset = Key.objects.filter(friends=self.user)
 
 
-  def save(self, settings, commit=True):
+  def save(self, settings, commit=True, f=None):
     count = self.cleaned_data['count']
-    file = self.cleaned_data['file']
+    file = f if f != None else self.cleaned_data['file']
     message = self.cleaned_data['message']
     key = self.cleaned_data['key']
 
@@ -49,6 +51,8 @@ class MessageWriteForm(ModelForm):
 
     imageEfigie = Effigy.setEffigy(file, settings, message, msg.id)
 
+
+
     b = BytesIO()
     imageEfigie.save(b, format="PNG")
     img_str = b64encode(b.getvalue())
@@ -57,4 +61,4 @@ class MessageWriteForm(ModelForm):
 
   class Meta:
     model = Message
-    fields = ('count', )
+    fields = '__all__'

@@ -1,0 +1,74 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}">
+{% endblock %}
+
+{% block header %}{{ title|safe }}{% endblock %}
+
+{% block content %}
+
+  {% with 'Friend' as model %}
+    {% include '_modal.html' with modal=model type='delete' %}
+
+     <div class="box box-warning">
+      <div class="box-body">
+        <table id="list{{ model }}" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>{% trans 'Full Name' %}</th>
+              <th>Username</th>
+              <th>{% trans 'Email Address' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for friend in friends %}
+              <tr>
+                <td>
+                  <a href="{% url 'friendShow' friend.id %}">
+                    {{ friend.get_full_name }}
+                  </a>
+                </td>
+                <td>
+                  {{ friend.username }}
+                </td>
+                <td>
+                  {{ friend.email }}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endwith %}
+
+{% endblock content %}
+
+
+{% block script %}
+  <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+  <script>
+    var id_list = 'listFriend';
+
+    $('#deleteModalFriend').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var name = button.data('name'); // Extract info from data-* attributes
+      var model = button.data('model');
+      var modal = $(this)
+      modal.find('h4 span').text("{% trans 'Unfriend' %}")
+      modal.find('div .modal-body').html("{% trans 'Unfriending' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}");
+      modal.find('.modal-footer a').text("{% trans 'Unfriend' %}")
+
+      modal.find('.modal-body span').text( name );
+      modal.find('.modal-footer a').attr('href', model);
+
+    });
+  </script>
+  <script src="{% static 'efigie/dataTables.js' %}"></script>
+{% endblock %}

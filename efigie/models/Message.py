@@ -13,9 +13,8 @@ class Message(models.Model):
   count = models.IntegerField(_('Count'))
 
   def __str__(self):
-    return '{0} created at {1} by {2}'.format(self.name, self.created_at, self.user)
+    return '%s' % (self.count)
 
   class Meta:
     verbose_name = _('Message')
     verbose_name_plural = _('Messages')
-    # ordering = ['-user']

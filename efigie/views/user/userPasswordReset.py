@@ -3,6 +3,7 @@
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 
 from efigie import *
@@ -18,9 +19,10 @@ def userPasswordReset(request):
 
   if form.is_valid():
     form.save(request.build_absolute_uri(None))
-    messages.success(request, invariants.mail_success % ("Password Reset"))
+    messages.success(request, invariants.mail_success % {
+      'field_email': capfirst(User._meta.get_field('email').verbose_name)})
     return redirect(userLogin)
 
   return render(request, 'template_login.html',
     {'form': form,
-     'button': 'Restar Senha'})
+     'button': _('Send me the instructions') })

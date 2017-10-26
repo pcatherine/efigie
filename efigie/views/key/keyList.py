@@ -33,7 +33,10 @@ def keyList(request):
       List of :model:`efigie.Key`.
   """
 
-  keys = Key.objects.filter(user = request.user).order_by('name')
+  keys_own = Key.objects.filter(user = request.user).order_by('name')
+  keys_others = Key.objects.filter(friends = request.user).order_by('name')
+
+  keys = list(keys_own) + list(keys_others)
 
   return render(request, 'key/list.html',
     {'tableHead': fields_for_model(Key, fields=('name', 'size')),

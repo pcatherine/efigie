@@ -1,0 +1,34 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block header %}: <b>{{ key.name }}</b>{% endblock %}
+
+{% block content %}
+
+  {% with 'Key' as model %}
+    {% include '_modal.html' with modal=model type='delete' %}
+    <div class="box box-warning">
+      <div class="box-body">
+        <dl class="dl-horizontal">
+          <h4><dt>{% trans 'Name' %}</dt></h4>
+          <h4><dd>{{ key.name }}</dd></h4>
+          <h4><dt>{% trans 'Size' %}</dt></h4>
+          <h4><dd>{{ key.size }}</dd></h4>
+          <h4><dt>{% trans 'Owner' %}</dt></h4>
+          <h4><dd>{{ key.user.get_full_name }}</dd></h4>
+        </dl>
+      </div>
+    </div>
+  {% endwith %}
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    var id_modal = 'deleteModalKey';
+  </script>
+  <script src="{% static 'efigie/dataTables.js' %}"></script>
+{% endblock %}

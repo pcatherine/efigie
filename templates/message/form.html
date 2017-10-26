@@ -7,8 +7,6 @@
 
 {% block content %}
   <div class="box box-warning">
-    <section class="content">
-      {% include '_form.html' with form=form button=button %}
-    </section>
+    {% include '_form.html' with form=form button=button %}
   </div>
 {% endblock %}

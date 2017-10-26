@@ -1,0 +1,32 @@
+{% load static %}
+{% load i18n %}
+{% load tz %}
+{% load notification %}
+{% load utils %}
+
+{% notificationsBar request.user as notificatons %}
+
+<li class="dropdown notifications-menu">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-bell"></i>
+    {% if notificatons|length > 0 %}
+      <span class="label bg-purple">{{ notificatons|length }}</span>
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu">
+    <li>
+      {% if notificatons|length > 0 %}
+        <ul class="menu">
+          {% for n in notificatons %}
+            {{ n|safe }}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <li class="header">{% trans 'You have no new notifications.' %}</li>
+      {% endif %}
+    </li>
+    <li class="footer"><a href="{% url 'notifications' %}">{% trans 'View all' %}</a></li>
+  </ul>
+</li>
+

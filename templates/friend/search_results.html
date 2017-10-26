@@ -1,0 +1,62 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}">
+{% endblock %}
+
+{% block header %}{{ title|safe }}{% endblock %}
+
+{% block content %}
+
+<div class="row" id="friends-result">
+  {% for f in friends %}
+    <div class="col-lg-3 col-xs-6">
+      <div class="box">
+        <div class="box-body box-profile">
+          <h3 class="profile-username text-center"><a href="/friend/{{ f.id }}">{{ f.get_full_name }}</a></h3>
+          <p class="text-muted text-center">{{ f.email }}</p>
+          <div id="id_div_friend{{ f.id }}">
+            {% if f.username == 1 %}
+              <button type="button" onclick="btnAdd(this)" value="{{ f.id }}" id="id_friend{{ f.id }}" class="btn btn-primary btn-block">
+                <i class="fa fa-plus"></i> <span> <b>{% trans "Add" %}</b> </span>
+              </button>
+            {% elif f.username == 2 %}
+              <button type="button" onclick="btnCancel(this)" value="{{ f.id }}" id="id_friend{{ f.id }}" class="btn btn-danger btn-block">
+                <i class="fa fa-ban"></i> <span> <b>{% trans "Cancel" %}</b> </span>
+              </button>
+            {% elif f.username == 3 %}
+              <button type="button" disabled value="{{ f.id }}" id="id_friend{{ f.id }}" class="btn btn-default btn-block">
+                <i class="fa fa-user"></i> <span> <b>{% trans "Added" %}</b> </span>
+              </button>
+            {% elif f.username == 4 %}
+              <button type="button" disabled value="{{ f.id }}" id="id_friend{{ f.id }}" class="btn btn-default btn-block">
+                <i class="fa fa-user-times"></i> <span> <b>{% trans "Blocked" %}</b> </span>
+              </button>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  {% empty %}
+  <div class="content">
+    <h4>{% trans 'Sorry!!! No results found.' %}</h4>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block script %}
+  <script type="text/javascript">
+    var add = '{% trans "Add" %}';
+    var cancel = '{% trans "Cancel" %}';
+    var added = '{% trans "Added" %}';
+    var blocked = '{% trans "Blocked" %}';
+  </script>
+  <script src="{% static 'efigie/friendSearch.js' %}"></script>
+{% endblock %}

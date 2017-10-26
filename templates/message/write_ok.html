@@ -6,12 +6,15 @@
 {% block header %} {{ title|safe }} {% endblock %}
 
 {% block content %}
+{% comment %}
+  AGARD
+{% endcomment %}
   <div class="box box-warning">
     <div class="box-body">
         <img src="data:image/png;base64,{{ image }}" alt="" height="75%" width="75%" />
     </div>
     <div class="box-footer">
-      <a href="data:image/png;base64,{{ image }}" download class="btn btn-primary"><span>Download</span></a><br/>
+      <a href="data:image/png;base64,{{ image }}" download="name.png" class="btn btn-primary"><span>{% trans 'Download' %}</span></a><br/>
     </div>
   </div>
 {% endblock %}

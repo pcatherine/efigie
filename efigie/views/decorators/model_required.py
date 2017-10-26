@@ -44,7 +44,7 @@ def model_required(Model, url, parm=None, user=False):
         if len(kwargs) == 1:
           value = ''.join(kwargs.values())
         else:
-          return HttpResponseNotFound('<h1>ALGO DE ERRADO NÃO ESTA CERTO</h1>')
+          return HttpResponseNotFound(invariants.unknown_error)
       else:
         value = kwargs[parm]
 
@@ -54,7 +54,8 @@ def model_required(Model, url, parm=None, user=False):
         query = Model.objects.filter(id=value, user=request.user).exists()
 
       if not query:
-        messages.error(request, invariants.alert_not_found_error % (Model._meta.verbose_name.title()))
+        messages.error(request, invariants.alert_not_found_error % {
+          'model_name': Model._meta.verbose_name.title()})
         if isinstance(url, str):
           return redirect(url)
         else:

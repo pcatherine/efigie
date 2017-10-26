@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 16:55-0300\n"
+"POT-Creation-Date: 2017-10-24 11:02-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: PAOLLA CATHERINE <paollacath@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,204 +18,462 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models/Key.py:15
-msgid "User"
-msgstr ""
+#: forms/KeyForm.py:16
+msgid "Friends with whom you want to share this key"
+msgstr "Amigos com quem você deseja compartilhar esta chave"
 
-#: models/Key.py:17
-msgid "Name"
-msgstr ""
+#: forms/KeyForm.py:33 forms/UserEditForm.py:35 forms/UserEditForm.py:44
+#: forms/UserNewForm.py:23
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr "%(model_name)s com este %(field_label)s já existe."
 
-#: models/Key.py:21
-msgid "Size"
-msgstr ""
+#: forms/KeyImportForm.py:11
+msgid "File"
+msgstr "Arquivo"
 
-#: models/Key.py:23
-msgid "Public Key"
-msgstr ""
+#: forms/MessageReadForm.py:13 forms/MessageWriteForm.py:19
+msgid "Image"
+msgstr "Imagem"
 
-#: models/Key.py:25
-msgid "Private Key"
-msgstr ""
+#: forms/MessageReadForm.py:16
+#, fuzzy
+msgid "RSA Key to encrypt the message"
+msgstr "Chave RSA para criptografar a mensagem"
 
-#: models/Key.py:27 models/UserConfirmation.py:25
-msgid "Created at"
-msgstr ""
+#: forms/MessageReadForm.py:37
+msgid "RSA key is required in this case."
+msgstr "Chave RSA é necessária neste caso."
 
-#: models/Key.py:32
+#: forms/MessageReadForm.py:42
+msgid "RSA key didn't match."
+msgstr "Chave RSA não corresponde."
+
+#: forms/MessageSettingsForm.py:10
+msgid "Red"
+msgstr "Vermelho"
+
+#: forms/MessageSettingsForm.py:11
+msgid "Green"
+msgstr "Verde"
+
+#: forms/MessageSettingsForm.py:12
+msgid "Blue"
+msgstr "Azul"
+
+#: forms/MessageSettingsForm.py:27
+msgid "Odd"
+msgstr "Impar"
+
+#: forms/MessageSettingsForm.py:28
+msgid "Even"
+msgstr "Par"
+
+#: forms/MessageSettingsForm.py:33
+msgid "Colors"
+msgstr "Cores"
+
+#: forms/MessageWriteForm.py:16
+msgid "Times the message can be read"
+msgstr "Quantidade de vezes que a mensagem pode ser lida"
+
+#: forms/MessageWriteForm.py:23
+msgid "RSA key to encrypt the message"
+msgstr "Chave RSA para criptografar a mensagem"
+
+#: forms/UserLoginForm.py:13
+msgid "Username or Email Address"
+msgstr "Username ou Endereço de Email"
+
+#: models/Friend.py:56 models/Friend.py:74
+msgid "Friend"
+msgstr "Amigo"
+
+#: models/Friend.py:59
+msgid "Friendship?"
+msgstr "Relacionamento?"
+
+#: models/Friend.py:63
+msgid "Blocked?"
+msgstr "Bloqueado?"
+
+#: models/Friend.py:75 models/Key.py:55
 msgid "Friends"
-msgstr ""
-
-#: models/Key.py:39 urls.py:78
-msgid "Key"
-msgstr ""
+msgstr "Amigos"
 
 #: models/Key.py:40
+msgid "Name"
+msgstr "Nome"
+
+#: models/Key.py:43
+msgid "Size"
+msgstr "Tamanho"
+
+#: models/Key.py:46
+msgid "Public Key"
+msgstr "Chave Publica"
+
+#: models/Key.py:48
+msgid "Private Key"
+msgstr "Chave Privada"
+
+#: models/Key.py:50 models/Notification.py:39 models/UserConfirmation.py:26
+msgid "Created at"
+msgstr "Criado em"
+
+#: models/Key.py:62
+msgid "Key"
+msgstr "Chave"
+
+#: models/Key.py:63
 msgid "Keys"
-msgstr ""
+msgstr "Chaves"
 
-#: models/UserConfirmation.py:21
-msgid "Token"
-msgstr ""
+#: models/Message.py:13
+msgid "Count"
+msgstr "Quantidade"
 
-#: models/UserConfirmation.py:28
+#: models/Message.py:19
+msgid "Message"
+msgstr "Mensagem"
+
+#: models/Message.py:20
+msgid "Messages"
+msgstr "Mensagens"
+
+#: models/Notification.py:29
+msgid "Content Type"
+msgstr "Tipo de conteúdo"
+
+#: models/Notification.py:33
+msgid "Read?"
+msgstr "Lido?"
+
+#: models/Notification.py:37 models/UserConfirmation.py:29
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
-#: models/UserConfirmation.py:32
+#: models/Notification.py:43
+#, python-format
+msgid "%(notification_typet)s's Notification to %(user_name)s"
+msgstr "Notificação de %(notification_typet)s para %(user_name)s"
+
+#: models/Notification.py:57
+msgid "sent a friend request."
+msgstr "enviou uma solicitação de amizade."
+
+#: models/Notification.py:59
+msgid "accepted your friend request."
+msgstr "aceitou a sua solicitação de amizade."
+
+#: models/Notification.py:61
+#, python-format
+msgid "You accepted %(user)s's friend request."
+msgstr "Você aceitou a solicitação de amizade de %(user)s."
+
+#: models/Notification.py:63
+#, python-format
+msgid "shared the key %(key)s with you."
+msgstr "compartilhou a chave %(key)s com você."
+
+#: models/Notification.py:65
+msgid "sent you a message."
+msgstr "enviou uma mensagem para você."
+
+#: models/Notification.py:94
+msgid "Notification"
+msgstr "Notificação"
+
+#: models/Notification.py:95
+msgid "Notifications"
+msgstr "Notificações"
+
+#: models/UserConfirmation.py:22
+msgid "Token"
+msgstr "Símbolo"
+
+#: models/UserConfirmation.py:33
 msgid "Confirmed?"
-msgstr ""
+msgstr "Confirmado?"
 
-#: models/UserConfirmation.py:36
+#: models/UserConfirmation.py:37
 msgid "Confirmed at"
-msgstr ""
+msgstr "Confirmado em"
 
-#: models/UserConfirmation.py:40
+#: models/UserConfirmation.py:41
 msgid "Confirmed by"
-msgstr ""
-
-#: models/UserConfirmation.py:55
-msgid "User Confirmation"
-msgstr ""
+msgstr "Confirmado por"
 
 #: models/UserConfirmation.py:56
+msgid "User Confirmation"
+msgstr "Confirmação de Usuário"
+
+#: models/UserConfirmation.py:57
 msgid "User Confirmations"
-msgstr ""
+msgstr "Confirmações de Usuário"
 
-#: settings.py:123
+#: models/UserEffigy.py:19
+msgid "Settings"
+msgstr "Configuração"
+
+#: settings.py:129
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
-#: settings.py:124
+#: settings.py:130
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
 
-#: urls.py:57
+#: templatetags/notification.py:78
+msgid "Accept"
+msgstr "Aceitar"
+
+#: templatetags/notification.py:79
+msgid "Delete"
+msgstr "Apagar"
+
+#: urls.py:22
+msgid "Efigie Administration"
+msgstr "Administração de Efigie"
+
+#: urls.py:93
 msgid "Home"
 msgstr ""
 
-#: urls.py:58
+#: urls.py:94
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
-#: urls.py:59
+#: urls.py:97
 msgid "System Settings"
-msgstr ""
+msgstr "Configuração de Sistema"
 
-#: urls.py:61
+#: urls.py:99
 msgid "Login"
 msgstr ""
 
-#: urls.py:62
+#: urls.py:100
 msgid "Logout"
 msgstr ""
 
-#: urls.py:63
-msgid "New User"
-msgstr ""
+#: urls.py:101
+#, python-format
+msgid "New %(model_user)s"
+msgstr "Novo %(model_user)s"
 
-#: urls.py:64
-msgid "Delete User"
-msgstr ""
+#: urls.py:102
+#, fuzzy, python-format
+#| msgid "Delete %(model_user)s"
+msgid "Delete %(model_user)s"
+msgstr "Apagar %(model_user)s"
 
-#: urls.py:66 urls.py:68 urls.py:73
-msgid "Confirm"
-msgstr ""
+#: urls.py:104 urls.py:107 urls.py:113
+msgid "Confirmation"
+msgstr "Confirmação"
 
-#: urls.py:67
-msgid "Reset Password"
-msgstr ""
+#: urls.py:109
+#, python-format
+msgid "%(model_user)s Settings"
+msgstr "Configuração de %(model_user)s"
 
-#: urls.py:70
-msgid "User Settings"
-msgstr ""
+#: urls.py:110
+#, fuzzy, python-format
+#| msgid "Edit %(field_password)s"
+msgid "Edit %(field_password)s"
+msgstr "Editar %(fiedl_password)s"
 
-#: urls.py:71
-msgid "Edit Password"
-msgstr ""
+#: urls.py:112
+#, python-format
+msgid "Edit %(model_user)s"
+msgstr "Editar %(model_user)s"
 
-#: urls.py:72
-msgid "Edit User"
-msgstr ""
+#: urls.py:115
+#, python-format
+msgid "%(model_friend)s's List"
+msgstr "Lista de %(model_friend)s"
 
-#: urls.py:75
-msgid "Key's List"
-msgstr ""
+#: urls.py:116
+#, python-format
+msgid "Blocked %(model_friend)s's List"
+msgstr "Lista de %(model_friend)s Bloqueados"
 
-#: urls.py:76
-msgid "New Key"
-msgstr ""
+#: urls.py:117
+#, python-format
+msgid "Find %(model_friend)s"
+msgstr "Procurar %(model_friend)s"
 
-#: urls.py:77
-msgid "Import Key"
-msgstr ""
+#: urls.py:118
+#, python-format
+msgid "%(model_friend)s's Results"
+msgstr "Resultados de %(model_friend)s"
 
-#: urls.py:79
-msgid "Edit Key"
-msgstr ""
+#: urls.py:120
+#, python-format
+msgid "Block %(model_friend)s"
+msgstr "Bloquear %(model_friend)s"
 
-#: urls.py:80
-msgid "Delete Key"
-msgstr ""
+#: urls.py:121
+#, python-format
+msgid "Delete %(model_friend)s"
+msgstr "Apagar %(model_friend)s"
 
-#: urls.py:81
-msgid "Export Key"
-msgstr ""
+#: urls.py:123
+#, python-format
+msgid "%(model_key)s's List"
+msgstr "Lista de %(model_key)s"
 
-#: utils/Effigy.py:18 utils/Effigy.py:44
-msgid "Imagem nao pode ser aberta"
-msgstr ""
+#: urls.py:124
+#, python-format
+msgid "New %(model_key)s"
+msgstr "Nova %(model_key)s"
 
-#: utils/Effigy.py:30
-msgid "Imagem pequena demais para o tamanho da mensagem"
-msgstr ""
+#: urls.py:125
+#, python-format
+msgid "Import %(model_key)s"
+msgstr "Importar %(model_key)s"
 
-#: utils/Effigy.py:53 utils/Effigy.py:55 utils/Effigy.py:175
-#: utils/Effigy.py:176
-msgid "Imagem nao autentica"
-msgstr ""
+#: urls.py:128
+#, python-format
+msgid "Edit %(model_key)s"
+msgstr "Editar %(model_key)s"
+
+#: urls.py:129
+#, python-format
+msgid "Delete %(model_key)s"
+msgstr "Apagar %(model_key)s"
+
+#: urls.py:130
+#, python-format
+msgid "Export %(model_key)s"
+msgstr "Exportar %(model_key)s"
+
+#: urls.py:132
+#, python-format
+msgid "Encrypt %(model_message)s"
+msgstr "Criptografar %(model_message)s"
+
+#: urls.py:133
+#, python-format
+msgid "Decrypt %(model_message)s"
+msgstr "Descriptografar %(model_message)s"
+
+#: urls.py:134
+#, python-format
+msgid "%(model_message)s Settings"
+msgstr "Configurações de %(model_message)s"
+
+#: urls.py:136
+msgid "Image Search"
+msgstr "Procurar Imagem"
+
+#: utils/Effigy.py:24 utils/Effigy.py:45 utils/Effigy.py:55
+msgid "This image could not be opened."
+msgstr "Esta imagem não pode ser aberta."
+
+#: utils/Effigy.py:31
+msgid "This image is too small."
+msgstr "Esta imagem é muito pequena."
+
+#: utils/Effigy.py:57 utils/Effigy.py:166 utils/Effigy.py:167
+msgid "This image is not authentic."
+msgstr "Esta imagem não é autêntica."
 
 #. Translators: This message appears on alert with %(model_name)s and %(item_name)s
 #: utils/invariants.py:4
 #, python-format
-msgid "%s <b>%s</b> was successfully added."
-msgstr ""
+msgid "%(model_name)s <b>%(item_name)s</b> was successfully added."
+msgstr "%(model_name)s <b>%(item_name)s</b> foi adicionado(a) com sucesso."
 
 #: utils/invariants.py:5
 #, python-format
-msgid "%s <b>%s</b> was successfully updated."
-msgstr ""
+msgid "%(model_name)s <b>%(item_name)s</b> was successfully updated."
+msgstr "%(model_name)s <b>%(item_name)s</b> foi alterado(a) com sucesso."
 
 #: utils/invariants.py:6
 #, python-format
-msgid "%s <b>%s</b> was successfully deleted."
-msgstr ""
+msgid "%(model_name)s <b>%(item_name)s</b> was successfully deleted."
+msgstr "%(model_name)s <b>%(item_name)s</b> foi apagado(a) com sucesso."
 
 #: utils/invariants.py:8
 #, python-format
-msgid "%s <b>%s</b> could not be deleted."
-msgstr ""
+msgid "%(model_name)s <b>%(item_name)s</b> could not be deleted."
+msgstr "%(model_name)s <b>%(item_name)s</b> não pode ser apagado(a)."
+
+#: utils/invariants.py:9
+#, python-format
+msgid "%(model_name)s not found."
+msgstr "%(model_name)s não encontrado(a)"
+
+#: utils/invariants.py:10
+#, python-format
+msgid "%(field_token)s has already been validated."
+msgstr "%(field_token)s já foi validado(a)."
 
 #. Translators: This message appears on button with %(model_name)s
-#: utils/invariants.py:12
-#, python-format
-msgid "Update %s"
-msgstr ""
-
 #: utils/invariants.py:13
-#, python-format
-msgid "Create %s"
-msgstr ""
+msgid "Update"
+msgstr "Alterar"
 
-#: utils/invariants.py:15
-msgid "Confirm your account"
-msgstr ""
+#: utils/invariants.py:14
+msgid "Create"
+msgstr "Criar"
 
 #: utils/invariants.py:16
-msgid "Set Password"
-msgstr ""
+msgid "Confirm your account"
+msgstr "Confirmar sua conta"
 
-#: utils/invariants.py:17
+#: utils/invariants.py:18
 #, python-format
-msgid "Insert %s"
-msgstr ""
+msgid "%(field_email)s was successfully sent."
+msgstr "%(field_email)s foi enviado(a) com sucesso"
+
+#: utils/invariants.py:20
+msgid "Unknown error."
+msgstr "Erro Desconhecido"
+
+#: utils/invariants.py:22
+#, python-format
+msgid "Reset %(field_password)s"
+msgstr "Trocar %(field_password)s"
+
+#: views/key/keyImport.py:33
+#, fuzzy, python-format
+#| msgid "%(model_key)s <b>%(item_name)s</b> was successfully imported."
+msgid "%(model_key)s <b>%(item_name)s</b> was successfully imported."
+msgstr "%(model_name)s <b>%(item_name)s</b> foi importada com sucesso."
+
+#: views/key/keyImport.py:37
+msgid "The file could not be imported."
+msgstr "O arquivo não pode ser importado"
+
+#: views/key/keyImport.py:42
+msgid "Import"
+msgstr "Importar"
+
+#: views/message/messageRead.py:34
+msgid "This message cannot be read."
+msgstr "Esta mensagam não pode ser lida"
+
+#: views/message/messageRead.py:45
+msgid "Decrypt"
+msgstr "Descriptografar"
+
+#: views/message/messageWrite.py:35
+msgid "Encrypt"
+msgstr "Criptografar"
+
+#: views/user/userLogin.py:41
+msgid "Invalid email or password."
+msgstr "Email ou senha inválidos"
+
+#: views/user/userLogin.py:46
+msgid "Forgot your password?"
+msgstr "Esqueceu a sua senha?"
+
+#: views/user/userLogin.py:47 views/user/userNew.py:33
+msgid "Sign Up"
+msgstr "Cadastrar-se"
+
+#: views/user/userPasswordReset.py:28
+msgid "Send me the instructions"
+msgstr "Envie-me as intruções"

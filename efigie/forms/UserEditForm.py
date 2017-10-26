@@ -3,25 +3,49 @@
 
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import ugettext_lazy as _
 
 from efigie import settings
-from efigie.utils import utils
-from efigie.utils import mail
+from efigie.utils import mail, utils
 from efigie.forms import *
-from efigie.models import UserConfirmation, Category
+from efigie.models import UserConfirmation
 
 class UserEditForm(forms.Form):
   first_name = forms.CharField(
-    widget=forms.TextInput(attrs={'placeholder':'First Name'}))
+    label=capfirst(User._meta.get_field('first_name').verbose_name),
+    widget=forms.TextInput())
 
   last_name = forms.CharField(
-    widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
+    label=capfirst(User._meta.get_field('last_name').verbose_name),
+    widget=forms.TextInput())
 
   username = forms.CharField(
-    widget=forms.TextInput(attrs={'placeholder':'Username'}))
+    label='Username',
+    widget=forms.TextInput())
 
   email = forms.EmailField(
-    widget=forms.TextInput(attrs={'placeholder':'E-mail'}))
+    label=capfirst(User._meta.get_field('email').verbose_name),
+    widget=forms.TextInput())
+
+
+  def clean_username(self):
+    username = self.cleaned_data['username']
+    if User.objects.filter(username=username).exists() and username != self.user.username:
+      raise forms.ValidationError(_('%(model_name)s with this %(field_label)s already exists.') % {
+        'model_name': capfirst(User._meta.verbose_name),
+        'field_label': User._meta.get_field('email').verbose_name})
+    else:
+      return username
+
+  def clean_email(self):
+    email = self.cleaned_data['email']
+    if User.objects.filter(email=email).exists() and email != self.user.email:
+      raise forms.ValidationError(_('%(model_name)s with this %(field_label)s already exists.') % {
+        'model_name': capfirst(User._meta.verbose_name),
+        'field_label': User._meta.get_field('email').verbose_name})
+    else:
+      return email
 
 
   def __init__(self, *args, **kwargs):
@@ -32,6 +56,8 @@ class UserEditForm(forms.Form):
     self.fields['last_name'].initial = self.user.last_name
     self.fields['username'].initial = self.user.username
     self.fields['email'].initial = self.user.email
+
+    # self.fields['first_name'].widget.attrs.update({'autofocus': True})
 
 
   def save(self, url, commit=True):
@@ -45,9 +71,9 @@ class UserEditForm(forms.Form):
       self.user.save()
       if old_email != self.cleaned_data['email']:
         key = utils.generateHashKey(self.user.username)
-        reset = UserConfirmation(key=key, user=self.user, category=Category.VERIFICATION)
+        reset = UserConfirmation(key=key, user=self.user, category=UserConfirmation.Category.VERIFICATION)
         reset.save()
-
+        # AGARD arrumar os emails
         subject = '[Efigie] E-mail Confirmation'
 
         message = '''Olá %s, <br/>
@@ -66,20 +92,3 @@ class UserEditForm(forms.Form):
 
         mail.sendMailTemplate(subject, context, [self.user.email])
     return self.user
-
-
-  def clean_username(self):
-    username = self.cleaned_data['username']
-
-    if self.user.username != username and User.objects.filter(username=username).exists():
-      raise forms.ValidationError('Usuário já cadastrado com este username')
-    else:
-      return username
-
-  def clean_email(self):
-    email = self.cleaned_data['email']
-
-    if self.user.email != email and User.objects.filter(email=email).exists():
-      raise forms.ValidationError('Usuário já cadastrado com este e-mail')
-    else:
-      return email

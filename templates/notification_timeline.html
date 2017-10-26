@@ -1,0 +1,36 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load tz %}
+{% load notification %}
+
+{% block header %} {% endblock %}
+
+
+{% block content %}
+
+  {% timeline request.user as notifs %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="timeline">
+        {% for n in notifs %}
+            {{ n|safe }}
+        {% endfor %}
+
+        {% if notifs|length > 0 %}
+          <li>
+            <i class="fa fa-clock-o bg-gray"></i>
+          </li>
+        {% else %}
+          <li class="time-label">
+            <span class="bg-purple">{% trans 'You have no notifications.' %}</span>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+
+{% endblock %}

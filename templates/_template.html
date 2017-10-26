@@ -4,6 +4,15 @@
 {% load i18n %}
 {% load utils %}
 
+{% block style %}
+  <style type="text/css">
+    form ul {
+      list-style-type: none;
+    }
+  </style>
+{% endblock %}
+
+
 {% block body %}
   <div class="content-wrapper">
     <section class="content-header">
@@ -15,11 +24,10 @@
     </section>
 
     <section class="content">
-      {% emailConfirmation user as confimation  %}
+      {% emailConfirmation request.user as confimation  %}
       {% if confimation %}
         <div class="callout callout-danger">
-          <h4> Alerta</h4>
-          <p><i class="icon fa fa-ban"></i> Aguardando a confirmação de e-mail ou <a href="{% url 'userEdit' %}"> clique aqui</a> para alteração.</p>
+          <p><i class="icon fa fa-ban"></i> {% trans 'Waiting for a email confirmation or ' %}<a href="{% url 'userEdit' %}">{% trans 'click here' %}</a>{% trans ' to change it.' %} </p>
         </div>
       {% endif %}
 
@@ -27,14 +35,4 @@
       {% block content %} {% endblock %}
     </section>
   </div>
-{% endblock %}
-
-{% block script %}
-  <script>
-    $('ul').removeClass('form-control');
-    $('ul').removeClass('input-lg');
-    $('ul input').removeClass('form-control');
-    $('ul input').removeClass('input-lg');
-
-  </script>
 {% endblock %}

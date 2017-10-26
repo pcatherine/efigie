@@ -39,9 +39,11 @@ def keyNew(request):
 
   if form.is_valid():
     key = form.save()
-    messages.success(request, invariants.alert_add_success % (Key._meta.verbose_name, key.name ) )
+    messages.success(request, invariants.alert_add_success % {
+      'model_name': Key._meta.verbose_name, 
+      'item_name': key.name } )
     return redirect(keyList)
 
   return render(request, 'key/form.html',
     {'form': form,
-     'button': invariants.button_new % (Key._meta.verbose_name)})
+     'button': invariants.button_new })

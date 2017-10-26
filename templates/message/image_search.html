@@ -1,0 +1,29 @@
+{% extends "_template.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block header %} {% endblock %}
+
+{% block content %}
+{% comment %}
+  AGARD
+{% endcomment %}
+  <div class="box box-warning">
+    <div class="box-body">
+      <form method="POST" action="{% url 'imageSearch' %}" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="input-group input-group-lg">
+          <input type="input" class="form-control" name="imgTheme" id="imgTheme" placeholder="{% trans 'Theme' %}"  >
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-flat" >{% trans "Search" %} </button>
+          </span>
+        </div>
+      </form>
+      {% for img in imgList %}
+        <a href="#"><img src="{{ img.url }}" style="max-width:200px; max-height:200px; width: auto; height: auto; margin:3px" alt="" > </a>
+      {% endfor %}
+
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
+{% endblock %}

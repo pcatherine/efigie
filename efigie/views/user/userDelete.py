@@ -6,7 +6,9 @@ from django.shortcuts import redirect
 
 from efigie import *
 from efigie.views import *
-#AGARD
+from efigie.views.user import *
+
+#agard
 @login_required
 def userDelete(request):
   return redirect(userSettings)

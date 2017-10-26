@@ -13,12 +13,22 @@
     <div class="box box-warning">
       <div class="box-body">
         <dl class="dl-horizontal">
-          {% modelDict model key as values %}
 
-          {% for key, value in values.items %}
-            <h4><dt>{% modelFieldName model key %}</dt></h4>
-            <h4><dd>{% if value is not None %}{{ value }}{% else %}&nbsp;{% endif %}</dd></h4>
-          {% endfor %}
+          <h4><dt>{% trans 'Name' %}</dt></h4>
+          <h4><dd>{{ key.name }}</dd></h4>
+          <h4><dt>{% trans 'Size' %}</dt></h4>
+          <h4><dd>{{ key.size }}</dd></h4>
+          <h4><dt>{% trans 'Public Key' %}</dt></h4>
+          <h4><dd>{{ key.publicKey }}</dd></h4>
+          <h4><dt>{% trans 'Private Key' %}</dt></h4>
+          <h4><dd>{{ key.privateKey }}</dd></h4>
+          <h4><dt>{% trans 'Friends' %}</dt></h4>
+          <h4><dd>
+            {% for u in key.friends.all %}
+              <a href="{% url 'friendShow' u.id %}">{{ u.get_full_name }}</a><br />
+            {% endfor %}
+          </dd></h4>
+
 
         </dl>
       </div>

@@ -4,10 +4,11 @@
 from django import forms
 from django.utils.text import capfirst
 
-from efigie.utils import utils
-from efigie.utils import mail
+from efigie.utils import mail, utils
 from efigie.forms import *
-from efigie.models import UserConfirmation, Category
+from efigie.models import UserConfirmation
+from efigie.utils import invariants
+
 
 
 class UserPasswordResetForm(forms.Form):
@@ -16,16 +17,22 @@ class UserPasswordResetForm(forms.Form):
   def clean_email(self):
     email = self.cleaned_data['email']
     if not User.objects.filter(email=email).exists():
-      raise forms.ValidationError('Nenhum usuário encontrado com este e-mail')
+      raise forms.ValidationError(invariants.alert_not_found_error % {
+        'model_name': capfirst(User._meta.verbose_name)})
     else:
       return email
+
+  def __init__(self, *args, **kwargs):
+    super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+    self.fields['email'].widget.attrs.update({'autofocus': True})
 
   def save(self, url):
     user = User.objects.get(email=self.cleaned_data['email'])
     token = utils.generateHashKey(user.username)
-    reset = UserConfirmation(token=token, user=user, category=Category.PASSWORD)
+    reset = UserConfirmation(token=token, user=user, category=UserConfirmation.Category.PASSWORD)
     reset.save()
 
+    # AGARD email
     subject = '[Efigie] New Password'
 
     message = '''Olá %s, <br/>

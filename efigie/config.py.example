@@ -10,4 +10,7 @@ DATABASES_HOST = 'host'
 EMAIL_HOST_USER = 'email'
 EMAIL_HOST_PASSWORD = 'password'
 
+GOOGLE_DEVELOPER_KEY = 'google_key'
+GOOGLE_CUSTOM_SEARCH = 'google_search'
+
 IFTTT_KEY = 'ifttt_key'

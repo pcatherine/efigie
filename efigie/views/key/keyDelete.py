@@ -30,7 +30,11 @@ def keyDelete(request, keyId):
 
   try:
     key.delete()
-    messages.success(request, invariants.alert_delete_success % (model_name, name))
+    messages.success(request, invariants.alert_delete_success % {
+      'model_name': model_name, 
+      'item_name': name})
   except Exception as e:
-    messages.error(request, invariants.alert_delete_error % (model_name, name))
+    messages.error(request, invariants.alert_delete_error % {
+      'model_name': model_name, 
+      'item_name': name})
   return redirect(keyList)

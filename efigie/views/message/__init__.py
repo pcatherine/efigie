@@ -12,3 +12,4 @@ from efigie.views.message.messageRead import *
 from efigie.views.message.messageSet import *
 from efigie.views.message.messageSettings import *
 from efigie.views.message.messageWrite import *
+from efigie.views.message.imageSearch import *

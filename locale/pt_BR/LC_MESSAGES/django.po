@@ -1,0 +1,241 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-24 07:58-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Paolla Catherine <paollacath@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/_alert.html:16
+msgid "Information"
+msgstr "Informação"
+
+#: templates/_alert.html:18
+msgid "Success"
+msgstr "Sucesso"
+
+#: templates/_alert.html:20
+msgid "Warning"
+msgstr "Alerta"
+
+#: templates/_alert.html:22
+msgid "Error"
+msgstr "Erro"
+
+#: templates/_form.html:32 templates/_modal.html:15
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/_form.html:33 templates/_form.html:35
+#: templates/friend/search.html:33 templates/friend/search_results.html:29
+#: templates/friend/search_results.html:57 templates/friend/show.html:39
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/_menu.html:17
+msgid "Friend"
+msgstr "Amigo"
+
+#: templates/_menu.html:32
+msgid "Message"
+msgstr "Mensagem"
+
+#: templates/_menu.html:46
+msgid "RSA Keys"
+msgstr "Chave RSA"
+
+#: templates/_menu.html:61
+msgid "Settings"
+msgstr "Configurações"
+
+#: templates/_menu.html:78
+msgid "Administration"
+msgstr "Administração"
+
+#: templates/_modal.html:11 templates/_modal.html:16 templates/_modal.html:53
+#: templates/key/show.html:38
+msgid "Delete"
+msgstr "Apagar"
+
+#: templates/_modal.html:13
+msgid "Deleting"
+msgstr "Apagando"
+
+#: templates/_modal.html:13 templates/friend/list.html:65
+#: templates/friend/show.html:68 templates/friend/show.html:72
+#: templates/friend/show.html:76
+msgid "Do you want to continue?"
+msgstr "Você quer continuar?"
+
+#: templates/_modal.html:30
+msgid "Are you sure you want to do this?"
+msgstr "Você tem certeza disso?"
+
+#: templates/_modal.html:35
+msgid ""
+"<p>We will <b>immediately</b> remove all RSA key related only to you, "
+"together with all your friends.</p>"
+msgstr ""
+"<p>Nós vamos remover <b>imediatamente</b> todas as chaves relacionadas "
+"somente a você, juntamente com todos os seus amigos.</p>"
+
+#: templates/_notification.html:26
+msgid "You have no new notifications."
+msgstr "Você não tem novas notificações."
+
+#: templates/_notification.html:29
+msgid "View all"
+msgstr "Ver todas"
+
+#: templates/_templ.html:83
+msgid "Version"
+msgstr "Versão"
+
+#: templates/_templ.html:85
+msgid "All rights reserved."
+msgstr "Todos os direitos reservados."
+
+#: templates/_template.html:30
+msgid "Waiting for a email confirmation or "
+msgstr "Esperando pelo email de confirmação ou"
+
+#: templates/_template.html:30
+msgid "click here"
+msgstr "clique aqui"
+
+#: templates/_template.html:30
+msgid " to change it."
+msgstr "para mudá-lo"
+
+#: templates/friend/list.html:23 templates/friend/show.html:17
+#: templates/user/settings.html:16
+msgid "Full Name"
+msgstr "Nome Completo"
+
+#: templates/friend/list.html:25 templates/friend/show.html:23
+#: templates/user/settings.html:22
+msgid "Email Address"
+msgstr "Endereço de Email"
+
+#: templates/friend/list.html:64 templates/friend/list.html:66
+#: templates/friend/show.html:42 templates/friend/show.html:67
+#: templates/friend/show.html:69
+msgid "Unfriend"
+msgstr "Desfazer amizade"
+
+#: templates/friend/list.html:65 templates/friend/show.html:68
+msgid "Unfriending"
+msgstr "Desfazendo amizade"
+
+#: templates/friend/search.html:19
+msgid "Search by name or email address"
+msgstr "Buscar por nome ou endereço de email"
+
+#: templates/friend/search.html:32 templates/friend/search_results.html:25
+#: templates/friend/search_results.html:56 templates/friend/show.html:35
+msgid "Add"
+msgstr "Adicionar"
+
+#: templates/friend/search.html:34 templates/friend/search_results.html:33
+#: templates/friend/search_results.html:58
+msgid "Added"
+msgstr "Adicionado"
+
+#: templates/friend/search.html:35 templates/friend/search_results.html:37
+#: templates/friend/search_results.html:59
+msgid "Blocked"
+msgstr "Bloqueado"
+
+#: templates/friend/search_results.html:47
+msgid "Sorry!!! No results found."
+msgstr "Desculpa!!! Nenhum resultado encontrado."
+
+#: templates/friend/show.html:26 templates/user/settings.html:25
+msgid "Member Since"
+msgstr "Membro desde"
+
+#: templates/friend/show.html:46 templates/friend/show.html:71
+#: templates/friend/show.html:73
+msgid "Block"
+msgstr "Bloquear"
+
+#: templates/friend/show.html:48 templates/friend/show.html:75
+#: templates/friend/show.html:77
+msgid "Unblock"
+msgstr "Desbloquear"
+
+#: templates/friend/show.html:72
+msgid "Blocking"
+msgstr "Bloquiando"
+
+#: templates/friend/show.html:76
+msgid "Unblocking"
+msgstr "Desbloquiando"
+
+#: templates/key/list.html:26 templates/key/show_friend.html:20
+msgid "Owner"
+msgstr "Dono"
+
+#: templates/key/list.html:27
+msgid "Shared With"
+msgstr "Compatilhada Com"
+
+#: templates/key/show.html:17 templates/key/show_friend.html:16
+msgid "Name"
+msgstr "Nome"
+
+#: templates/key/show.html:19 templates/key/show_friend.html:18
+msgid "Size"
+msgstr "Tamanho"
+
+#: templates/key/show.html:21
+msgid "Public Key"
+msgstr "Chave Publica"
+
+#: templates/key/show.html:23
+msgid "Private Key"
+msgstr "Chave Provada"
+
+#: templates/key/show.html:25
+msgid "Friends"
+msgstr "Amigos"
+
+#: templates/key/show.html:36
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/message/image_search.html:17
+msgid "Theme"
+msgstr "Tema"
+
+#: templates/message/image_search.html:19
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/message/write_ok.html:17
+msgid "Download"
+msgstr "Baixar"
+
+#: templates/notification_timeline.html:28
+msgid "You have no notifications."
+msgstr "Você não tem notificações."
+
+#: templates/settings.html:15
+msgid "Locale"
+msgstr "Idioma"
+
+#: templates/settings.html:28
+msgid "Update System Settings"
+msgstr "Atualizar Configurações de Sistema"

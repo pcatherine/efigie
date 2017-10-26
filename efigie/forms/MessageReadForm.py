@@ -2,25 +2,27 @@
 #-*- coding: utf-8 -*-
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 from efigie.forms import *
 from efigie.models import Message
-
-from efigie.utils import Effigy, RSA
+from efigie.utils import Effigy, invariants, RSA
 
 
 class MessageReadForm(forms.Form):
-  file = forms.FileField(label='Image',
+  file = forms.FileField(label=_('Image'),
     widget=forms.FileInput(attrs={'accept':'image/*'}))
 
-  # AGARD FILTRAR POR AMIGO
-  key = forms.ModelChoiceField(label='RSA key to encrypt the message',
-    queryset=Key.objects.all(),
+  key = forms.ModelChoiceField(label=_('RSA Key to encrypt the message'),
+    queryset=None,
     required=False)
 
-  # def __init__(self, *args, **kwargs):
-  #   self.user = kwargs.pop('user')
-  #   super(MessageWriteForm, self).__init__(*args, **kwargs)
-  #   # AGARD receber o usuário e set key by friend
+  def __init__(self, *args, **kwargs):
+    self.user = kwargs.pop('user')
+    super(MessageReadForm, self).__init__(*args, **kwargs)
+
+    self.fields['key'].queryset = Key.objects.filter(user=self.user).exclude(friends=None)
+
 
   def save(self, commit=True):
     file = self.cleaned_data['file']
@@ -32,14 +34,14 @@ class MessageReadForm(forms.Form):
       print(e)
 
     if s[13] == '1' and key == None:
-      raise forms.ValidationError('RSA key is required in this case.')
+      raise forms.ValidationError(_('RSA key is required in this case.'))
     elif s[13] == '1' and key != None:
       try:
         m = RSA.decrypt(key.privateKey, m)
       except ValueError as e:
-        raise ValueError("RSA key didn't match.")
+        raise ValueError(_("RSA key didn't match."))
       except:
-        raise Exception('Unknown error.')
+        raise Exception(invariants.unknown_error)
 
     return i, m, s
 

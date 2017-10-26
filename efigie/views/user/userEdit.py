@@ -23,9 +23,11 @@ def userEdit(request):
   form = UserEditForm(user=request.user, data=request.POST or None)
   if form.is_valid():
     form.save(request.build_absolute_uri(None))
-    messages.success(request, invariants.alert_update_success % (capfirst(User._meta.verbose_name)))
+    messages.success(request, invariants.alert_update_success % {
+      'model_name': capfirst(User._meta.verbose_name), 
+      'item_name': request.user.get_full_name()})
     return redirect(userSettings)
 
-  return render(request, 'form.html',
+  return render(request, 'user/form.html',
     {'form': form,
-     'button': invariants.button_edit % (capfirst(User._meta.verbose_name)) })
+     'button': invariants.button_edit })

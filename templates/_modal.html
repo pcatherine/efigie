@@ -8,7 +8,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="deleteModalLabel{{ modal }}">{% trans 'Delete' %} {% modelName modal %}</h4>
+          <h4 class="modal-title" id="deleteModalLabel{{ modal }}"><span>{% trans 'Delete' %}</span> {% modelName modal %}</h4>
         </div>
         <div class="modal-body">{% trans 'Deleting' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}</div>
         <div class="modal-footer">
@@ -27,17 +27,19 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="deleteModalLabel">{% trans 'Você tem certeza que deseja fazer isso?' %}</h4>
+          <h4 class="modal-title" id="deleteModalLabel">{% trans 'Are you sure you want to do this?' %}</h4>
         </div>
         <form action="#" method="post">
 
           <div class="modal-body">
-            {% trans '<p>Excluiremos <b>imediatamente</b> todas as chaves relacionadas somente a voce, juntamente com todos os seus contatos.</p>' %}  
-            
+            {% trans '<p>We will <b>immediately</b> remove all RSA key related only to you, together with all your friends.</p>' %}
+
             {% csrf_token %}
             {% for field in form %}
               <div class="form-group has-feedback">
-              
+
+              {% if field.field.required %}* {% endif %}<b>{{ field.label }}</b>: &nbsp;
+
               {% for error in field.errors %}
                 <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ error|escape }} </label>
               {% endfor %}
@@ -45,12 +47,12 @@
               {{ field|addcssclass:'form-control' }}
               </div>
             {% endfor %}
-          </div> 
+          </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-danger btn-outline" ><i class="fa fa-times"></i> <span>{% trans 'Deletar' %}</span></button>
+            <button type="submit" class="btn btn-danger btn-outline" ><i class="fa fa-times"></i> <span>{% trans 'Delete' %}</span></button>
           </div>
-        </form> 
+        </form>
       </div>
     </div>
   </div>

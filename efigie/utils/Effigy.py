@@ -4,6 +4,8 @@
 import re
 from PIL import Image
 
+from django.utils.translation import ugettext_lazy as _
+
 from efigie.utils import RSA, utils
 
 IDENTIFICADOR = u"efigie"
@@ -19,14 +21,14 @@ def setEffigy(path, setting, msg, idMessage):
     if img.mode != 'RGB':
       img = img.convert('RGB')
   except Exception as e:
-    raise Exception(('setEffigy - Image cannot be open'))
+    raise Exception(_('This image could not be opened.'))
 
   width, height = img.size
 
   message = utils.toBinary('##' + str(idMessage) + '##') + utils.toBinary(msg) + ('00000000' * 8)
 
   if (width * height - 4) < identifySizeImagem(setting, message):
-    raise Exception(('setEffigy - This image is very small'))
+    raise Exception(_('This image is too small.'))
 
   authenticate(img, width, height)
   row, col = setHeader(img, setting, width, height)
@@ -40,7 +42,7 @@ def getEffigy(path):
   try:
     img = Image.open(path)
   except Exception as e:
-    raise Exception(('Imagem nao pode ser aberta'))
+    raise Exception(_('This image could not be opened.'))
 
   width, height = img.size
   if isAuthenticate(img, width, height):
@@ -50,9 +52,9 @@ def getEffigy(path):
       idMessage, m = getMessage(img, setting, width, height, row, col)
       return idMessage, m, setting
     else:
-      raise Exception(('getEffigy - Imagem nao autentica'))
+      raise Exception(_('This image could not be opened.'))
   else:
-    raise Exception(('Imagem nao autentica'))
+    raise Exception(_('This image is not authentic.'))
 
 
 
@@ -161,8 +163,8 @@ def getMessage(img, setting, width, height, i, j):
           idMessage = re.match('^[#]{2}(\d+)[#]{2}', message).groups(0)[0]
           return idMessage, message[len("".join(idMessage))+4:]
         except Exception:
-          raise Exception(('getMessage 1 - Imagem nao autentica'))
-  raise Exception(('getMessage 2 - Imagem nao autentica'))
+          raise Exception(_('This image is not authentic.'))
+  raise Exception(_('This image is not authentic.'))
 
 
 def setMessage(img, message, setting, width, height, i, j):

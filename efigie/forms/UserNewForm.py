@@ -5,30 +5,32 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.text import capfirst
+from django.utils.translation import ugettext_lazy as _
 
 from efigie import settings
-from efigie.utils import utils
-from efigie.utils import mail
+from efigie.utils import utils, mail
 from efigie.forms import *
-from efigie.models import UserConfirmation, Category
+from efigie.models import UserConfirmation, UserEffigy
 
 class UserNewForm(UserCreationForm):
 
+  username = forms.CharField(label='Username')
   email = forms.EmailField(label=capfirst(User._meta.get_field('email').verbose_name))
-
-  def clean_username(self):
-    username = self.cleaned_data['username']
-    if User.objects.filter(username=username).exists():
-      raise forms.ValidationError('Usuário já cadastrado com este username')
-    else:
-      return username
 
   def clean_email(self):
     email = self.cleaned_data['email']
     if User.objects.filter(email=email).exists():
-      raise forms.ValidationError('Usuário já cadastrado com este e-mail')
+      raise forms.ValidationError(_('%(model_name)s with this %(field_label)s already exists.') % {
+        'model_name': capfirst(User._meta.verbose_name),
+        'field_label': User._meta.get_field('email').verbose_name})
     else:
       return email
+
+  def __init__(self, *args, **kwargs):
+    super(UserNewForm, self).__init__(*args, **kwargs)
+    self.fields['first_name'].widget.attrs.update({'autofocus': True})
+    self.fields['username'].widget.attrs.update({'autofocus': False})
+
 
   def save(self, url, commit=True):
     user = super(UserNewForm, self).save(commit=False)
@@ -37,12 +39,13 @@ class UserNewForm(UserCreationForm):
     if commit:
       user.save()
       token = utils.generateHashKey(user.username)
-      reset = UserConfirmation(token=token, user=user, category=Category.VERIFICATION)
+      reset = UserConfirmation(token=token, user=user, category=UserConfirmation.Category.VERIFICATION)
       reset.save()
 
-      uf = UserEffigy(user = self.user, settings='00100000001010000')
+      uf = UserEffigy(user = user, settings='00100000001010000')
       uf.save()
 
+      # AGARD email
       subject = '[Efigie] E-mail Confirmation'
 
       message = '''Olá %s, <br/>

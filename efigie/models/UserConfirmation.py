@@ -6,6 +6,7 @@ from enum import IntEnum
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
 from efigie.models import *
@@ -16,7 +17,7 @@ class UserConfirmation(models.Model):
   """
   user = models.ForeignKey(settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE,
-    verbose_name='User')
+    verbose_name=capfirst(User._meta.verbose_name))
 
   token = models.CharField(_('Token'),
     max_length=100,
@@ -48,7 +49,7 @@ class UserConfirmation(models.Model):
     """
     If user exists and not confirmed, confirm
     """
-    UserConfirmation.objects.filter(user=self.user, confirmed=False).update(confirmed=True, confirmed_by = Confirm.SYSTEM, confirmed_at=timezone.now() )
+    UserConfirmation.objects.filter(user=self.user, confirmed=False).update(confirmed=True, confirmed_by = UserConfirmation.Confirm.SYSTEM, confirmed_at=timezone.now() )
     super(UserConfirmation,self).save(*args, **kwargs)
 
   class Meta:
@@ -56,16 +57,16 @@ class UserConfirmation(models.Model):
     verbose_name_plural = _('User Confirmations')
     ordering = ['-created_at']
 
-class Category(IntEnum):
-  """
-  Enumerates categories, extends IntEnum
-  """
-  VERIFICATION = 1
-  PASSWORD = 2
+  class Category(IntEnum):
+    """
+    Enumerates categories, extends IntEnum
+    """
+    VERIFICATION = 1
+    PASSWORD = 2
 
-class Confirm(IntEnum):
-  """
-  Enumerates Confirmed_by options, extends IntEnum
-  """
-  USER = 1
-  SYSTEM = 2
+  class Confirm(IntEnum):
+    """
+    Enumerates Confirmed_by options, extends IntEnum
+    """
+    USER = 1
+    SYSTEM = 2

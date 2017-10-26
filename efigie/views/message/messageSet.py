@@ -8,6 +8,8 @@ from django.template import loader, Context, Template, RequestContext
 # from efigie.controller import Effigy, EffigyParameters, EffigyCommunication
 from efigie.models import Message, Key
 from efigie.views import *
+from efigie.views.message import *
+
 
 # import urllib, cStringIO
 

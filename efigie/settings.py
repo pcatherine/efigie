@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+
             ],
             'debug': DEBUG,
         },
@@ -131,6 +132,10 @@ LANGUAGES = (
 
 LOCALE_PATHS = [
   os.path.join(BASE_DIR, 'locale'),
+]
+
+FORMAT_MODULE_PATH = [
+  'efigie.formats'
 ]
 
 TIME_ZONE = 'America/Chicago'

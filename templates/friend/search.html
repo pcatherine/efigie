@@ -1,0 +1,38 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}">
+{% endblock %}
+
+{% block header %}{{ title|safe }}{% endblock %}
+
+{% block content %}
+  <div class="box box-warning">
+    <div class="box-header">
+      <form action="{% url 'friendSearchResults' %}" id="id_form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group has-feedback">
+          <b>{% trans 'Search by name or email address' %}</b>: &nbsp;
+          <input type="text" name="search" class="form-control input-lg" required="" id="id_search">
+        </div>
+      </form>
+    </div>
+  </div>
+
+<div class="row" id="friends-result"> </div>
+
+{% endblock content %}
+
+{% block script %}
+  <script type="text/javascript">
+    var btnTextAdd = '{% trans "Add" %}';
+    var btnTextCancel = '{% trans "Cancel" %}';
+    var btnTextAdded = '{% trans "Added" %}';
+    var btnTextBlocked = '{% trans "Blocked" %}';
+  </script>
+  <script src="{% static 'efigie/friendSearch.js' %}"></script>
+{% endblock %}

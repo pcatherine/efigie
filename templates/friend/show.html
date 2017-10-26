@@ -1,0 +1,85 @@
+{% extends '_template.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load utils %}
+
+{% block header %}: <b>{{ friend.get_full_name }}</b>{% endblock %}
+
+{% block content %}
+
+  {% with 'Friend' as model %}
+    {% include '_modal.html' with modal=model type='delete' %}
+
+    <div class="box box-warning ">
+      <div class="box-body ">
+        <dl class="dl-horizontal">
+          <h4><dt class="with-border" >{% trans 'Full Name' %}</dt></h4>
+          <h4><dd >{{ friend.get_full_name }}</dd></h4>
+
+          <h4><dt class="with-border">Username</dt></h4>
+          <h4><dd >{{ friend.username }}</dd></h4>
+
+          <h4><dt >{% trans 'Email Address' %}</dt></h4>
+          <h4><dd >{{ friend.email }}</dd></h4>
+
+          <h4><dt >{% trans 'Member Since' %}</dt></h4>
+          <h4><dd >{{ friend.date_joined|date:'SHORT_DATE_FORMAT' }}</dd></h4>
+        </dl>
+      </div>
+
+      <div class="box-footer">
+
+        {% if category == 1 %}
+          <a class="btn btn-primary" href="{% url 'friendAdd' friend.id %}" >
+            <span>{% trans 'Add' %}</span>
+          </a>
+        {% elif category == 2 %}
+          <a class="btn btn-default" href="{% url 'friendCancel' friend.id %}" >
+            <span class="text-red">{% trans 'Cancel' %}</span>
+          </a>
+        {% elif category == 3 %}
+          <a class="btn btn-default" data-toggle="modal" data-target="#deleteModal{{ model }}" data-name="{{ friend.get_full_name }}" data-model="{% url 'friendDelete' friend.id %}" data-type="unfriend"><span class="text-red">{% trans 'Unfriend' %}</span></a>
+        {% endif %}
+
+        {% if category != 4 %}
+          <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ model }}" data-name="{{ friend.get_full_name }}" data-model="{% url 'friendBlock' friend.id %}" data-type="block">{% trans 'Block' %}</a>
+        {% else %}
+          <a class="btn btn-success" data-toggle="modal" data-target="#deleteModal{{ model }}" data-name="{{ friend.get_full_name }}" data-model="{% url 'friendUnblock' friend.id %}" data-type="unblock">{% trans 'Unblock' %}</a>
+        {% endif %}
+
+      </div>
+    </div>
+  {% endwith %}
+{% endblock %}
+
+{% block script %}
+  <script>
+    var id_modal = 'deleteModalFriend';
+
+    $('#'+id_modal).on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var name = button.data('name'); // Extract info from data-* attributes
+      var model = button.data('model');
+      var t = button.data('type');
+      var modal = $(this)
+      if (t == 'unfriend'){
+        modal.find('h4 span').text("{% trans 'Unfriend' %}")
+        modal.find('div .modal-body').html("{% trans 'Unfriending' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}");
+        modal.find('.modal-footer a').text("{% trans 'Unfriend' %}")
+      } else if (t == 'block'){
+        modal.find('h4 span').text("{% trans 'Block' %}")
+        modal.find('div .modal-body').html("{% trans 'Blocking' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}");
+        modal.find('.modal-footer a').text("{% trans 'Block' %}")
+      } else if (t == 'unblock'){
+        modal.find('h4 span').text("{% trans 'Unblock' %}")
+        modal.find('div .modal-body').html("{% trans 'Unblocking' %} <b><span></span></b>. {% trans 'Do you want to continue?' %}");
+        modal.find('.modal-footer a').text("{% trans 'Unblock' %}")
+      }
+      modal.find('.modal-body span').text( name );
+      modal.find('.modal-footer a').attr('href', model);
+
+    });
+
+  </script>
+{% endblock %}

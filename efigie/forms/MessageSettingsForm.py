@@ -2,13 +2,14 @@
 #-*- coding: utf-8 -*-
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from efigie.models import UserEffigy
 
 COLORS_CHOICES = (
-  ('0', 'Red'),
-  ('1', 'Green'),
-  ('2', 'Blue'),
+  ('0', _('Red')),
+  ('1', _('Green')),
+  ('2', _('Blue')),
 )
 
 BITS_CHOICES = (
@@ -23,12 +24,13 @@ BITS_CHOICES = (
 )
 
 PIXEL_CHOICES = (
-  ('11', 'Impar'),
-  ('12', 'Par'),
+  ('11', _('Odd')),
+  ('12', _('Even')),
 )
 
 class MessageSettingsForm(forms.Form):
   colors = forms.MultipleChoiceField(
+    label=_('Colors'),
     required=True,
     widget=forms.CheckboxSelectMultiple,
     choices=COLORS_CHOICES,
@@ -55,19 +57,19 @@ class MessageSettingsForm(forms.Form):
     colors = []
     for i in range (0,3):
       if uf.settings[i] == '1':
-        colors += [i] 
+        colors += [i]
     self.fields['colors'].initial = colors
 
     bits = []
     for i in range (3,11):
       if uf.settings[i] == '1':
-        bits += [i] 
+        bits += [i]
     self.fields['bits'].initial = bits
 
     pixel = []
     for i in range (11,13):
       if uf.settings[i] == '1':
-        pixel += [i] 
+        pixel += [i]
     self.fields['pixel'].initial = pixel
 
 

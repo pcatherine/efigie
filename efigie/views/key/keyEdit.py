@@ -43,10 +43,12 @@ def keyEdit(request, keyId):
 
   if form.is_valid():
     form.save()
-    messages.success(request, invariants.alert_update_success % (model_name, key.name))
+    messages.success(request, invariants.alert_update_success % {
+      'model_name': model_name, 
+      'item_name': key.name})
     return redirect(keyShow, keyId=keyId)
 
   return render(request, 'key/form.html',
     {'title': ': <b>%s</b>' % (key.name),
      'form': form,
-     'button': invariants.button_edit % (model_name)})
+     'button': invariants.button_edit })

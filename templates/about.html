@@ -3,28 +3,111 @@
 {% load static %}
 {% load i18n %}
 
+{% block style %}
+  <style type="text/css">
+    .plan {
+      font-size: 16px;
+      text-align: justify;
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+
+    .plan p {
+
+      text-indent: 25px;
+    }
+
+  </style>
+{% endblock %}
+
 {% block header %} {% endblock %}
 
 
 {% block content %}
 
-  Python 3.5.2 <br/><br/>
-  Django 1.10.6 <br/><br/>
-  AdminLTE 2.3.11 <br/><br/>
-  Font Awesome 4.7.0 <br/><br/>
-  Pip 9.0.1 <br/>
+  <ul class="bring-up" style="font-size: 16px;">
+    <li><a href="#proposal">Proposta</a></li>
+    <li><a href="#extra" > Extra</a></li>
+    <li><a href="#license" > Licença</a></li>
+    <li><a href="#libs"> Bibliotecas</a></li>
+  </ul>
 
-  appdirs 1.4.3 <br/>
-  packaging 16.8 <br/>
-  pyparsing 2.2.0 <br/>
-  six 1.10.0 <br/>
+  <div class="plan">
 
-  dj-database-url 0.4.1 <br/>
-  gunicorn 19.4.5 <br/>
-  psycopg2 2.6.2 <br/>
-  whitenoise 3.2 <br/>
-  setuptools 34.3.3 <br/>
-  pycrypto 2.6.1
+   <section id="proposal">
+    <h3>Proposta</h3>
+    <p>Efígie consiste em um sistema Web para trocas de mensagens sigilosas através de imagem, utilizando o Pinterest, uma rede social voltada para o compartilhamento de imagem, apesar da imagem ser pública com o Efígie será possível identificar o usuário que poderá ler a mensagem. O usuário poderá acessar o aplicativo cadastrar-se e logar-se em sua conta. Assim, poderá recuperar as configuração relacionadas a mensagem, usuário e sistema, que ficarão salvos no banco de dados, para aumentar a segurança nas mensagens que serão trocadas na rede social.</p>
 
+    <p>Efígie contará com um editor de texto próprio, onde o usuário digitará a mensagem, realizará uma busca personalizada de imagens utilizando o Google, caso o usuário deseje, e compartilhará imagens no Pinterest.</p>
+
+    <p>Haverá a necessidade de cadastrar-se ou logar-se em uma conta ativa, que possibilitará ao usuário trocar mensagens com diversos níveis de segurança, que poderão ser configurados conforme necessidade. Os parâmetros disponíveis para isso serão: </p>
+
+    <ul>
+      <li>Cores - a imagem gerada pelo Efígie será no formato RGB (Red Green Blue – Vermelho Verde Azul), então o usuário poderá selecionar as cores vermelha(R), verde (G) e/ou azul (B), pelo menos uma delas deve estar selecionada.</li>
+
+      <li>Bits - cada pixel é comporto por três cores, cada cor por 8 bits, o usuário poderá escolher qual bit será alterado, pelo um deles deve estar selecionado.</li>
+
+      <li>Pixels – se a alteração será aplicada ou somente aos pares, ou múltiplos de 3, 4 e assim por diante, para verificar se são múltiplos será realizada uma multiplicação simples entre a linha e a coluna do pixel e dividida pelo valor escolhido.</li>
+
+      <li>Criptografia – o usuário poderá gerar uma chave RSA (Algoritmo de criptografia de dados) com a utilização da biblioteca Pycrypto, os tamanhos em bits que varia de 1024 até 4864, escolhidos pelo usuário, essa chave pode ser associada a uma mensagem que a utilizará para criptografar e descriptografar a mensagem, essa chave deve ser compatilhada com todos os outros usuário que poderão ler a mensagem.</li>
+
+      <li>Quantidade de vezes que a mensagem pode ser lida – O usuário poderá limitar a quantidade de vezes que a mensagem poderá ser lida.</li>
+    </ul>
+
+    <p>Fora isso, o Efígie oferecerá um layout responsivo, ou seja, adapitar-se-á a tela do usuário, e bilíngue: português e inglês. </p>
+    <p>O desenvolvimento do Efígie será feito em Phyton com o framework Django, baseado no conceito de estenografia, que é a técnica da escrita escondida, aplicado na rede social Pinterest. Para isso, será utilizada uma modificação do algoritmo de LSB (Least Significant Bit - Último Bit Significativo), além de APIs (Interface de Programação de Aplicações ) para integração com a rede social e o Google para busca de imagens. </p>
+
+    <img src="{% static 'efigie/docs/V171009_diagrama.png' %}"  style="max-width: 100%; max-height: 100%;" >
+
+  </section>
+
+  <section id="extra">
+    <h3>Extra</h3>
+    <p>Disponíveis para download</p>
+    <ul class="bring-up">
+      <li><a href="{% static 'efigie/docs/V170828_diagrama.png' %}" target="_blank">Diagrama v17.08.29</a></li>
+      <li><a href="{% static 'efigie/docs/V171009_diagrama.png' %}" target="_blank">Diagrama v17.10.09</a></li>
+      <li><a href="{% static 'efigie/docs/V170911_PlanoDeTrabalho.docx' %}" target="_blank"> Plano de Trabalho</a></li>
+      <li><a href="https://github.com/pcatherine/efigie" target="_blank">Github: Efígie</a></li>
+    </ul>
+  </section>
+
+  <section id="license">
+    <h3>Licença: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT license</a> </h3>
+  </section>
+
+  <section id="libs">
+    <h3>Ferramentas</h3>
+    <ul class="bring-up">
+      <li><a href="https://adminlte.io/docs/2.4/installation" target="_blank">AdminLTE</a></li>
+      <li><a href="http://fontawesome.io/" target="_blank">Font Awesome</a></li>
+      <li><a href="https://docs.python.org/3.5/" target="_blank">Python</a> 3.5.2</li>
+      <li><a href="https://pypi.python.org/pypi/pip" target="_blank">Pip</a> 9.0.1 </li>
+      <li><a href="https://pypi.python.org/pypi/appdirs" target="_blank">Appdirs</a> 1.4.3 </li>
+      <li><a href="https://docs.djangoproject.com/en/1.11/" target="_blank">Django</a> 1.11.2 </li>
+      <li><a href="https://pypi.python.org/pypi/dj-database-url" target="_blank">dj-database-url</a> 0.4.2 </li>
+      <li><a href="https://pypi.python.org/pypi/docutils" target="_blank">Docutils</a> 0.13.1</li>
+      <li><a href="https://developers.google.com/api-client-library/python/reference/pydoc" target="_blank">google-api-python-client</a> 1.6.2</li>
+      <li><a href="https://pypi.python.org/pypi/gunicorn/" target="_blank">Gunicorn</a> 19.4.5 </li>
+      <li><a href="https://pypi.python.org/pypi/packaging" target="_blank">Packaging</a> 16.8 </li>
+      <li><a href="https://pypi.python.org/pypi/Pillow/4.2.1" target="_blank">Pillow</a> 4.2.1</li>
+      <li><a href="https://pypi.python.org/pypi/pyparsing" target="_blank">Pyparsing</a> 2.2.0 </li>
+      <li><a href="https://pypi.python.org/pypi/pycrypto" target="_blank">PyCrypto</a> 2.6.1</li>
+      <li><a href="http://initd.org/psycopg/docs/install.html" target="_blank">Psycopg2</a> 2.6.2 </li>
+      <li><a href="http://docs.python-requests.org/en/master/user/install/" target="_blank">Requests</a> 2.18.3</li>
+      <li><a href="https://pypi.python.org/pypi/setuptools" target="_blank">Setuptools</a> 34.3.3</li>
+      <li><a href="https://pypi.python.org/pypi/six" target="_blank">Six</a> 1.10.0 </li>
+      <li><a href="https://pip.pypa.io/en/stable/reference/pip_wheel/" target="_blank">Wheel</a> 0.29.0</li>
+      <li><a href="http://whitenoise.evans.io/en/stable/" target="_blank">WhiteNoise</a> 3.2 </li>
+    </ul>
+  </section>
+
+  woman
+  <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+  mask
+  <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+</div>
 
 {% endblock %}

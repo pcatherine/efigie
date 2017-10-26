@@ -9,7 +9,7 @@ import efigie.config as config
 
 def sendMailTemplate(subject, context, recipient_list,from_email=settings.DEFAULT_FROM_EMAIL, fail_silently=False):
   # AGARD ARRUMAR PARA A VARIEDADE DE EMAILS
-  # template_name = 'user_password_reset_mail.html' 
+  # template_name = 'user_password_reset_mail.html'
   # message_html = render_to_string(template_name, context)
   # message_txt = striptags(message_html)
   # email = EmailMultiAlternatives(

@@ -10,6 +10,7 @@ __status__ = "Production"
 
 from efigie.views.key.keyList import *
 from efigie.views.key.keyShow import *
+from efigie.views.key.keyShowFriend import *
 from efigie.views.key.keyDelete import *
 from efigie.views.key.keyEdit import *
 from efigie.views.key.keyNew import *
