@@ -2,7 +2,7 @@ appdirs==1.4.3
 certifi==2017.7.27.1
 chardet==3.0.4
 dj-database-url==0.4.2
-Django==1.11.6
+Django==2.2.24
 docutils==0.14
 google-api-python-client==1.6.4
 gunicorn==19.7.1
